@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>答题中 · 今天吃什么</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    .slide-container { position: relative; overflow: hidden; }
+    .slide { transition: transform 0.35s ease; }
+    .slide.exit-left { transform: translateX(-110%); position: absolute; top: 0; width: 100%; }
+    .slide.enter-right { transform: translateX(110%); }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="loadingView" class="waiting">
+    <div class="waiting-emoji">🍽️</div>
+    <p style="margin-top:16px; color:var(--muted);">加载题目中…</p>
+  </div>
+
+  <div id="waitingView" style="display:none;" class="waiting">
+    <div class="waiting-emoji">⏳</div>
+    <h2 style="margin-top:16px;">等待主持人开始答题</h2>
+    <p style="color:var(--muted); margin-top:8px; font-size:14px;">主持人点击「开始答题」后自动跳转</p>
+  </div>
+
+  <div id="questionView" style="display:none;">
+    <p class="progress-label" id="progressLabel">问题 1 / 8</p>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+
+    <div class="slide-container" id="slideContainer">
+      <div class="slide" id="currentSlide">
+        <div class="question-card" id="questionCard">
+          <div class="question-emoji" id="questionEmoji"></div>
+          <div class="question-text" id="questionText"></div>
+          <div class="choices" id="choiceList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; display:flex; gap:10px;">
+      <button class="btn btn-ghost" id="prevBtn" style="width:auto; padding:14px 20px;" onclick="prevQuestion()">← 上一题</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextOrSubmit()">下一题 →</button>
+    </div>
+  </div>
+
+  <div id="submittedView" style="display:none;" class="waiting">
+    <div class="waiting-emoji" id="waitEmoji">🎉</div>
+    <h2 style="margin-top:16px;">已提交！</h2>
+    <p style="color:var(--muted); margin-top:8px; font-size:14px;">等待结果出炉…</p>
+  </div>
+</div>
+
+<script>
+const ROOM_ID = '{{ room_id }}';
+let questions = [];
+let currentIndex = 0;
+let selectedAnswers = {};  // question_id -> choice_id
+const participantId = sessionStorage.getItem('participant_id');
+
+async function init() {
+  if (!participantId) {
+    window.location.href = `/join/${ROOM_ID}`;
+    return;
+  }
+
+  // 先检查房间状态
+  const statusRes = await fetch(`/api/rooms/${ROOM_ID}`);
+  const status = await statusRes.json();
+
+  if (status.state === 'closed') {
+    window.location.href = `/results/${ROOM_ID}`;
+    return;
+  }
+
+  if (status.state === 'waiting') {
+    document.getElementById('loadingView').style.display = 'none';
+    document.getElementById('waitingView').style.display = 'block';
+    pollForStart();
+    return;
+  }
+
+  // 获取题目
+  const qRes = await fetch(`/api/rooms/${ROOM_ID}/questions`);
+  const qData = await qRes.json();
+  questions = qData.questions;
+
+  document.getElementById('loadingView').style.display = 'none';
+  document.getElementById('questionView').style.display = 'block';
+  renderQuestion(0);
+}
+
+function pollForStart() {
+  const interval = setInterval(async () => {
+    const res = await fetch(`/api/rooms/${ROOM_ID}`);
+    const data = await res.json();
+    if (data.state !== 'waiting') {
+      clearInterval(interval);
+      window.location.reload();
+    }
+  }, 2000);
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  currentIndex = index;
+
+  const card = document.getElementById('questionCard');
+  card.className = 'question-card' + (q.type === 'fun' ? ' fun-type' : '');
+
+  document.getElementById('questionEmoji').textContent = q.emoji;
+  document.getElementById('questionText').textContent = q.text;
+
+  const choiceList = document.getElementById('choiceList');
+  choiceList.innerHTML = '';
+  q.choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn' + (selectedAnswers[q.id] === c.id ? ' selected' : '');
+    btn.textContent = c.text;
+    btn.onclick = () => selectChoice(q.id, c.id);
+    choiceList.appendChild(btn);
+  });
+
+  // 进度
+  const total = questions.length;
+  document.getElementById('progressLabel').textContent = `问题 ${index + 1} / ${total}`;
+  document.getElementById('progressFill').style.width = `${(index / total) * 100}%`;
+
+  // 按钮
+  document.getElementById('prevBtn').disabled = index === 0;
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.textContent = index === total - 1 ? '提交！🎉' : '下一题 →';
+}
+
+function selectChoice(questionId, choiceId) {
+  selectedAnswers[questionId] = choiceId;
+  renderQuestion(currentIndex);
+}
+
+function prevQuestion() {
+  if (currentIndex > 0) renderQuestion(currentIndex - 1);
+}
+
+async function nextOrSubmit() {
+  const q = questions[currentIndex];
+  if (!selectedAnswers[q.id]) {
+    q.choices[0] && selectChoice(q.id, q.choices[0].id);
+    return;
+  }
+  if (currentIndex < questions.length - 1) {
+    renderQuestion(currentIndex + 1);
+  } else {
+    await submitAnswers();
+  }
+}
+
+async function submitAnswers() {
+  const answers = questions.map(q => ({
+    question_id: q.id,
+    choice_id: selectedAnswers[q.id] || q.choices[0].id,
+  }));
+
+  const res = await fetch(`/api/rooms/${ROOM_ID}/answers`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({participant_id: participantId, answers}),
+  });
+
+  if (res.ok) {
+    document.getElementById('questionView').style.display = 'none';
+    document.getElementById('submittedView').style.display = 'block';
+
+    // 随机食物 emoji 等待动画
+    const emojis = ['🍜', '🍣', '🍔', '🌮', '🍲', '🥗', '🍱', '🥘', '🍝', '🍛'];
+    let i = 0;
+    const el = document.getElementById('waitEmoji');
+    setInterval(() => { el.textContent = emojis[i++ % emojis.length]; }, 800);
+
+    // 轮询结果
+    const poll = setInterval(async () => {
+      const r = await fetch(`/api/rooms/${ROOM_ID}`);
+      const d = await r.json();
+      if (d.state === 'closed') {
+        clearInterval(poll);
+        window.location.href = `/results/${ROOM_ID}`;
+      }
+    }, 2000);
+  }
+}
+
+init();
+</script>
+</body>
+</html>

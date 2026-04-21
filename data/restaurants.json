@@ -1,0 +1,2961 @@
+[
+  {
+    "name": "1点点(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "金科路3057号汇智B1楼(金科路地铁站2号口旁)",
+    "rating": 4.4,
+    "avg_spend": 15.0,
+    "lng": 121.601125,
+    "lat": 31.203713,
+    "district": "浦东新区",
+    "poi_id": "B0FFFZYTCZ",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "3号仓库·创意中国菜(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号长泰广场2座3楼",
+    "rating": 4.6,
+    "avg_spend": 131.0,
+    "lng": 121.603389,
+    "lat": 31.205739,
+    "district": "浦东新区",
+    "poi_id": "B0L3CHJSPQ",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "BUTCHER牛排肉铺(长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;牛扒店(扒房)",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 3.7,
+    "avg_spend": 36.0,
+    "lng": 121.602725,
+    "lat": 31.205875,
+    "district": "浦东新区",
+    "poi_id": "B0FFJ1LNAT",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "Blue Frog蓝蛙(长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;西餐厅(综合风味)",
+    "address": "长泰广场E座1层(金科路地铁站4号口步行280米)",
+    "rating": 4.5,
+    "avg_spend": 141.0,
+    "lng": 121.602827,
+    "lat": 31.206368,
+    "district": "浦东新区",
+    "poi_id": "B0HR7DP811",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "Blueglass酸奶(长泰广场店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "祖冲之路1239弄长泰广场2座1层18-1室",
+    "rating": 4.2,
+    "avg_spend": 40.0,
+    "lng": 121.601201,
+    "lat": 31.205564,
+    "district": "浦东新区",
+    "poi_id": "B0J6B5X2IY",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "CHAGEE霸王茶姬(上海长泰广场店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "祖冲之路1239弄7号长泰广场东区负一楼49-1室(热风斜对面)",
+    "rating": 4.5,
+    "avg_spend": 22.0,
+    "lng": 121.602253,
+    "lat": 31.205217,
+    "district": "浦东新区",
+    "poi_id": "B0J3TAG6QN",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "CHAGEE霸王茶姬(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "金科路3057号汇智国际商业中心F1层肯德基旁边西南门",
+    "rating": 4.4,
+    "avg_spend": 18.0,
+    "lng": 121.601173,
+    "lat": 31.202923,
+    "district": "浦东新区",
+    "poi_id": "B0KDHHIKRW",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "Chili's奇利斯美式小餐馆(长泰广场店)",
+    "category_raw": "餐饮服务;快餐厅;快餐厅|餐饮服务;咖啡厅;咖啡厅",
+    "address": "长泰广场6座1楼172室(金科路祖冲之路路口)",
+    "rating": 4.4,
+    "avg_spend": 114.0,
+    "lng": 121.600921,
+    "lat": 31.20471,
+    "district": "浦东新区",
+    "poi_id": "B0K0DS8W56",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "Costa Coffee(上海张江浦软2店)(暂停营业)",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "郭守敬路498号上海浦东软件园郭守敬园14幢105-1室",
+    "rating": 4.4,
+    "avg_spend": 29.0,
+    "lng": 121.59869,
+    "lat": 31.208649,
+    "district": "浦东新区",
+    "poi_id": "B0FFFE51VD",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "Costa Coffee(上海张江高科园)",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "博云路2号浦软大厦1楼(金科路地铁站1号口步行490米)",
+    "rating": 4.5,
+    "avg_spend": 37.0,
+    "lng": 121.604233,
+    "lat": 31.202269,
+    "district": "浦东新区",
+    "poi_id": "B00156E59N",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "Costa Coffee(上海张江高科园)",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "博云路2号浦软大厦1楼(金科路地铁站1号口步行490米)",
+    "rating": 4.5,
+    "avg_spend": 37.0,
+    "lng": 121.604233,
+    "lat": 31.202269,
+    "district": "浦东新区",
+    "poi_id": "B00156E59N",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "DAISUKI MAKI",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "金科路长泰广场10座负一层02-3室",
+    "rating": 4.3,
+    "avg_spend": 125.0,
+    "lng": 121.60127,
+    "lat": 31.205805,
+    "district": "浦东新区",
+    "poi_id": "B0L1TU3QD7",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "DQ·蛋糕·冰淇淋(上海张江长泰2店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "祖冲之路1239弄7号长泰广场地下一层09室",
+    "rating": 4.5,
+    "avg_spend": 35.0,
+    "lng": 121.601641,
+    "lat": 31.205749,
+    "district": "浦东新区",
+    "poi_id": "B0FFG69LGH",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "GODIVA(长泰广场店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "张江高科技园区祖冲之路1239弄长泰广场1楼",
+    "rating": 3.9,
+    "avg_spend": null,
+    "lng": 121.601115,
+    "lat": 31.205528,
+    "district": "浦东新区",
+    "poi_id": "B0FFIGRHED",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "KOI The(长泰广场店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "金科路2889号长泰广场B1层",
+    "rating": 4.2,
+    "avg_spend": 21.0,
+    "lng": 121.601066,
+    "lat": 31.205612,
+    "district": "浦东新区",
+    "poi_id": "B0IRBZX5J2",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "LINLEE·手打柠檬茶(张江汇智店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "金科路3057号汇智国际商业中心亮景路55号1楼1室商铺",
+    "rating": 4.0,
+    "avg_spend": 17.0,
+    "lng": 121.602075,
+    "lat": 31.203275,
+    "district": "浦东新区",
+    "poi_id": "B0JU1CMX0R",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "La Repete(张江汇智店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "金科路3057号汇智国际商业中心B1层",
+    "rating": 4.0,
+    "avg_spend": 60.0,
+    "lng": 121.601596,
+    "lat": 31.203496,
+    "district": "浦东新区",
+    "poi_id": "B0K6XCYF09",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "M Stand(长泰广场店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "祖冲之路1239弄长泰广场东庭院5座E1-09BMStand",
+    "rating": 4.3,
+    "avg_spend": 30.0,
+    "lng": 121.602954,
+    "lat": 31.205147,
+    "district": "浦东新区",
+    "poi_id": "B0H1L6E1H3",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "Manner Coffee(上海长泰广场店)",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "金科路2889号长泰广场1F层",
+    "rating": 4.4,
+    "avg_spend": 20.0,
+    "lng": 121.601662,
+    "lat": 31.205239,
+    "district": "浦东新区",
+    "poi_id": "B0G2Z7IPET",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "Manner Coffee(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "金科路3057号汇智国际商业中心F1层",
+    "rating": 4.2,
+    "avg_spend": 20.0,
+    "lng": 121.60143,
+    "lat": 31.203804,
+    "district": "浦东新区",
+    "poi_id": "B0JGR40U7H",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "Manner Coffee(金科路店)",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "金科路与祖冲之路交叉口西北120米",
+    "rating": 4.1,
+    "avg_spend": 20.0,
+    "lng": 121.599236,
+    "lat": 31.205097,
+    "district": "浦东新区",
+    "poi_id": "B0K2HBK604",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "OT另茶(上海汇智国际商业中心店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "汇智商业中心南广场集装箱房内",
+    "rating": 4.1,
+    "avg_spend": 26.0,
+    "lng": 121.602048,
+    "lat": 31.20307,
+    "district": "浦东新区",
+    "poi_id": "B0KGR5M2RP",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "PVG04餐厅",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "亮秀路与亮景路交叉口西80米",
+    "rating": 3.1,
+    "avg_spend": null,
+    "lng": 121.601575,
+    "lat": 31.201475,
+    "district": "浦东新区",
+    "poi_id": "B0LKDXPJ4N",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "Peet's Coffee皮爷咖啡(长泰广场店)",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "祖冲之路1239弄6号长泰广场1层05-158室",
+    "rating": 4.4,
+    "avg_spend": 47.0,
+    "lng": 121.602261,
+    "lat": 31.20544,
+    "district": "浦东新区",
+    "poi_id": "B0GK0P8DZP",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "TPS coffee",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "长泰广场写字楼A座酒吧街旁绿色集装箱",
+    "rating": 4.1,
+    "avg_spend": 19.0,
+    "lng": 121.601437,
+    "lat": 31.20648,
+    "district": "浦东新区",
+    "poi_id": "B0LRMHXRF5",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "Wagas沃歌斯(上海欧尚店)",
+    "category_raw": "餐饮服务;外国餐厅;西餐厅(综合风味)",
+    "address": "金科路3057号汇智国际商业中心1栋1层646-1001号",
+    "rating": 4.2,
+    "avg_spend": 82.0,
+    "lng": 121.601703,
+    "lat": 31.202978,
+    "district": "浦东新区",
+    "poi_id": "B0G3V4CHAC",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "WenTinG文汀·半糖蛋糕(长泰国际商业广场店)",
+    "category_raw": "餐饮服务;糕饼店;糕饼店",
+    "address": "金科路长泰广场七座地下一层西区14室(胡子大厨隔壁)",
+    "rating": 4.4,
+    "avg_spend": 108.0,
+    "lng": 121.60101,
+    "lat": 31.205881,
+    "district": "浦东新区",
+    "poi_id": "B0JBAOI1QH",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "YAHAACOFFEE(长泰广场店)",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 3.1,
+    "avg_spend": 19.0,
+    "lng": 121.603014,
+    "lat": 31.20557,
+    "district": "浦东新区",
+    "poi_id": "B0M647K7U0",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "b3coffee必三咖啡(张江长泰店)",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "祖冲之路1239弄2号1层01-1室(长泰广场7栋和8栋中间1楼有户外客座区,近西南出入口)",
+    "rating": 4.2,
+    "avg_spend": 22.0,
+    "lng": 121.60132,
+    "lat": 31.205613,
+    "district": "浦东新区",
+    "poi_id": "B0LGXH91C5",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "baker&spice(上海长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;西餐厅(综合风味)",
+    "address": "祖冲之路1261号,1269号1层185室,1层186室",
+    "rating": 4.4,
+    "avg_spend": 80.0,
+    "lng": 121.60275,
+    "lat": 31.204969,
+    "district": "浦东新区",
+    "poi_id": "B0JKG42MB1",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "haxnbauer海森堡德国餐厅(长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;西餐厅(综合风味)|餐饮服务;外国餐厅;德国菜",
+    "address": "金科路2891号长泰广场10座113室(靠近金科路边)",
+    "rating": 4.4,
+    "avg_spend": 206.0,
+    "lng": 121.600706,
+    "lat": 31.206119,
+    "district": "浦东新区",
+    "poi_id": "B0FFIY38B6",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "一绪寿喜烧(长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;日本料理",
+    "address": "张江高科技园区祖冲之路1239弄1号长泰广场10栋2F",
+    "rating": 4.6,
+    "avg_spend": 184.0,
+    "lng": 121.600849,
+    "lat": 31.205784,
+    "district": "浦东新区",
+    "poi_id": "B0HAUAQPSP",
+    "tags": [
+      "cuisine_japanese",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "丁香餐厅(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心F2层",
+    "rating": 4.6,
+    "avg_spend": 182.0,
+    "lng": 121.601336,
+    "lat": 31.203676,
+    "district": "浦东新区",
+    "poi_id": "B0FFG2YDJ5",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "七八冷面(上海长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路2889号上海长泰广场1座1层",
+    "rating": 4.4,
+    "avg_spend": 61.0,
+    "lng": 121.601332,
+    "lat": 31.205955,
+    "district": "浦东新区",
+    "poi_id": "B0KAC5V4UL",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "上海华虹宏力半导体制造有限公司餐厅",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "祖冲之路1399号",
+    "rating": 4.5,
+    "avg_spend": 16.0,
+    "lng": 121.605628,
+    "lat": 31.206494,
+    "district": "浦东新区",
+    "poi_id": "B00156NAFO",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "上海浦东软件园第2餐厅",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "郭守敬路498号浦东软件园14号楼1层",
+    "rating": 4.0,
+    "avg_spend": 21.0,
+    "lng": 121.598186,
+    "lat": 31.208261,
+    "district": "浦东新区",
+    "poi_id": "B00155M7N7",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "丰和日丽(张江汇智店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "张江镇科技园区金科路3057号汇智国际商业中心4层C4-3A",
+    "rating": 4.5,
+    "avg_spend": 123.0,
+    "lng": 121.601546,
+    "lat": 31.203028,
+    "district": "浦东新区",
+    "poi_id": "B0FFKNNRZS",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "乐意坊Alla Torre意大利手工披萨(长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;意式菜品餐厅|餐饮服务;外国餐厅;西餐厅(综合风味)",
+    "address": "祖冲之路1239弄6号10号楼1层0304室",
+    "rating": 4.1,
+    "avg_spend": 140.0,
+    "lng": 121.602694,
+    "lat": 31.205585,
+    "district": "浦东新区",
+    "poi_id": "B0FFG34VOS",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "云彩坡· 云南古法油焖鸡(长泰广场店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "祖冲之路1239弄7号长泰广场F2层",
+    "rating": 4.5,
+    "avg_spend": 87.0,
+    "lng": 121.602206,
+    "lat": 31.205507,
+    "district": "浦东新区",
+    "poi_id": "B0LDLUH7JY",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "云阿蛮云南生烫牛肉米线(长泰广场店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "长泰广场西区美食档口(煲仔皇斜对面)",
+    "rating": 4.1,
+    "avg_spend": 32.0,
+    "lng": 121.601534,
+    "lat": 31.20545,
+    "district": "浦东新区",
+    "poi_id": "B0LAH7B1BV",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "京云华(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "张江高科技园区金科路3057汇智国际商业中心四楼",
+    "rating": 4.1,
+    "avg_spend": 98.0,
+    "lng": 121.601727,
+    "lat": 31.203055,
+    "district": "浦东新区",
+    "poi_id": "B0FFKNNS3U",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "兢杰冰室",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "金科路3057号汇智国际商业中心B1层",
+    "rating": 3.9,
+    "avg_spend": 41.0,
+    "lng": 121.601257,
+    "lat": 31.203529,
+    "district": "浦东新区",
+    "poi_id": "B0KK06V9C2",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "八合里潮汕鲜牛肉火锅(上海汇智广场店)",
+    "category_raw": "餐饮服务;中餐厅;火锅店",
+    "address": "金科路3057号汇智国际商业中心3层C3-6室",
+    "rating": 4.5,
+    "avg_spend": 116.0,
+    "lng": 121.601345,
+    "lat": 31.203521,
+    "district": "浦东新区",
+    "poi_id": "B0HD175EOE",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "六悦兮茶室(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;茶艺馆;茶艺馆",
+    "address": "张江镇金科路3057号汇智国际商业中心L4-4",
+    "rating": 4.2,
+    "avg_spend": 119.0,
+    "lng": 121.60187,
+    "lat": 31.203096,
+    "district": "浦东新区",
+    "poi_id": "B0J2NLJYS4",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "华三爷干拌面(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 4.0,
+    "avg_spend": 29.0,
+    "lng": 121.602588,
+    "lat": 31.205377,
+    "district": "浦东新区",
+    "poi_id": "B0JKVHMKG7",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "厚贞牛舌烧肉(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;外国餐厅;日本料理",
+    "address": "金科路3057号汇智国际商业中心F3层",
+    "rating": 4.3,
+    "avg_spend": 145.0,
+    "lng": 121.601855,
+    "lat": 31.203432,
+    "district": "浦东新区",
+    "poi_id": "B0KRCLEFWT",
+    "tags": [
+      "cuisine_japanese",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "君之喜(长泰广场店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 3.7,
+    "avg_spend": 45.0,
+    "lng": 121.601725,
+    "lat": 31.205422,
+    "district": "浦东新区",
+    "poi_id": "B0LGZ5S4X3",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "和府捞面(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心B1层31室",
+    "rating": 4.2,
+    "avg_spend": 39.0,
+    "lng": 121.601089,
+    "lat": 31.203311,
+    "district": "浦东新区",
+    "poi_id": "B0JKO9JX14",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "和米堂(长泰广场店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "金科路2889弄长泰广场B1",
+    "rating": 4.4,
+    "avg_spend": 21.0,
+    "lng": 121.602129,
+    "lat": 31.205534,
+    "district": "浦东新区",
+    "poi_id": "B0FFFW4TXH",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "咏发顺德海鲜大排挡",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号长泰广场F3层",
+    "rating": 4.5,
+    "avg_spend": 95.0,
+    "lng": 121.601427,
+    "lat": 31.204835,
+    "district": "浦东新区",
+    "poi_id": "B0L3M1P7GH",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "哈尔滨食品厂(长泰广场店)",
+    "category_raw": "餐饮服务;糕饼店;糕饼店",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 4.5,
+    "avg_spend": null,
+    "lng": 121.601567,
+    "lat": 31.205439,
+    "district": "浦东新区",
+    "poi_id": "B0FFLNINWZ",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "喜家德虾仁水饺(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄长泰广场地下一层西区",
+    "rating": 4.5,
+    "avg_spend": 36.0,
+    "lng": 121.600943,
+    "lat": 31.205637,
+    "district": "浦东新区",
+    "poi_id": "B0FFLLW7U3",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "喜茶(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "金科路3057号汇智国际商业中心L1-27号铺位",
+    "rating": 4.2,
+    "avg_spend": 25.0,
+    "lng": 121.601625,
+    "lat": 31.203101,
+    "district": "浦东新区",
+    "poi_id": "B0KUD14G16",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "喜茶(长泰广场店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "金科路2889号长泰广场1F层",
+    "rating": 4.4,
+    "avg_spend": 16.0,
+    "lng": 121.601008,
+    "lat": 31.204909,
+    "district": "浦东新区",
+    "poi_id": "B0J3CA3B6B",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "嘻小北牛肉面(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 3.9,
+    "avg_spend": 33.0,
+    "lng": 121.601219,
+    "lat": 31.205917,
+    "district": "浦东新区",
+    "poi_id": "B0M6HZ8ZUI",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "复兴面王·咖啡铺(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239号长泰广场东区B1-402",
+    "rating": 4.4,
+    "avg_spend": 40.0,
+    "lng": 121.602525,
+    "lat": 31.205475,
+    "district": "浦东新区",
+    "poi_id": "B0L6CDJIH1",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "太二酸菜鱼(上海长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "上海浦东新区张江镇金科路2889号长泰广场7座2楼04号",
+    "rating": 4.4,
+    "avg_spend": 83.0,
+    "lng": 121.601551,
+    "lat": 31.205326,
+    "district": "浦东新区",
+    "poi_id": "B0G0JKG1Z7",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "宝珠奶酪(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;甜品店;甜品店",
+    "address": "金科路3057号汇智国际商业中心B1负一楼",
+    "rating": 3.9,
+    "avg_spend": 28.0,
+    "lng": 121.601584,
+    "lat": 31.203217,
+    "district": "浦东新区",
+    "poi_id": "B0HUCGVBBT",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "小杨生煎(上海汇智广场店)",
+    "category_raw": "餐饮服务;中餐厅;上海菜",
+    "address": "金科路3057号亮景路55号B1层12室商铺",
+    "rating": 4.3,
+    "avg_spend": 28.0,
+    "lng": 121.601476,
+    "lat": 31.203346,
+    "district": "浦东新区",
+    "poi_id": "B0J0F7OK3I",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "尚一汤广东炖汤",
+    "category_raw": "餐饮服务;中餐厅;广东菜(粤菜)",
+    "address": "张江镇上海浦东新区金科路3057号汇智国际商业中心4楼C4-5室",
+    "rating": 4.5,
+    "avg_spend": 194.0,
+    "lng": 121.601914,
+    "lat": 31.203498,
+    "district": "浦东新区",
+    "poi_id": "B0FFJ8697H",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "山缓缓火锅(上海长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄6号长泰广场3座2层(西提牛排对面)",
+    "rating": 4.5,
+    "avg_spend": 158.0,
+    "lng": 121.602375,
+    "lat": 31.205352,
+    "district": "浦东新区",
+    "poi_id": "B0L3TX8RHW",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "山野边云南生烫米线",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7座地下一层40-3室",
+    "rating": 4.2,
+    "avg_spend": 36.0,
+    "lng": 121.60225,
+    "lat": 31.20546,
+    "district": "浦东新区",
+    "poi_id": "B0LRCRGRP0",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "山闲集·山里货大排档(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;中餐厅;火锅店",
+    "address": "金科路3057号汇智商业中心3楼扶梯旁边",
+    "rating": 4.4,
+    "avg_spend": 136.0,
+    "lng": 121.601327,
+    "lat": 31.203675,
+    "district": "浦东新区",
+    "poi_id": "B0KURA3FJK",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "巡湘记·乡野湖南菜(汇智店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心F4层",
+    "rating": 4.4,
+    "avg_spend": 83.0,
+    "lng": 121.601946,
+    "lat": 31.203262,
+    "district": "浦东新区",
+    "poi_id": "B0K16CVY2V",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "巡湘记·乡野湖南菜(汇智店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心F4层",
+    "rating": 4.4,
+    "avg_spend": 83.0,
+    "lng": 121.601946,
+    "lat": 31.203262,
+    "district": "浦东新区",
+    "poi_id": "B0K16CVY2V",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "左庭右院鲜牛肉火锅(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;火锅店",
+    "address": "祖冲之路1239弄7号地下一层58-33号",
+    "rating": 4.5,
+    "avg_spend": 127.0,
+    "lng": 121.602876,
+    "lat": 31.205661,
+    "district": "浦东新区",
+    "poi_id": "B0G0HBFU9A",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "巴黎贝甜(汇智国际店)",
+    "category_raw": "餐饮服务;糕饼店;糕饼店",
+    "address": "金科路3057号汇智国际商业中心B1层",
+    "rating": 4.3,
+    "avg_spend": 40.0,
+    "lng": 121.601017,
+    "lat": 31.20295,
+    "district": "浦东新区",
+    "poi_id": "B0FFJLTKGF",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "张千四·贵州羊肉粉",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心B1层",
+    "rating": 3.9,
+    "avg_spend": 25.0,
+    "lng": 121.601575,
+    "lat": 31.203475,
+    "district": "浦东新区",
+    "poi_id": "B0KK7NO1MV",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "张正发茶餐厅",
+    "category_raw": "餐饮服务;中餐厅;广东菜(粤菜)",
+    "address": "张江镇汇智国际商业中心5层",
+    "rating": 3.9,
+    "avg_spend": 21.0,
+    "lng": 121.601594,
+    "lat": 31.203451,
+    "district": "浦东新区",
+    "poi_id": "B0L0HSQ86Y",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "很久以前羊肉串(张江汇智店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心3层",
+    "rating": 4.6,
+    "avg_spend": 100.0,
+    "lng": 121.601251,
+    "lat": 31.203522,
+    "district": "浦东新区",
+    "poi_id": "B0LB7AAK5G",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "德罗心DELORSIM(长泰广场店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 4.5,
+    "avg_spend": 109.0,
+    "lng": 121.602692,
+    "lat": 31.205402,
+    "district": "浦东新区",
+    "poi_id": "B0L3O7YI7J",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "慢勒咖啡",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "金科路3057号汇智国际商业中心F1层",
+    "rating": 3.3,
+    "avg_spend": null,
+    "lng": 121.60142,
+    "lat": 31.203731,
+    "district": "浦东新区",
+    "poi_id": "B0LKSLJT9W",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "慢生活桔梗店(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 3.5,
+    "avg_spend": null,
+    "lng": 121.601061,
+    "lat": 31.205066,
+    "district": "浦东新区",
+    "poi_id": "B0FFI5FFMG",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "成都你六姐(上海长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "上海浦东新区张江镇祖冲之路1239弄7号长泰广场地下一层",
+    "rating": 4.5,
+    "avg_spend": 40.0,
+    "lng": 121.601312,
+    "lat": 31.205742,
+    "district": "浦东新区",
+    "poi_id": "B0FFJ67B7Q",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "披头士烧鸟居酒屋(长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;日本料理",
+    "address": "金科路2889号长泰广场西区10座1楼(麦当劳向前20米避风塘隔壁)",
+    "rating": 4.5,
+    "avg_spend": 105.0,
+    "lng": 121.60102,
+    "lat": 31.206003,
+    "district": "浦东新区",
+    "poi_id": "B0FFLPIQG8",
+    "tags": [
+      "cuisine_japanese",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "拉蒂娜·巴西牛排馆Latina(长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;外国餐厅",
+    "address": "金科路2889号长泰广场东区3座1层",
+    "rating": 4.6,
+    "avg_spend": 312.0,
+    "lng": 121.60263,
+    "lat": 31.20556,
+    "district": "浦东新区",
+    "poi_id": "B0FFG69LAW",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "拾宴(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心F4层",
+    "rating": 4.4,
+    "avg_spend": 140.0,
+    "lng": 121.601075,
+    "lat": 31.203349,
+    "district": "浦东新区",
+    "poi_id": "B0JGMR9VNW",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "摩伽·麦塔奇·恋树",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "金科路2966号康达源谷1栋(招商证券)302",
+    "rating": 3.0,
+    "avg_spend": null,
+    "lng": 121.599237,
+    "lat": 31.205156,
+    "district": "浦东新区",
+    "poi_id": "B0L1M9I1ZD",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "新旺茶餐厅(长泰广场店)",
+    "category_raw": "餐饮服务;快餐厅;茶餐厅",
+    "address": "金科路2889号长泰广场东区1层28-30号",
+    "rating": 4.4,
+    "avg_spend": 70.0,
+    "lng": 121.602174,
+    "lat": 31.20621,
+    "district": "浦东新区",
+    "poi_id": "B0FFKQRWCT",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "星巴克臻选(汇智广场店)",
+    "category_raw": "餐饮服务;咖啡厅;星巴克咖啡",
+    "address": "金科路3057号汇智国际商业中心1层L1-1A室",
+    "rating": 4.6,
+    "avg_spend": 42.0,
+    "lng": 121.601193,
+    "lat": 31.203687,
+    "district": "浦东新区",
+    "poi_id": "B0FFFH95JA",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "星巴克臻选(长泰广场店)",
+    "category_raw": "餐饮服务;咖啡厅;星巴克咖啡",
+    "address": "祖冲之路1239弄5座1E13-1单元",
+    "rating": 4.6,
+    "avg_spend": 52.0,
+    "lng": 121.602778,
+    "lat": 31.204973,
+    "district": "浦东新区",
+    "poi_id": "B0I1TA7B7D",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "春华府",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 1.8,
+    "avg_spend": null,
+    "lng": 121.601725,
+    "lat": 31.205175,
+    "district": "浦东新区",
+    "poi_id": "B0LKGN0SQN",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "春风松月楼(汇智国际店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心B1-08",
+    "rating": 3.5,
+    "avg_spend": 20.0,
+    "lng": 121.601575,
+    "lat": 31.203475,
+    "district": "浦东新区",
+    "poi_id": "B0KR4PW817",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "曼格纳·曼芯馆(张江店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "祖冲之路1136号一楼(金科路地铁站2号口步行80米)",
+    "rating": 4.5,
+    "avg_spend": 238.0,
+    "lng": 121.602253,
+    "lat": 31.203816,
+    "district": "浦东新区",
+    "poi_id": "B0HD1K1NRU",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "有堂古·甘草水果(长泰广场店)",
+    "category_raw": "购物服务;综合市场;果品市场|餐饮服务;冷饮店;冷饮店",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 3.8,
+    "avg_spend": null,
+    "lng": 121.601013,
+    "lat": 31.205832,
+    "district": "浦东新区",
+    "poi_id": "B0L3M1PQ7Z",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "東盛炭烤自助料理(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路2901号长泰广场10座2层避风塘楼上",
+    "rating": 4.7,
+    "avg_spend": 132.0,
+    "lng": 121.601021,
+    "lat": 31.205755,
+    "district": "浦东新区",
+    "poi_id": "B0FFKFKUCA",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "果之满满(长泰广场店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "张江高科技园区祖冲之路7号长泰广场15-2室",
+    "rating": 4.2,
+    "avg_spend": 21.0,
+    "lng": 121.601064,
+    "lat": 31.205649,
+    "district": "浦东新区",
+    "poi_id": "B0FFFHC7X8",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "柠季·手打柠檬茶(上海长泰广场店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "金科路2889号长泰国际商业广场地下一层东区48-1室",
+    "rating": 4.2,
+    "avg_spend": 21.0,
+    "lng": 121.602284,
+    "lat": 31.205979,
+    "district": "浦东新区",
+    "poi_id": "B0LAOYF3LQ",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "柠檬向右(长泰广场店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "张江镇祖冲之路1239弄7号地下一层15-7室",
+    "rating": 4.1,
+    "avg_spend": 20.0,
+    "lng": 121.601011,
+    "lat": 31.205718,
+    "district": "浦东新区",
+    "poi_id": "B0JA9RGOOJ",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "格瑞思(长泰店)",
+    "category_raw": "科教文化服务;培训机构;培训机构|餐饮服务;糕饼店;糕饼店",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 4.2,
+    "avg_spend": 41.0,
+    "lng": 121.601563,
+    "lat": 31.205538,
+    "district": "浦东新区",
+    "poi_id": "B0FFJ8T55I",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "桂满陇·江南流水席(长泰广场旗舰店)",
+    "category_raw": "餐饮服务;中餐厅;浙江菜",
+    "address": "祖冲之路1239弄7号地下一层57室长泰广场5座B1层",
+    "rating": 4.6,
+    "avg_spend": 70.0,
+    "lng": 121.603014,
+    "lat": 31.205033,
+    "district": "浦东新区",
+    "poi_id": "B0FFHIJCPZ",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "梅将面屋(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "长泰广场自由贸易试验区祖冲之路1239弄7号B1层23号",
+    "rating": 4.2,
+    "avg_spend": 66.0,
+    "lng": 121.601776,
+    "lat": 31.205618,
+    "district": "浦东新区",
+    "poi_id": "B0L3FC5PPI",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "棒约翰比萨(长泰广场店)",
+    "category_raw": "餐饮服务;快餐厅;快餐厅",
+    "address": "金科路2839弄长泰国际广场7座地下一层美食广场80-1",
+    "rating": 4.3,
+    "avg_spend": 68.0,
+    "lng": 121.600943,
+    "lat": 31.205441,
+    "district": "浦东新区",
+    "poi_id": "B0FFFWQ0LB",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "椒锅锅·麻辣香锅(汇智国际店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "中国(上海)自由贸易试验区金科路3057号亮景路55号5层",
+    "rating": 4.1,
+    "avg_spend": 51.0,
+    "lng": 121.601609,
+    "lat": 31.203533,
+    "district": "浦东新区",
+    "poi_id": "B0J3UL1L4K",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "楼下酸奶(长泰广场店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "长泰广场西区7号楼B1层03-1号",
+    "rating": 4.3,
+    "avg_spend": 26.0,
+    "lng": 121.600955,
+    "lat": 31.205958,
+    "district": "浦东新区",
+    "poi_id": "B0LDS72XPH",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "欢喜花生(长泰广场2店)",
+    "category_raw": "餐饮服务;快餐厅;快餐厅",
+    "address": "祖冲之路1239弄长泰负一楼西",
+    "rating": 3.9,
+    "avg_spend": null,
+    "lng": 121.603327,
+    "lat": 31.205467,
+    "district": "浦东新区",
+    "poi_id": "B0JUYSC01G",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "欧味多(长泰广场店)",
+    "category_raw": "餐饮服务;快餐厅;快餐厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 3.8,
+    "avg_spend": 62.0,
+    "lng": 121.601225,
+    "lat": 31.205675,
+    "district": "浦东新区",
+    "poi_id": "B0LGDZ8YON",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "毕真烤肉集市(长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;韩国料理",
+    "address": "祖冲之路1239弄长泰广场7座西区B1层",
+    "rating": 4.3,
+    "avg_spend": 150.0,
+    "lng": 121.600724,
+    "lat": 31.205391,
+    "district": "浦东新区",
+    "poi_id": "B0FFFSS209",
+    "tags": [
+      "cuisine_korean",
+      "spicy",
+      "filling"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "江边城外烤全鱼(上海长泰广场店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 4.5,
+    "avg_spend": 116.0,
+    "lng": 121.603309,
+    "lat": 31.205158,
+    "district": "浦东新区",
+    "poi_id": "B0JR5SR3Z8",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "泰兰尼斯TARANIS(上海长泰广场)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 3.6,
+    "avg_spend": 403.0,
+    "lng": 121.602125,
+    "lat": 31.205525,
+    "district": "浦东新区",
+    "poi_id": "B0LKAH8ZAX",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "泰序(长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;泰国/越南菜品餐厅",
+    "address": "祖冲之路1239弄7号长泰广场F1层",
+    "rating": 4.5,
+    "avg_spend": 128.0,
+    "lng": 121.601788,
+    "lat": 31.206248,
+    "district": "浦东新区",
+    "poi_id": "B0LRZR2X50",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "派悦坊(长泰广场店)",
+    "category_raw": "餐饮服务;糕饼店;糕饼店",
+    "address": "祖冲之路1239弄长泰广场8座2号1层01-2室派悦坊商铺",
+    "rating": 4.3,
+    "avg_spend": 40.0,
+    "lng": 121.60141,
+    "lat": 31.20561,
+    "district": "浦东新区",
+    "poi_id": "B0LDV76OKL",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "淡马茶坊(张江汇智店)",
+    "category_raw": "餐饮服务;茶艺馆;茶艺馆",
+    "address": "金科路3057号、亮景路55号地下一层B1-18室",
+    "rating": 3.9,
+    "avg_spend": 20.0,
+    "lng": 121.601275,
+    "lat": 31.203625,
+    "district": "浦东新区",
+    "poi_id": "B0J0C7ELW1",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "淡马茶坊(张江汇智店)",
+    "category_raw": "餐饮服务;茶艺馆;茶艺馆",
+    "address": "金科路3057号、亮景路55号地下一层B1-18室",
+    "rating": 3.9,
+    "avg_spend": 20.0,
+    "lng": 121.601275,
+    "lat": 31.203625,
+    "district": "浦东新区",
+    "poi_id": "B0J0C7ELW1",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "湊湊火锅·茶憩(上海金科路店)",
+    "category_raw": "餐饮服务;中餐厅;火锅店",
+    "address": "张江高科技园区金科路3057号汇智国际商业中心L3-7-8三楼",
+    "rating": 4.6,
+    "avg_spend": 140.0,
+    "lng": 121.60193,
+    "lat": 31.203267,
+    "district": "浦东新区",
+    "poi_id": "B0FFMABP7W",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "湊湊火锅·茶憩(上海金科路店)",
+    "category_raw": "餐饮服务;中餐厅;火锅店",
+    "address": "张江高科技园区金科路3057号汇智国际商业中心L3-7-8三楼",
+    "rating": 4.6,
+    "avg_spend": 140.0,
+    "lng": 121.60193,
+    "lat": 31.203267,
+    "district": "浦东新区",
+    "poi_id": "B0FFMABP7W",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "满记甜品(长泰广场店)",
+    "category_raw": "餐饮服务;甜品店;甜品店",
+    "address": "张江镇金科路2889弄长泰广场8座1W23",
+    "rating": 4.4,
+    "avg_spend": 44.0,
+    "lng": 121.601629,
+    "lat": 31.205849,
+    "district": "浦东新区",
+    "poi_id": "B0FFISF5RQ",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "滨寿司(长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;日本料理",
+    "address": "祖冲之路1239弄7号长泰广场10座F2层",
+    "rating": 4.6,
+    "avg_spend": 87.0,
+    "lng": 121.600805,
+    "lat": 31.205563,
+    "district": "浦东新区",
+    "poi_id": "B0K2Y7K9W0",
+    "tags": [
+      "cuisine_japanese",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "漫游咖啡(长泰广场店)",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 3.5,
+    "avg_spend": null,
+    "lng": 121.601574,
+    "lat": 31.206401,
+    "district": "浦东新区",
+    "poi_id": "B0L3H7B5Y2",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "潮界(张江汇智店)",
+    "category_raw": "餐饮服务;中餐厅;潮州菜",
+    "address": "金科路3057号汇智广场4楼C4-A商铺",
+    "rating": 4.4,
+    "avg_spend": 88.0,
+    "lng": 121.601368,
+    "lat": 31.203157,
+    "district": "浦东新区",
+    "poi_id": "B0I2TAUHB5",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "炙柒Sekinana(长泰广场店)",
+    "category_raw": "餐饮服务;外国餐厅;日本料理",
+    "address": "祖冲之路1239弄长泰广场1W48号",
+    "rating": 4.3,
+    "avg_spend": 149.0,
+    "lng": 121.601388,
+    "lat": 31.206277,
+    "district": "浦东新区",
+    "poi_id": "B0FFLFG7SE",
+    "tags": [
+      "cuisine_japanese",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "炙染",
+    "category_raw": "餐饮服务;外国餐厅;日本料理",
+    "address": "祖冲之路1239弄7号长泰广场F1层",
+    "rating": 3.8,
+    "avg_spend": null,
+    "lng": 121.601338,
+    "lat": 31.20616,
+    "district": "浦东新区",
+    "poi_id": "B0L3M1P08C",
+    "tags": [
+      "cuisine_japanese",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "点都德(长泰广场店)",
+    "category_raw": "餐饮服务;快餐厅;茶餐厅",
+    "address": "祖冲之路1239弄长泰广场三座二楼(地铁2号线金科路4号出)",
+    "rating": 4.6,
+    "avg_spend": 117.0,
+    "lng": 121.602569,
+    "lat": 31.205507,
+    "district": "浦东新区",
+    "poi_id": "B0HAKCIM3D",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "煲仔皇(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 4.2,
+    "avg_spend": 40.0,
+    "lng": 121.601056,
+    "lat": 31.205784,
+    "district": "浦东新区",
+    "poi_id": "B0KRBCW6HU",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "煲珠公·老红糖珍珠奶茶(上海长泰广场店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "祖冲之路1239弄7号地下一层48-20室",
+    "rating": 4.3,
+    "avg_spend": 17.0,
+    "lng": 121.601956,
+    "lat": 31.205855,
+    "district": "浦东新区",
+    "poi_id": "B0K0PUWW7K",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "熊治面包(长泰广场店)",
+    "category_raw": "餐饮服务;糕饼店;糕饼店",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 4.4,
+    "avg_spend": 32.0,
+    "lng": 121.602393,
+    "lat": 31.205898,
+    "district": "浦东新区",
+    "poi_id": "B0LKYO4LY5",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "爷爷不泡茶NOYEYENOTEA(上海长泰广场店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "长泰广场B1层东区48-19室",
+    "rating": 4.4,
+    "avg_spend": 21.0,
+    "lng": 121.602584,
+    "lat": 31.205406,
+    "district": "浦东新区",
+    "poi_id": "B0K1SOBL5Y",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "牛New寿喜烧(张江店)",
+    "category_raw": "餐饮服务;外国餐厅;日本料理",
+    "address": "金科路3057号汇智国际中心5F(金科路地铁站2号口旁)",
+    "rating": 4.7,
+    "avg_spend": 174.0,
+    "lng": 121.601302,
+    "lat": 31.203673,
+    "district": "浦东新区",
+    "poi_id": "B0IR2H31SY",
+    "tags": [
+      "cuisine_japanese",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "王品牛排(上海张江长泰店)",
+    "category_raw": "餐饮服务;外国餐厅;牛扒店(扒房)",
+    "address": "祖冲之路1239弄长泰广场3座3楼",
+    "rating": 4.4,
+    "avg_spend": 247.0,
+    "lng": 121.60279,
+    "lat": 31.205064,
+    "district": "浦东新区",
+    "poi_id": "B0LRJSGWC8",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "王春春鸡汤饭(上海长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路2889弄长泰广场B1",
+    "rating": 4.2,
+    "avg_spend": 30.0,
+    "lng": 121.60115,
+    "lat": 31.205551,
+    "district": "浦东新区",
+    "poi_id": "B0KRP5R7Z5",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "玺炖·中国铁锅炖(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄长泰广场2座2楼24号铺",
+    "rating": 4.5,
+    "avg_spend": 94.0,
+    "lng": 121.602454,
+    "lat": 31.205884,
+    "district": "浦东新区",
+    "poi_id": "B0L1ADJDOR",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "琦王花生(浦东汇智广场店)",
+    "category_raw": "餐饮服务;快餐厅;快餐厅",
+    "address": "金科路3057号汇智国际商业中心(金科路地铁站2号口旁)",
+    "rating": 3.7,
+    "avg_spend": 54.0,
+    "lng": 121.601625,
+    "lat": 31.203325,
+    "district": "浦东新区",
+    "poi_id": "B0LKDGMPO5",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "瑞幸咖啡(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
+    "address": "亮景路55号-2汇智国际商业中心底商",
+    "rating": 4.4,
+    "avg_spend": 15.0,
+    "lng": 121.602111,
+    "lat": 31.203055,
+    "district": "浦东新区",
+    "poi_id": "B0K06L45B5",
+    "tags": [
+      "light_meal",
+      "premium"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "璞徽(长泰广场店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关|购物服务;购物相关场所;购物相关场所",
+    "address": "祖冲之路与哈雷路交叉口(长泰国际广场5座)",
+    "rating": 4.4,
+    "avg_spend": 272.0,
+    "lng": 121.603005,
+    "lat": 31.205271,
+    "district": "浦东新区",
+    "poi_id": "B0I06UQKHX",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "申宴(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄长泰广场10座2层",
+    "rating": 4.3,
+    "avg_spend": 152.0,
+    "lng": 121.60072,
+    "lat": 31.205682,
+    "district": "浦东新区",
+    "poi_id": "B0M6SS3JJ8",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "盒马鲜生员工餐厅(上海长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 4.2,
+    "avg_spend": null,
+    "lng": 121.600716,
+    "lat": 31.206737,
+    "district": "浦东新区",
+    "poi_id": "B0IK1N92EQ",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "眉州东坡(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心F4层",
+    "rating": 4.3,
+    "avg_spend": 80.0,
+    "lng": 121.601458,
+    "lat": 31.203057,
+    "district": "浦东新区",
+    "poi_id": "B0K3M7T8VZ",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "眷屋の深夜食堂",
+    "category_raw": "餐饮服务;外国餐厅;日本料理",
+    "address": "浦东新区金科路3057号汇智国际商业中心",
+    "rating": 4.1,
+    "avg_spend": 83.0,
+    "lng": 121.601799,
+    "lat": 31.203039,
+    "district": "浦东新区",
+    "poi_id": "B0L3ASTN3E",
+    "tags": [
+      "cuisine_japanese",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "秦小乖(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心B1层",
+    "rating": 3.6,
+    "avg_spend": 34.0,
+    "lng": 121.601207,
+    "lat": 31.203723,
+    "district": "浦东新区",
+    "poi_id": "B0JK7RSR1P",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "稻香情时尚智选餐厅(长泰广场店)",
+    "category_raw": "餐饮服务;快餐厅;快餐厅",
+    "address": "长泰广场负一楼东区美食汇(金科路地铁站4号口步行130米)",
+    "rating": 3.7,
+    "avg_spend": 36.0,
+    "lng": 121.602592,
+    "lat": 31.205398,
+    "district": "浦东新区",
+    "poi_id": "B0G0V1OVVI",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "立方铁铁板烧(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 4.3,
+    "avg_spend": 110.0,
+    "lng": 121.601073,
+    "lat": 31.205414,
+    "district": "浦东新区",
+    "poi_id": "B0G39KKDSO",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "笠园(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路2889号长泰广场3F层",
+    "rating": 4.4,
+    "avg_spend": 215.0,
+    "lng": 121.601053,
+    "lat": 31.205325,
+    "district": "浦东新区",
+    "poi_id": "B0GRTAESMC",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "米陀饭团(汇智国际店)",
+    "category_raw": "餐饮服务;快餐厅;快餐厅",
+    "address": "金科路3057号汇智国际商业中心B1-4号铺",
+    "rating": 3.9,
+    "avg_spend": 20.0,
+    "lng": 121.601405,
+    "lat": 31.203673,
+    "district": "浦东新区",
+    "poi_id": "B0KKMO84FR",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "索尼食堂(张江店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "居里路361号(近祖冲之路)",
+    "rating": 4.4,
+    "avg_spend": 17.0,
+    "lng": 121.597461,
+    "lat": 31.206713,
+    "district": "浦东新区",
+    "poi_id": "B001557VHU",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "绿茶餐厅(上海浦东汇智店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅|餐饮服务;冷饮店;冷饮店",
+    "address": "金科路3057号汇智国际商业中心F2层",
+    "rating": 4.6,
+    "avg_spend": 63.0,
+    "lng": 121.601062,
+    "lat": 31.203342,
+    "district": "浦东新区",
+    "poi_id": "B0HUAH3CP3",
+    "tags": [
+      "cuisine_chinese",
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "美味美锅·麻辣香锅(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号地下一层19-8室长泰广场西区",
+    "rating": 3.7,
+    "avg_spend": 71.0,
+    "lng": 121.60148,
+    "lat": 31.205614,
+    "district": "浦东新区",
+    "poi_id": "B0G2JKHLH0",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "美珍香(浦东汇智店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "上海自由贸易试验区金科路3057号、亮景路55号地下一层B1-6B室",
+    "rating": 4.0,
+    "avg_spend": 100.0,
+    "lng": 121.601325,
+    "lat": 31.203775,
+    "district": "浦东新区",
+    "poi_id": "B0L2D994U7",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "老碗会(上海浦东长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路2889号长泰广场GF层",
+    "rating": 4.3,
+    "avg_spend": 36.0,
+    "lng": 121.600927,
+    "lat": 31.205856,
+    "district": "浦东新区",
+    "poi_id": "B0LAHRGMG4",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "老韩煸鸡·中国炸鸡(汇智店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "金科路3057号汇智国际商业中心B1层",
+    "rating": 3.9,
+    "avg_spend": 34.0,
+    "lng": 121.60125,
+    "lat": 31.203773,
+    "district": "浦东新区",
+    "poi_id": "B0JKGCCNNN",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "肥汁米蘭香港米綫(長泰廣場分號)",
+    "category_raw": "餐饮服务;快餐厅;快餐厅",
+    "address": "祖冲之路1239弄7号地下一层25-2室",
+    "rating": 4.2,
+    "avg_spend": 39.0,
+    "lng": 121.601577,
+    "lat": 31.205585,
+    "district": "浦东新区",
+    "poi_id": "B0HAJR6DUV",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "肯德基(张江郭守敬园餐厅)",
+    "category_raw": "餐饮服务;快餐厅;肯德基",
+    "address": "郭守敬路498号6幢一层",
+    "rating": 4.3,
+    "avg_spend": 24.0,
+    "lng": 121.598675,
+    "lat": 31.208575,
+    "district": "浦东新区",
+    "poi_id": "B0KGFZ2F7V",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "肯德基(金科店)",
+    "category_raw": "餐饮服务;快餐厅;肯德基",
+    "address": "金科路3057号汇智国际商业中心1层",
+    "rating": 4.5,
+    "avg_spend": 33.0,
+    "lng": 121.601578,
+    "lat": 31.202907,
+    "district": "浦东新区",
+    "poi_id": "B0FFFQ6KVT",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "胖哥俩肉蟹煲(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "张江镇金科路3057号汇智国际商业中心",
+    "rating": 4.6,
+    "avg_spend": 79.0,
+    "lng": 121.601212,
+    "lat": 31.203476,
+    "district": "浦东新区",
+    "poi_id": "B0FFGPRIMC",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "胡子大厨(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心B1层",
+    "rating": 4.1,
+    "avg_spend": 47.0,
+    "lng": 121.601273,
+    "lat": 31.203438,
+    "district": "浦东新区",
+    "poi_id": "B0HGSU57KJ",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "胡子大厨·湖南小炒(汇智国际店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号B1层646-B007商铺",
+    "rating": 4.1,
+    "avg_spend": 61.0,
+    "lng": 121.601288,
+    "lat": 31.205917,
+    "district": "浦东新区",
+    "poi_id": "B0IKRUJWU5",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "至街烧鸭",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "张江镇祖冲之路1239弄7号地下一层19-6室",
+    "rating": 3.9,
+    "avg_spend": 37.0,
+    "lng": 121.601975,
+    "lat": 31.205875,
+    "district": "浦东新区",
+    "poi_id": "B0LR3MBW08",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "苏小柳点心(汇智广场分院)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "汇智国际商业中心B1-23室",
+    "rating": 4.2,
+    "avg_spend": 58.0,
+    "lng": 121.60136,
+    "lat": 31.203414,
+    "district": "浦东新区",
+    "poi_id": "B0JKRAS9TH",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "茉沏(长泰广场店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "祖冲之路1239弄2号长泰广场1座B1层",
+    "rating": 4.2,
+    "avg_spend": 16.0,
+    "lng": 121.601062,
+    "lat": 31.205685,
+    "district": "浦东新区",
+    "poi_id": "B0GUN5IXD9",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "茉莉奶白(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;休闲餐饮场所;休闲餐饮场所",
+    "address": "金科路3057号B1层15-16号铺",
+    "rating": 4.0,
+    "avg_spend": 21.0,
+    "lng": 121.601601,
+    "lat": 31.203341,
+    "district": "浦东新区",
+    "poi_id": "B0J30U47TT",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "茉酸奶(长泰店)",
+    "category_raw": "餐饮服务;冷饮店;冷饮店",
+    "address": "金科路2889号长泰广场GF层",
+    "rating": 4.2,
+    "avg_spend": 20.0,
+    "lng": 121.601554,
+    "lat": 31.205627,
+    "district": "浦东新区",
+    "poi_id": "B0HD3RPF9H",
+    "tags": [
+      "cold_food",
+      "light_meal"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "萍姐火锅(张江汇智店)",
+    "category_raw": "餐饮服务;中餐厅;火锅店",
+    "address": "金科路3057号汇智国际商业中心F5层",
+    "rating": 4.3,
+    "avg_spend": 96.0,
+    "lng": 121.601872,
+    "lat": 31.203478,
+    "district": "浦东新区",
+    "poi_id": "B0JUCK1J38",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "萨莉亚意式餐厅(汇智广场店)",
+    "category_raw": "餐饮服务;外国餐厅;意式菜品餐厅",
+    "address": "金科路3057号汇智国际商业中心5楼",
+    "rating": 4.6,
+    "avg_spend": 51.0,
+    "lng": 121.601508,
+    "lat": 31.203623,
+    "district": "浦东新区",
+    "poi_id": "B0GRD9JWAH",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "蔡林记·湖北小馆(上海长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "中国(上海)自由贸易试验区祖冲之路1239弄7号地下一层10室",
+    "rating": 4.3,
+    "avg_spend": 38.0,
+    "lng": 121.600949,
+    "lat": 31.205528,
+    "district": "浦东新区",
+    "poi_id": "B0KKFOI29O",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "蔡澜点心(上海长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "中国(上海)自由贸易试验区金科路2891号1层114室",
+    "rating": 4.4,
+    "avg_spend": 106.0,
+    "lng": 121.601015,
+    "lat": 31.206192,
+    "district": "浦东新区",
+    "poi_id": "B0K36UG2Y4",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "裕莲茶楼(长泰广场店)",
+    "category_raw": "餐饮服务;茶艺馆;茶艺馆",
+    "address": "金科路2889弄长泰广场1楼东区3座6号02-156室",
+    "rating": 4.6,
+    "avg_spend": 32.0,
+    "lng": 121.603112,
+    "lat": 31.205363,
+    "district": "浦东新区",
+    "poi_id": "B0KAV7DYXY",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "西堤牛排(长泰店)",
+    "category_raw": "餐饮服务;外国餐厅;牛扒店(扒房)",
+    "address": "祖冲之路1239弄长泰广场东区3座2层",
+    "rating": 4.6,
+    "avg_spend": 132.0,
+    "lng": 121.602788,
+    "lat": 31.205065,
+    "district": "浦东新区",
+    "poi_id": "B0FFF9L07A",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "西塔老太太泥炉烤肉(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路4号",
+    "rating": 4.7,
+    "avg_spend": 128.0,
+    "lng": 121.602953,
+    "lat": 31.205039,
+    "district": "浦东新区",
+    "poi_id": "B0H1URXUF2",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "西树泡芙(长泰广场店)",
+    "category_raw": "餐饮服务;甜品店;甜品店",
+    "address": "祖冲之路1239弄7号长泰广场地下一层48-2室",
+    "rating": 4.3,
+    "avg_spend": 26.0,
+    "lng": 121.602726,
+    "lat": 31.205583,
+    "district": "浦东新区",
+    "poi_id": "B0FFFPKYHL",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "西贝(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;中餐厅;西北菜",
+    "address": "金科路3057号汇智国际商业中心三楼",
+    "rating": 4.5,
+    "avg_spend": 113.0,
+    "lng": 121.601637,
+    "lat": 31.203589,
+    "district": "浦东新区",
+    "poi_id": "B0FFGQE9OU",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "读酥世家(汇智广场店)",
+    "category_raw": "餐饮服务;糕饼店;糕饼店",
+    "address": "金科路3057号汇智国际商业中心B1层",
+    "rating": 4.2,
+    "avg_spend": 33.0,
+    "lng": 121.601341,
+    "lat": 31.203662,
+    "district": "浦东新区",
+    "poi_id": "B0J0MSXA61",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "费大厨辣椒炒肉(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路2889号长泰广场东区5座B1层费大厨",
+    "rating": 4.6,
+    "avg_spend": 84.0,
+    "lng": 121.603092,
+    "lat": 31.205145,
+    "district": "浦东新区",
+    "poi_id": "B0HK07ASQD",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "超级碗FOODBOWL(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心B1层",
+    "rating": 3.9,
+    "avg_spend": 42.0,
+    "lng": 121.601677,
+    "lat": 31.203438,
+    "district": "浦东新区",
+    "poi_id": "B0J3R72A5K",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "遇见小面(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 4.2,
+    "avg_spend": 31.0,
+    "lng": 121.601675,
+    "lat": 31.205675,
+    "district": "浦东新区",
+    "poi_id": "B0LKUUY8T6",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "那时新疆·大月氏(长泰广场店)",
+    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
+    "address": "张江高科技园区祖冲之路长泰广场7座B1层",
+    "rating": 4.5,
+    "avg_spend": 84.0,
+    "lng": 121.600742,
+    "lat": 31.205465,
+    "district": "浦东新区",
+    "poi_id": "B0FFKTRC32",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "重庆小面(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 3.9,
+    "avg_spend": 33.0,
+    "lng": 121.602125,
+    "lat": 31.205525,
+    "district": "浦东新区",
+    "poi_id": "B0J3ULXL9R",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "长泰华府(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路2889弄长泰广场7座2层",
+    "rating": 4.3,
+    "avg_spend": 255.0,
+    "lng": 121.601876,
+    "lat": 31.205318,
+    "district": "浦东新区",
+    "poi_id": "B0FFGYOS4Y",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "长荣桂冠酒店-中餐厅",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "亮景路与哈雷路交叉口西160米",
+    "rating": 4.1,
+    "avg_spend": null,
+    "lng": 121.60248,
+    "lat": 31.203761,
+    "district": "浦东新区",
+    "poi_id": "B0JDJ5FGDU",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "闽叔福建菜(长泰广场6座店)",
+    "category_raw": "餐饮服务;中餐厅;福建菜",
+    "address": "张江镇金科路2889弄长泰广场6座二楼",
+    "rating": 4.5,
+    "avg_spend": 91.0,
+    "lng": 121.601909,
+    "lat": 31.205059,
+    "district": "浦东新区",
+    "poi_id": "B0J14PUY03",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "陈香贵·兰州牛肉面(上海浦东长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;清真菜馆",
+    "address": "金科路2889弄长泰广场7座B1",
+    "rating": 4.4,
+    "avg_spend": 38.0,
+    "lng": 121.60133,
+    "lat": 31.205558,
+    "district": "浦东新区",
+    "poi_id": "B0IG75P1EU",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "韩宫宴(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;外国餐厅;韩国料理",
+    "address": "金科路3057号汇智国际商业中心F5层",
+    "rating": 4.4,
+    "avg_spend": 118.0,
+    "lng": 121.601511,
+    "lat": 31.203513,
+    "district": "浦东新区",
+    "poi_id": "B0L2ZU3F7N",
+    "tags": [
+      "cuisine_korean",
+      "spicy",
+      "filling"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "食味客",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层",
+    "rating": 2.6,
+    "avg_spend": null,
+    "lng": 121.600775,
+    "lat": 31.206325,
+    "district": "浦东新区",
+    "poi_id": "B0LUDA984J",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "饿梨酱Hey Guac(汇智店)",
+    "category_raw": "餐饮服务;外国餐厅;西餐厅(综合风味)",
+    "address": "金科路3057号汇智国际商业中心F1层",
+    "rating": 4.1,
+    "avg_spend": 45.0,
+    "lng": 121.601762,
+    "lat": 31.203062,
+    "district": "浦东新区",
+    "poi_id": "B0K22UK5K6",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "鱼酷活鱼烤鱼(上海张江长泰店)",
+    "category_raw": "餐饮服务;中餐厅;特色/地方风味餐厅",
+    "address": "祖冲之路1239弄7号长泰广场B1层05-3室",
+    "rating": 4.6,
+    "avg_spend": 81.0,
+    "lng": 121.600786,
+    "lat": 31.20568,
+    "district": "浦东新区",
+    "poi_id": "B0FFFW06DP",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "鲁东莱鲜·胶东菜(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "祖冲之路1239弄7座2层(太二旁边)",
+    "rating": 4.5,
+    "avg_spend": 133.0,
+    "lng": 121.601293,
+    "lat": 31.205263,
+    "district": "浦东新区",
+    "poi_id": "B0LG573C5M",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "鸿姐老火锅(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;火锅店",
+    "address": "上海浦东新区祖冲之路1239弄6座3楼鸿姐老火锅",
+    "rating": 4.6,
+    "avg_spend": 110.0,
+    "lng": 121.601516,
+    "lat": 31.204915,
+    "district": "浦东新区",
+    "poi_id": "B0KUOGXV6V",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "麦当劳(长泰广场店)",
+    "category_raw": "餐饮服务;快餐厅;麦当劳",
+    "address": "金科路2889号长泰广场西区1层",
+    "rating": 4.6,
+    "avg_spend": 33.0,
+    "lng": 121.601044,
+    "lat": 31.205603,
+    "district": "浦东新区",
+    "poi_id": "B0FFG1HDAR",
+    "tags": [],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "麻都·成都菜(长泰广场)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路长泰广场10座负一层02-2室",
+    "rating": 4.5,
+    "avg_spend": 92.0,
+    "lng": 121.600728,
+    "lat": 31.20596,
+    "district": "浦东新区",
+    "poi_id": "B0LDYH0049",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  },
+  {
+    "name": "黄启云私房牛肉面工坊(汇智国际商业中心店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "金科路3057号汇智国际商业中心F5层",
+    "rating": 4.2,
+    "avg_spend": 68.0,
+    "lng": 121.601723,
+    "lat": 31.203764,
+    "district": "浦东新区",
+    "poi_id": "B0L0H7R6EW",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 0,
+    "deleted": false
+  }
+]

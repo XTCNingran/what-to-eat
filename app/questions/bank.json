@@ -1,0 +1,163 @@
+{
+  "real_questions": [
+    {
+      "id": "q_spicy",
+      "type": "real",
+      "text": "今天能吃辣吗？",
+      "emoji": "🌶️",
+      "choices": [
+        {"id": "spicy_yes",  "text": "当然！越辣越好",   "weights": {"spicy": 2.0}},
+        {"id": "spicy_mid",  "text": "微辣可以",          "weights": {"spicy": 0.5}},
+        {"id": "spicy_no",   "text": "完全不行",          "weights": {"spicy": -2.0}}
+      ]
+    },
+    {
+      "id": "q_budget",
+      "type": "real",
+      "text": "今天午饭预算大概？",
+      "emoji": "💰",
+      "choices": [
+        {"id": "budget_low",  "text": "30元以内",          "weights": {"budget_max": 30, "budget_friendly": 1.0}},
+        {"id": "budget_mid",  "text": "30–60元",            "weights": {"budget_max": 60}},
+        {"id": "budget_high", "text": "60元以上随意",       "weights": {"budget_max": 999, "premium": 0.5}}
+      ]
+    },
+    {
+      "id": "q_cuisine",
+      "type": "real",
+      "text": "今天想吃什么大类？",
+      "emoji": "🍜",
+      "choices": [
+        {"id": "cuisine_chinese",  "text": "中餐",           "weights": {"cuisine_chinese": 2.0}},
+        {"id": "cuisine_japanese", "text": "日料",           "weights": {"cuisine_japanese": 2.0}},
+        {"id": "cuisine_western",  "text": "西式",           "weights": {"cuisine_western": 2.0}},
+        {"id": "cuisine_fast",     "text": "快餐随便",       "weights": {"fast_service": 1.5, "cuisine_chinese": 0.5}}
+      ]
+    },
+    {
+      "id": "q_distance",
+      "type": "real",
+      "text": "愿意走多远？",
+      "emoji": "🚶",
+      "choices": [
+        {"id": "dist_close",  "text": "楼下就好",           "weights": {"fast_service": 1.0}},
+        {"id": "dist_medium", "text": "5分钟步行",          "weights": {}},
+        {"id": "dist_far",    "text": "都行不在乎",         "weights": {"premium": 0.3}}
+      ]
+    },
+    {
+      "id": "q_health",
+      "type": "real",
+      "text": "今天想吃健康一点还是随意？",
+      "emoji": "🥗",
+      "choices": [
+        {"id": "health_yes", "text": "要吃得健康",          "weights": {"healthy": 1.5}},
+        {"id": "health_no",  "text": "今天放纵一下",        "weights": {"filling": 0.5, "meat": 0.5}},
+        {"id": "health_mid", "text": "无所谓",              "weights": {}}
+      ]
+    },
+    {
+      "id": "q_soup",
+      "type": "real",
+      "text": "想喝汤 / 吃热食吗？",
+      "emoji": "🍲",
+      "choices": [
+        {"id": "soup_yes", "text": "想喝热汤热食",          "weights": {"warm_food": 1.5}},
+        {"id": "soup_no",  "text": "不需要，随便",          "weights": {}}
+      ]
+    }
+  ],
+  "fun_questions": [
+    {
+      "id": "q_animal",
+      "type": "fun",
+      "text": "今天你更像哪种动物？",
+      "emoji": "🐾",
+      "choices": [
+        {"id": "animal_cat",  "text": "🐱 猫（慵懒优雅）",  "weights": {"light_meal": 0.8}},
+        {"id": "animal_bear", "text": "🐻 熊（要吃饱！）",   "weights": {"filling": 1.2}},
+        {"id": "animal_bird", "text": "🐦 鸟（啄几口就够）", "weights": {"light_meal": 1.2}},
+        {"id": "animal_wolf", "text": "🐺 狼（肉肉肉！）",   "weights": {"meat": 1.5, "filling": 0.5}}
+      ]
+    },
+    {
+      "id": "q_coffee",
+      "type": "fun",
+      "text": "上次帮同事买咖啡是什么时候？",
+      "emoji": "☕",
+      "choices": [
+        {"id": "coffee_today", "text": "今天！我最好了",    "weights": {"premium": 0.5}},
+        {"id": "coffee_week",  "text": "这周买过",          "weights": {"premium": 0.2}},
+        {"id": "coffee_never", "text": "…我不记得了",       "weights": {"budget_friendly": 0.3}}
+      ]
+    },
+    {
+      "id": "q_weather_mood",
+      "type": "fun",
+      "text": "今天的天气让你想到了什么食物？",
+      "emoji": "🌤️",
+      "choices": [
+        {"id": "weather_cold", "text": "🧊 冷饮冰淇淋",      "weights": {"cold_food": 1.0}},
+        {"id": "weather_warm", "text": "🍜 热汤面条",        "weights": {"warm_food": 1.0, "noodles": 0.8}},
+        {"id": "weather_any",  "text": "🎲 随机一个吧",      "weights": {"random_bonus": 0.8}}
+      ]
+    },
+    {
+      "id": "q_meeting",
+      "type": "fun",
+      "text": "今天下午有几个会？",
+      "emoji": "📅",
+      "choices": [
+        {"id": "meeting_none", "text": "零个！开心",        "weights": {"premium": 0.5, "filling": 0.5}},
+        {"id": "meeting_few",  "text": "1–2个，还行",        "weights": {}},
+        {"id": "meeting_many", "text": "3个以上，救命",      "weights": {"fast_service": 1.5, "budget_friendly": 0.5}}
+      ]
+    },
+    {
+      "id": "q_last_eaten",
+      "type": "fun",
+      "text": "昨天吃了什么类型的食物？",
+      "emoji": "🤔",
+      "choices": [
+        {"id": "last_rice",    "text": "米饭类",            "weights": {"noodles": 0.5}},
+        {"id": "last_noodles", "text": "面食类",            "weights": {"avoid_noodles": 0.8}},
+        {"id": "last_fast",    "text": "快餐外卖",          "weights": {"healthy": 0.5, "premium": 0.3}},
+        {"id": "last_nice",    "text": "吃得还不错",        "weights": {"budget_friendly": 0.5}}
+      ]
+    },
+    {
+      "id": "q_energy",
+      "type": "fun",
+      "text": "现在精神状态如何？",
+      "emoji": "⚡",
+      "choices": [
+        {"id": "energy_high", "text": "精力充沛！",         "weights": {"spicy": 0.5, "premium": 0.3}},
+        {"id": "energy_mid",  "text": "正常上班状态",       "weights": {}},
+        {"id": "energy_low",  "text": "困死了需要补血",     "weights": {"filling": 1.0, "meat": 0.5}}
+      ]
+    },
+    {
+      "id": "q_payday",
+      "type": "fun",
+      "text": "距离发工资还有多少天？",
+      "emoji": "💸",
+      "choices": [
+        {"id": "pay_soon",  "text": "快了！3天内",          "weights": {"premium": 1.0}},
+        {"id": "pay_mid",   "text": "还有10天左右",         "weights": {}},
+        {"id": "pay_far",   "text": "遥遥无期…",            "weights": {"budget_friendly": 1.5}}
+      ]
+    },
+    {
+      "id": "q_emoji_mood",
+      "type": "fun",
+      "text": "用一个 emoji 描述今天的心情？",
+      "emoji": "🎭",
+      "choices": [
+        {"id": "mood_happy",  "text": "😊 开心！",           "weights": {"spicy": 0.3, "premium": 0.3}},
+        {"id": "mood_tired",  "text": "😴 困",               "weights": {"warm_food": 0.5, "filling": 0.5}},
+        {"id": "mood_ok",     "text": "😐 一般",             "weights": {}},
+        {"id": "mood_stress", "text": "😤 有点烦",           "weights": {"spicy": 0.5, "filling": 0.3}}
+      ]
+    }
+  ]
+}

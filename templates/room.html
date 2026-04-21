@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>投票间 · 今天吃什么</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="container">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <a href="/" style="color:var(--muted); text-decoration:none; font-size:14px;">← 返回</a>
+    <span style="font-size:13px; color:var(--muted)">主持人视图</span>
+  </div>
+
+  <div class="card">
+    <h2>📢 房间码</h2>
+    <div class="room-code" id="roomCode">{{ room_id }}</div>
+    <div class="qr-box">
+      <img src="/api/rooms/{{ room_id }}/qr" alt="扫码加入" id="qrImg">
+      <p style="font-size:13px; color:var(--muted); margin-top:8px;">同事扫码或输入房间码加入</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>👥 已加入 <span id="joinCount">0</span> 人</h2>
+    <div class="participants" id="participantList"></div>
+  </div>
+
+  <div id="controlPanel">
+    <button class="btn btn-primary" id="startBtn" disabled onclick="startQuestioning()">
+      等待大家加入…
+    </button>
+  </div>
+
+  <div id="progressPanel" style="display:none;" class="card">
+    <h2>✍️ 答题进度</h2>
+    <div class="progress-label"><span id="submittedCount">0</span> / <span id="totalCount">0</span> 人已提交</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <button class="btn btn-secondary" id="closeBtn" onclick="closeRoom()">看结果！🎉</button>
+  </div>
+</div>
+
+<script>
+const ROOM_ID = '{{ room_id }}';
+const params = new URLSearchParams(window.location.search);
+const HOST_TOKEN = params.get('token') || '';
+
+let participants = {};
+let state = 'waiting';
+let totalCount = 0;
+let submittedCount = 0;
+
+// SSE 监听
+const es = new EventSource(`/api/rooms/${ROOM_ID}/events`);
+es.onmessage = (e) => {
+  const data = JSON.parse(e.data);
+  handleEvent(data);
+};
+
+function handleEvent(data) {
+  if (data.event === 'participant_joined') {
+    updateParticipants();
+  } else if (data.event === 'questioning_started') {
+    showQuestioningPanel();
+  } else if (data.event === 'answer_submitted') {
+    submittedCount = data.submitted;
+    totalCount = data.total;
+    updateProgress();
+  } else if (data.event === 'results_ready') {
+    window.location.href = `/results/${ROOM_ID}?token=${HOST_TOKEN}`;
+  }
+}
+
+async function updateParticipants() {
+  const res = await fetch(`/api/rooms/${ROOM_ID}`);
+  const data = await res.json();
+  const list = document.getElementById('participantList');
+  list.innerHTML = '';
+  document.getElementById('joinCount').textContent = data.participant_count;
+  totalCount = data.participant_count;
+
+  // 获取完整参与者信息
+  const qRes = await fetch(`/api/rooms/${ROOM_ID}/questions`);
+  // just update count for now
+  if (data.participant_count >= 1) {
+    const btn = document.getElementById('startBtn');
+    btn.disabled = false;
+    btn.textContent = `开始答题 (${data.participant_count}人)`;
+  }
+}
+
+// 轮询参与者详情
+async function pollParticipants() {
+  try {
+    const res = await fetch(`/api/rooms/${ROOM_ID}`);
+    const data = await res.json();
+    document.getElementById('joinCount').textContent = data.participant_count;
+    totalCount = data.participant_count;
+    if (data.participant_count >= 1) {
+      const btn = document.getElementById('startBtn');
+      btn.disabled = false;
+      btn.textContent = `开始答题 🚀`;
+    }
+    if (data.state === 'questioning') showQuestioningPanel();
+    if (data.has_results) {
+      window.location.href = `/results/${ROOM_ID}?token=${HOST_TOKEN}`;
+    }
+  } catch(e) {}
+}
+
+setInterval(pollParticipants, 3000);
+pollParticipants();
+
+async function startQuestioning() {
+  const res = await fetch(`/api/rooms/${ROOM_ID}/start`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({host_token: HOST_TOKEN}),
+  });
+  if (res.ok) showQuestioningPanel();
+}
+
+function showQuestioningPanel() {
+  state = 'questioning';
+  document.getElementById('controlPanel').style.display = 'none';
+  document.getElementById('progressPanel').style.display = 'block';
+  updateProgress();
+}
+
+function updateProgress() {
+  document.getElementById('submittedCount').textContent = submittedCount;
+  document.getElementById('totalCount').textContent = totalCount;
+  const pct = totalCount > 0 ? Math.round(submittedCount / totalCount * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  if (submittedCount === totalCount && totalCount > 0) {
+    document.getElementById('closeBtn').style.background = 'var(--green)';
+  }
+}
+
+async function closeRoom() {
+  const res = await fetch(`/api/rooms/${ROOM_ID}/close`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({host_token: HOST_TOKEN}),
+  });
+  if (res.ok) {
+    window.location.href = `/results/${ROOM_ID}?token=${HOST_TOKEN}`;
+  }
+}
+</script>
+</body>
+</html>

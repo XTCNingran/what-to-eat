@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>加入投票 · 今天吃什么</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="container">
+  <div style="text-align:center; padding: 40px 0 24px;">
+    <div style="font-size:56px">🙋</div>
+    <h1>加入投票</h1>
+    <p class="subtitle">告诉大家你是谁</p>
+  </div>
+
+  <div class="card">
+    <label style="font-size:14px; font-weight:600; display:block; margin-bottom:8px;">房间码</label>
+    <input type="text" id="roomId" value="{{ room_id }}"
+           style="text-transform:uppercase; letter-spacing:4px; font-weight:700; text-align:center;"
+           maxlength="6" placeholder="6位房间码">
+
+    <div style="margin-top:16px;">
+      <label style="font-size:14px; font-weight:600; display:block; margin-bottom:8px;">你的名字</label>
+      <input type="text" id="nameInput" placeholder="比如：小王、Alex…" maxlength="10"
+             onkeydown="if(event.key==='Enter') joinRoom()">
+    </div>
+
+    <p class="error-msg" id="errorMsg" style="display:none;"></p>
+
+    <button class="btn btn-primary" id="joinBtn" style="margin-top:16px;" onclick="joinRoom()">加入！</button>
+  </div>
+</div>
+
+<script>
+const ROOM_ID_INIT = '{{ room_id }}';
+
+async function joinRoom() {
+  const roomId = document.getElementById('roomId').value.trim().toUpperCase();
+  const name = document.getElementById('nameInput').value.trim();
+  const btn = document.getElementById('joinBtn');
+  const err = document.getElementById('errorMsg');
+
+  if (!name) {
+    showError('请输入你的名字');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '加入中…';
+  err.style.display = 'none';
+
+  try {
+    const res = await fetch(`/api/rooms/${roomId}/participants`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name}),
+    });
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.detail || '加入失败');
+    }
+    const data = await res.json();
+    sessionStorage.setItem('participant_id', data.participant_id);
+    sessionStorage.setItem('participant_name', data.name);
+    sessionStorage.setItem('room_id', roomId);
+    window.location.href = `/q/${roomId}`;
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = '加入！';
+    showError(e.message);
+  }
+}
+
+function showError(msg) {
+  const err = document.getElementById('errorMsg');
+  err.textContent = msg;
+  err.style.display = 'block';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+
+# 本地数据（不上传到 GitHub）
+data/history.json
+
+# 开发工具
+.superpowers/
+start.bat
+
+# 系统文件
+.DS_Store
+Thumbs.db

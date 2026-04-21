@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>结果出炉！· 今天吃什么</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="container">
+  <div style="text-align:center; padding: 24px 0 16px;">
+    <div style="font-size:48px" id="topEmoji">🏆</div>
+    <h1 style="margin-top:8px;">结果出炉！</h1>
+  </div>
+
+  <div id="loadingView" class="waiting">
+    <div class="waiting-emoji">🍽️</div>
+    <p style="margin-top:16px; color:var(--muted);">计算中…</p>
+  </div>
+
+  <div id="resultsView" style="display:none;">
+    <!-- 历史避雷 -->
+    <div id="historyPanel" style="display:none;" class="card" style="background:#FFF0F0;">
+      <h2>⚠️ 最近避雷</h2>
+      <div id="historyPills"></div>
+    </div>
+
+    <!-- 排行榜 -->
+    <div id="rankList"></div>
+
+    <!-- 主持人操作 -->
+    <div id="hostPanel" style="display:none;">
+      <div class="divider"></div>
+      <p style="font-size:13px; color:var(--muted); text-align:center; margin-bottom:12px;">选好了吗？记录今天的选择</p>
+      <button class="btn btn-primary" id="confirmBtn" onclick="confirmChoice()">我们去这里！✓</button>
+      <button class="btn btn-ghost" style="margin-top:10px;" onclick="window.location.href='/'">再来一次 🎲</button>
+    </div>
+    <div id="guestPanel" style="display:none;">
+      <div class="divider"></div>
+      <button class="btn btn-ghost" onclick="window.location.href='/'">回到首页</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ROOM_ID = '{{ room_id }}';
+const params = new URLSearchParams(window.location.search);
+const HOST_TOKEN = params.get('token') || '';
+let topRestaurant = '';
+
+async function loadResults() {
+  try {
+    const res = await fetch(`/api/rooms/${ROOM_ID}/results`);
+    if (!res.ok) {
+      setTimeout(loadResults, 2000);
+      return;
+    }
+    const data = await res.json();
+    document.getElementById('loadingView').style.display = 'none';
+    document.getElementById('resultsView').style.display = 'block';
+
+    renderHistory(data.recent_history);
+    renderRanking(data.results);
+
+    if (HOST_TOKEN) {
+      document.getElementById('hostPanel').style.display = 'block';
+    } else {
+      document.getElementById('guestPanel').style.display = 'block';
+    }
+  } catch(e) {
+    setTimeout(loadResults, 2000);
+  }
+}
+
+function renderHistory(records) {
+  if (!records || records.length === 0) return;
+  const panel = document.getElementById('historyPanel');
+  const pills = document.getElementById('historyPills');
+  panel.style.display = 'block';
+  records.forEach(r => {
+    const pill = document.createElement('span');
+    pill.className = 'history-pill';
+    pill.textContent = `${r.restaurant_name} (${r.date})`;
+    pills.appendChild(pill);
+  });
+}
+
+const RANK_ICONS = ['🥇', '🥈', '🥉'];
+
+function renderRanking(results) {
+  const list = document.getElementById('rankList');
+  list.innerHTML = '';
+  results.forEach((r, i) => {
+    if (i === 0) topRestaurant = r.name;
+
+    const item = document.createElement('div');
+    item.className = 'result-item' + (i === 0 ? ' top1' : '');
+    item.style.cursor = 'pointer';
+    item.dataset.name = r.name;
+
+    const rankIcon = i < 3 ? RANK_ICONS[i] : `${i + 1}`;
+    const ratingStars = r.rating ? '⭐'.repeat(Math.round(r.rating)) : '';
+    const spend = r.avg_spend ? `¥${r.avg_spend}/人` : '';
+    const tags = (r.tags || []).slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('');
+
+    item.innerHTML = `
+      <div class="result-rank">${rankIcon}</div>
+      <div class="result-info">
+        <div class="result-name">${r.name}</div>
+        <div class="result-meta">${ratingStars} ${spend} · ${r.address ? r.address.substring(0, 20) : ''}</div>
+        <div>${tags}</div>
+        <div class="result-reason">${r.reason}</div>
+      </div>
+    `;
+
+    item.onclick = () => selectRestaurant(r.name, item);
+    list.appendChild(item);
+  });
+
+  // 预设第一名
+  if (topRestaurant) selectRestaurant(topRestaurant, list.firstChild);
+}
+
+function selectRestaurant(name, el) {
+  // 清除所有高亮
+  document.querySelectorAll('.result-item').forEach(i => i.style.border = '');
+  // 高亮选中项
+  if (el) el.style.border = '2px solid var(--green)';
+  // 更新确认按钮
+  const btn = document.getElementById('confirmBtn');
+  btn.dataset.name = name;
+  btn.textContent = `我们去：${name}！✓`;
+}
+
+async function confirmChoice() {
+  const btn = document.getElementById('confirmBtn');
+  const name = btn.dataset.name;
+  if (!name) return;
+  btn.disabled = true;
+  btn.textContent = '记录中…';
+
+  await fetch('/api/history', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({restaurant_name: name, room_id: ROOM_ID}),
+  });
+
+  btn.textContent = '✅ 已记录，祝用餐愉快！';
+  document.getElementById('topEmoji').textContent = '🎊';
+}
+
+loadResults();
+</script>
+</body>
+</html>
