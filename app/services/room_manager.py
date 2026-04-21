@@ -116,6 +116,23 @@ def submit_answers(room_id: str, participant_id: str, raw_answers: list[dict]) -
     submitted = sum(1 for p in room.participants.values() if p.submitted)
     total = len(room.participants)
     _broadcast(room_id, {"event": "answer_submitted", "submitted": submitted, "total": total})
+
+    # 单人模式：全部提交后自动关闭
+    if submitted == total:
+        from app.services import scoring_engine, history_store, data_loader
+        all_answers = list(room.answers.values())
+        weights = scoring_engine.aggregate_weights(all_answers)
+        room.aggregated_weights = weights
+        restaurants = data_loader.get_restaurants()
+        yesterday, two_days = history_store.get_recent_names(days=2)
+        results = scoring_engine.rank_restaurants(
+            restaurants, weights, two_days, yesterday,
+            blacklist=room.blacklist
+        )
+        room.results = results
+        room.state = RoomState.CLOSED
+        _broadcast(room_id, {"event": "results_ready", "room_id": room_id})
+
     return True
 
 
