@@ -34,6 +34,10 @@
 
     <!-- 步骤2：黑名单选择 -->
     <div id="step2" style="display:none;">
+      <div style="margin-bottom:12px;">
+        <label style="font-size:13px; color:var(--muted);">你的名字</label>
+        <input type="text" id="hostName" placeholder="输入你的名字" maxlength="10" style="margin-top:4px;">
+      </div>
       <p style="font-size:13px; color:var(--muted); margin-bottom:8px;">🚫 排除今天不想去的餐厅（可跳过）</p>
       <input type="text" id="blSearch" placeholder="搜索餐厅…" oninput="filterBl(this.value)"
              style="margin-bottom:8px;">
@@ -125,6 +129,7 @@ function toggleBl(name) {
 
 async function createRoom() {
   const btn = document.getElementById('confirmCreateBtn');
+  const hostName = document.getElementById('hostName').value.trim() || '主持人';
   btn.disabled = true;
   btn.textContent = '创建中…';
   try {
@@ -134,6 +139,14 @@ async function createRoom() {
       body: JSON.stringify({blacklist: blList})
     });
     const data = await res.json();
+    // 主持人自动加入为参与者
+    const joinRes = await fetch(`/api/rooms/${data.room_id}/participants`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name: hostName})
+    });
+    const joinData = await joinRes.json();
+    sessionStorage.setItem('participant_id', joinData.participant_id);
     window.location.href = `/room/${data.room_id}?token=${data.host_token}`;
   } catch(e) {
     btn.disabled = false;
