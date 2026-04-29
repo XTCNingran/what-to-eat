@@ -67,3 +67,21 @@ def get_recent_names(days: int = 2) -> tuple[set[str], set[str]]:
             two_days_names.add(r["restaurant_name"])
 
     return yesterday_names, two_days_names
+
+
+def _get_all_restaurants():
+    """从 data_loader 获取全部餐厅，用于菜系标签查找。单独抽出便于测试 mock。"""
+    from app.services import data_loader
+    return data_loader.get_restaurants()
+
+
+def get_recent_cuisines(n: int) -> dict[str, int]:
+    """返回近 n 条历史记录中各菜系标签的出现次数。"""
+    records = get_recent(n)
+    name_to_tags: dict[str, list[str]] = {r.name: r.tags for r in _get_all_restaurants()}
+    counts: dict[str, int] = {}
+    for record in records:
+        for tag in name_to_tags.get(record.get("restaurant_name", ""), []):
+            if tag.startswith("cuisine_"):
+                counts[tag] = counts.get(tag, 0) + 1
+    return counts
