@@ -152,7 +152,8 @@
       "choices": [
         {"id": "meeting_none", "text": "零个！开心",        "weights": {"premium": 0.5, "filling": 0.5}},
         {"id": "meeting_few",  "text": "1–2个，还行",       "weights": {}},
-        {"id": "meeting_many", "text": "3个以上，救命",     "weights": {"fast_service": 1.5, "budget_friendly": 0.5}}
+        {"id": "meeting_many", "text": "3个以上，救命",     "weights": {"fast_service": 1.5, "budget_friendly": 0.5}},
+        {"id": "meeting_any",  "text": "随便，都行",        "weights": {}}
       ]
     },
     {
