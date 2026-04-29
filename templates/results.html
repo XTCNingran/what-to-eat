@@ -25,12 +25,12 @@
       <div id="historyPills"></div>
     </div>
 
-    <div id="rankList"></div>
-
     <div id="summaryPanel" style="display:none;" class="card">
       <h2>大家的选择</h2>
       <div id="summaryList"></div>
     </div>
+
+    <div id="rankList"></div>
 
     <div id="hostPanel" style="display:none;">
       <div class="divider"></div>
@@ -102,7 +102,7 @@ function renderHistory(records) {
 function renderRanking(results) {
   const list = document.getElementById('rankList');
   list.innerHTML = '';
-  results.forEach((r, i) => {
+  results.slice(0, 3).forEach((r, i) => {
     if (i === 0) topRestaurant = r.name;
 
     const item = document.createElement('div');

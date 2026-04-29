@@ -48,6 +48,17 @@
     </div>
   </div>
 
+  <div id="confirmView" style="display:none;" class="waiting">
+    <div class="waiting-icon"><i data-lucide="circle-help"></i></div>
+    <h2 style="margin-top:16px;">确定不改了吗？</h2>
+    <p style="color:var(--muted); margin-top:8px; font-size:14px;">提交后无法修改哦</p>
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:24px; width:100%;">
+      <button class="btn btn-primary" onclick="submitAnswers()">确定</button>
+      <button class="btn btn-ghost" onclick="submitAnswers()">别想了，提交吧</button>
+      <button class="btn btn-ghost" style="border-color:#ccc; color:var(--muted); margin-top:4px; font-size:14px;" onclick="backToQuestion()">再看看</button>
+    </div>
+  </div>
+
   <div id="submittedView" style="display:none;" class="waiting">
     <div class="waiting-icon"><i data-lucide="check-circle-2"></i></div>
     <h2 style="margin-top:16px;">已提交！</h2>
@@ -168,8 +179,15 @@ async function nextOrSubmit() {
   if (currentIndex < questions.length - 1) {
     renderQuestion(currentIndex + 1);
   } else {
-    await submitAnswers();
+    document.getElementById('questionView').style.display = 'none';
+    document.getElementById('confirmView').style.display = 'block';
+    lucide.createIcons();
   }
+}
+
+function backToQuestion() {
+  document.getElementById('confirmView').style.display = 'none';
+  document.getElementById('questionView').style.display = 'block';
 }
 
 async function submitAnswers() {
@@ -193,6 +211,7 @@ async function submitAnswers() {
 
   if (res.ok) {
     document.getElementById('questionView').style.display = 'none';
+    document.getElementById('confirmView').style.display = 'none';
     document.getElementById('submittedView').style.display = 'block';
 
     const poll = setInterval(async () => {
