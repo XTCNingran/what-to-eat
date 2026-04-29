@@ -14,6 +14,7 @@ class Question(BaseModel):
     text: str
     emoji: str
     choices: list[Choice]
+    multi_select: bool = False
 
 
 class Answer(BaseModel):

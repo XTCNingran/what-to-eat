@@ -135,9 +135,12 @@ function renderQuestion(index) {
   choiceList.innerHTML = '';
   q.choices.forEach(c => {
     const btn = document.createElement('button');
-    btn.className = 'choice-btn' + (selectedAnswers[q.id] === c.id ? ' selected' : '');
+    const isSelected = q.multi_select
+      ? (selectedAnswers[q.id] || []).includes(c.id)
+      : selectedAnswers[q.id] === c.id;
+    btn.className = 'choice-btn' + (isSelected ? ' selected' : '');
     btn.textContent = c.text;
-    btn.onclick = () => selectChoice(q.id, c.id);
+    btn.onclick = () => selectChoice(q.id, c.id, q.multi_select);
     choiceList.appendChild(btn);
   });
 
@@ -150,7 +153,18 @@ function renderQuestion(index) {
   nextBtn.textContent = index === total - 1 ? '提交' : '下一题 →';
 }
 
-function selectChoice(questionId, choiceId) {
+function selectChoice(questionId, choiceId, multiSelect) {
+  if (multiSelect) {
+    const current = selectedAnswers[questionId] || [];
+    if (current.includes(choiceId)) {
+      selectedAnswers[questionId] = current.filter(id => id !== choiceId);
+    } else {
+      selectedAnswers[questionId] = [...current, choiceId];
+    }
+    renderQuestion(currentIndex);
+    return;
+  }
+
   selectedAnswers[questionId] = choiceId;
 
   const q = questions.find(q => q.id === questionId);
@@ -172,8 +186,14 @@ function prevQuestion() {
 
 async function nextOrSubmit() {
   const q = questions[currentIndex];
-  if (!selectedAnswers[q.id]) {
-    q.choices[0] && selectChoice(q.id, q.choices[0].id);
+  const ans = selectedAnswers[q.id];
+  const hasAnswer = q.multi_select ? (ans && ans.length > 0) : !!ans;
+  if (!hasAnswer) {
+    if (q.multi_select) {
+      selectedAnswers[q.id] = [q.choices[0].id];
+    } else {
+      q.choices[0] && selectChoice(q.id, q.choices[0].id, false);
+    }
     return;
   }
   if (currentIndex < questions.length - 1) {
@@ -191,10 +211,16 @@ function backToQuestion() {
 }
 
 async function submitAnswers() {
-  const answers = questions.map(q => ({
-    question_id: q.id,
-    choice_id: selectedAnswers[q.id] || q.choices[0].id,
-  }));
+  const answers = [];
+  questions.forEach(q => {
+    const ans = selectedAnswers[q.id];
+    if (q.multi_select) {
+      const selected = (ans && ans.length > 0) ? ans : [q.choices[0].id];
+      selected.forEach(cid => answers.push({ question_id: q.id, choice_id: cid }));
+    } else {
+      answers.push({ question_id: q.id, choice_id: ans || q.choices[0].id });
+    }
+  });
 
   const drinksOnlyAnswer = Object.entries(selectedAnswers).find(
     ([qid]) => !questions.find(q => q.id === qid)

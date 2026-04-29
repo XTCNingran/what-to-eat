@@ -124,17 +124,17 @@
       "choices": [
         {
           "id": "budget_low",
-          "text": "30元以内",
+          "text": "40元以内",
           "weights": {
-            "budget_max": 30,
+            "budget_max": 40,
             "budget_friendly": 1.0
           }
         },
         {
           "id": "budget_mid",
-          "text": "30–60元",
+          "text": "40–100元",
           "weights": {
-            "budget_max": 60
+            "budget_max": 100
           }
         },
         {
@@ -155,6 +155,7 @@
     {
       "id": "q_cuisine",
       "type": "real",
+      "multi_select": true,
       "text": "今天想吃什么大类？",
       "emoji": "utensils",
       "choices": [
@@ -276,15 +277,15 @@
       "choices": [
         {
           "id": "dq_budget_low",
-          "text": "30元以内",
+          "text": "40元以内",
           "weights": {
-            "budget_max": 30,
+            "budget_max": 40,
             "budget_friendly": 1.0
           }
         },
         {
           "id": "dq_budget_mid",
-          "text": "30–60元",
+          "text": "40–60元",
           "weights": {
             "budget_max": 60
           }

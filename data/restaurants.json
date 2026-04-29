@@ -182,7 +182,7 @@
     "category_raw": "餐饮服务;冷饮店;冷饮店",
     "address": "张江高科技园区祖冲之路1239弄长泰广场1楼",
     "rating": 3.9,
-    "avg_spend": null,
+    "avg_spend": 50,
     "lng": 121.601115,
     "lat": 31.205528,
     "district": "浦东新区",
@@ -309,7 +309,7 @@
     "category_raw": "餐饮服务;中餐厅;中餐厅",
     "address": "亮秀路与亮景路交叉口西80米",
     "rating": 3.1,
-    "avg_spend": null,
+    "avg_spend": 31,
     "lng": 121.601575,
     "lat": 31.201475,
     "district": "浦东新区",
@@ -776,7 +776,7 @@
     "category_raw": "餐饮服务;糕饼店;糕饼店",
     "address": "祖冲之路1239弄7号长泰广场B1层",
     "rating": 4.5,
-    "avg_spend": null,
+    "avg_spend": 20,
     "lng": 121.601567,
     "lat": 31.205439,
     "district": "浦东新区",
@@ -1104,7 +1104,7 @@
     "category_raw": "餐饮服务;咖啡厅;咖啡厅",
     "address": "金科路3057号汇智国际商业中心F1层",
     "rating": 3.3,
-    "avg_spend": null,
+    "avg_spend": 20,
     "lng": 121.60142,
     "lat": 31.203731,
     "district": "浦东新区",
@@ -1112,23 +1112,6 @@
     "tags": [
       "light_meal",
       "premium"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "慢生活桔梗店(长泰广场店)",
-    "category_raw": "餐饮服务;中餐厅;中餐厅",
-    "address": "祖冲之路1239弄7号长泰广场B1层",
-    "rating": 3.5,
-    "avg_spend": null,
-    "lng": 121.601061,
-    "lat": 31.205066,
-    "district": "浦东新区",
-    "poi_id": "B0FFI5FFMG",
-    "tags": [
-      "cuisine_chinese"
     ],
     "phone": "",
     "vendor": 0,
@@ -1202,21 +1185,6 @@
     "deleted": false
   },
   {
-    "name": "摩伽·麦塔奇·恋树",
-    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
-    "address": "金科路2966号康达源谷1栋(招商证券)302",
-    "rating": 3.0,
-    "avg_spend": null,
-    "lng": 121.599237,
-    "lat": 31.205156,
-    "district": "浦东新区",
-    "poi_id": "B0L1M9I1ZD",
-    "tags": [],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
     "name": "新旺茶餐厅(长泰广场店)",
     "category_raw": "餐饮服务;快餐厅;茶餐厅",
     "address": "金科路2889号长泰广场东区1层28-30号",
@@ -1251,21 +1219,6 @@
     "deleted": false
   },
   {
-    "name": "春华府",
-    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
-    "address": "祖冲之路1239弄7号长泰广场B1层",
-    "rating": 1.8,
-    "avg_spend": null,
-    "lng": 121.601725,
-    "lat": 31.205175,
-    "district": "浦东新区",
-    "poi_id": "B0LKGN0SQN",
-    "tags": [],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
     "name": "春风松月楼(汇智国际店)",
     "category_raw": "餐饮服务;中餐厅;中餐厅",
     "address": "金科路3057号汇智国际商业中心B1-08",
@@ -1293,24 +1246,6 @@
     "district": "浦东新区",
     "poi_id": "B0HD1K1NRU",
     "tags": [],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "有堂古·甘草水果(长泰广场店)",
-    "category_raw": "购物服务;综合市场;果品市场|餐饮服务;冷饮店;冷饮店",
-    "address": "祖冲之路1239弄7号长泰广场B1层",
-    "rating": 3.8,
-    "avg_spend": null,
-    "lng": 121.601013,
-    "lat": 31.205832,
-    "district": "浦东新区",
-    "poi_id": "B0L3M1PQ7Z",
-    "tags": [
-      "cold_food",
-      "light_meal"
-    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -1497,7 +1432,7 @@
     "category_raw": "餐饮服务;快餐厅;快餐厅",
     "address": "祖冲之路1239弄长泰负一楼西",
     "rating": 3.9,
-    "avg_spend": null,
+    "avg_spend": 30,
     "lng": 121.603327,
     "lat": 31.205467,
     "district": "浦东新区",
@@ -1673,7 +1608,7 @@
     "category_raw": "餐饮服务;咖啡厅;咖啡厅",
     "address": "祖冲之路1239弄7号长泰广场B1层",
     "rating": 3.5,
-    "avg_spend": null,
+    "avg_spend": 20,
     "lng": 121.601574,
     "lat": 31.206401,
     "district": "浦东新区",
@@ -1727,7 +1662,7 @@
     "category_raw": "餐饮服务;外国餐厅;日本料理",
     "address": "祖冲之路1239弄7号长泰广场F1层",
     "rating": 3.8,
-    "avg_spend": null,
+    "avg_spend": 50,
     "lng": 121.601338,
     "lat": 31.20616,
     "district": "浦东新区",
@@ -2636,23 +2571,6 @@
     "deleted": false
   },
   {
-    "name": "长荣桂冠酒店-中餐厅",
-    "category_raw": "餐饮服务;中餐厅;中餐厅",
-    "address": "亮景路与哈雷路交叉口西160米",
-    "rating": 4.1,
-    "avg_spend": null,
-    "lng": 121.60248,
-    "lat": 31.203761,
-    "district": "浦东新区",
-    "poi_id": "B0JDJ5FGDU",
-    "tags": [
-      "cuisine_chinese"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
     "name": "闽叔福建菜(长泰广场6座店)",
     "category_raw": "餐饮服务;中餐厅;福建菜",
     "address": "张江镇金科路2889弄长泰广场6座二楼",
@@ -2701,23 +2619,6 @@
       "cuisine_korean",
       "spicy",
       "filling"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "食味客",
-    "category_raw": "餐饮服务;中餐厅;中餐厅",
-    "address": "祖冲之路1239弄7号长泰广场B1层",
-    "rating": 2.6,
-    "avg_spend": null,
-    "lng": 121.600775,
-    "lat": 31.206325,
-    "district": "浦东新区",
-    "poi_id": "B0LUDA984J",
-    "tags": [
-      "cuisine_chinese"
     ],
     "phone": "",
     "vendor": 0,
