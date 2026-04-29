@@ -60,6 +60,7 @@ async function loadResults() {
     document.getElementById('resultsView').style.display = 'block';
 
     renderHistory(data.recent_history);
+    renderDrinksNotice(data.drinks_only_notices);
     renderRanking(data.results);
 
     if (HOST_TOKEN) {
@@ -70,6 +71,19 @@ async function loadResults() {
   } catch(e) {
     setTimeout(loadResults, 2000);
   }
+}
+
+function renderDrinksNotice(notices) {
+  if (!notices || notices.length === 0) return;
+  const banner = document.createElement('div');
+  banner.className = 'card';
+  banner.style.cssText = 'background:#FFF8E1; margin-bottom:12px; text-align:center;';
+  const names = notices.join('、');
+  banner.textContent = `${names} 今天胃口不好，只想喝点饮料～`;
+  document.getElementById('resultsView').insertBefore(
+    banner,
+    document.getElementById('historyPanel')
+  );
 }
 
 function renderHistory(records) {
