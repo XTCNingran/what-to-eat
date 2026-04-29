@@ -28,11 +28,6 @@
   </div>
 
   <div id="controlPanel">
-    <div class="card" style="margin-bottom:12px;">
-      <label style="font-size:14px; font-weight:600; display:block; margin-bottom:8px;">你也要参与答题吗？</label>
-      <input type="text" id="hostNameInput" placeholder="填写你的名字（可留空跳过）" maxlength="10"
-             style="margin-bottom:0;">
-    </div>
     <button class="btn btn-primary" id="startBtn" disabled onclick="startQuestioning()">
       等待大家加入…
     </button>
@@ -122,22 +117,6 @@ async function startQuestioning() {
   btn.disabled = true;
   btn.textContent = '跳转中…';
   try {
-    // 如果 host 填了名字，先把自己加入为参与者
-    const hostName = document.getElementById('hostNameInput').value.trim();
-    if (hostName) {
-      const joinRes = await fetch(`/api/rooms/${ROOM_ID}/participants`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({name: hostName}),
-      });
-      if (joinRes.ok) {
-        const joinData = await joinRes.json();
-        sessionStorage.setItem('participant_id', joinData.participant_id);
-        sessionStorage.setItem('participant_name', joinData.name);
-        sessionStorage.setItem('room_id', ROOM_ID);
-      }
-    }
-
     const res = await fetch(`/api/rooms/${ROOM_ID}/start`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
