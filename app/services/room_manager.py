@@ -113,6 +113,12 @@ def submit_answers(room_id: str, participant_id: str, raw_answers: list[dict]) -
 
     room.answers[participant_id] = answers
     room.participants[participant_id].submitted = True
+
+    # 记录选择了 drinks_only 的参与者姓名（用于多人模式提示）
+    if any(a.weights.get("drinks_only", 0) > 0 for a in answers):
+        pname = room.participants[participant_id].name
+        if pname not in room.drinks_only_participants:
+            room.drinks_only_participants.append(pname)
     submitted = sum(1 for p in room.participants.values() if p.submitted)
     total = len(room.participants)
     _broadcast(room_id, {"event": "answer_submitted", "submitted": submitted, "total": total})
@@ -122,6 +128,9 @@ def submit_answers(room_id: str, participant_id: str, raw_answers: list[dict]) -
         from app.services import scoring_engine, history_store, data_loader
         all_answers = list(room.answers.values())
         weights = scoring_engine.aggregate_weights(all_answers)
+        # 多人模式：一人选饮品不代表全组无食欲，剔除该信号
+        if len(room.participants) > 1:
+            weights.pop("drinks_only", None)
         room.aggregated_weights = weights
         restaurants = data_loader.get_restaurants()
         yesterday, two_days = history_store.get_recent_names(days=2)
@@ -147,6 +156,9 @@ def close_room(room_id: str, host_token: str) -> bool:
 
     all_answers = list(room.answers.values())
     weights = scoring_engine.aggregate_weights(all_answers)
+    # 多人模式：一人选饮品不代表全组无食欲，剔除该信号
+    if len(room.participants) > 1:
+        weights.pop("drinks_only", None)
     room.aggregated_weights = weights
 
     restaurants = data_loader.get_restaurants()

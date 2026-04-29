@@ -29,6 +29,7 @@ class Room(BaseModel):
     results: Optional[list[ScoredRestaurant]] = None
     aggregated_weights: Optional[dict[str, float]] = None
     blacklist: list[str] = []
+    drinks_only_participants: list[str] = []
 
     class Config:
         use_enum_values = True
