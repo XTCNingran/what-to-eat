@@ -3,37 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>结果出炉！· 今天吃什么</title>
+  <title>结果出炉 · 今天吃什么</title>
   <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 <div class="container">
   <div style="text-align:center; padding: 24px 0 16px;">
-    <div style="font-size:48px" id="topEmoji">🏆</div>
-    <h1 style="margin-top:8px;">结果出炉！</h1>
+    <i data-lucide="trophy" style="width:40px; height:40px; color:var(--orange);"></i>
+    <h1 style="margin-top:8px;">结果出炉</h1>
   </div>
 
   <div id="loadingView" class="waiting">
-    <div class="waiting-emoji">🍽️</div>
+    <div class="waiting-icon"><i data-lucide="loader-circle"></i></div>
     <p style="margin-top:16px; color:var(--muted);">计算中…</p>
   </div>
 
   <div id="resultsView" style="display:none;">
-    <!-- 历史避雷 -->
-    <div id="historyPanel" style="display:none;" class="card" style="background:#FFF0F0;">
-      <h2>⚠️ 最近避雷</h2>
+    <div id="historyPanel" style="display:none;" class="card">
+      <h2>最近避雷</h2>
       <div id="historyPills"></div>
     </div>
 
-    <!-- 排行榜 -->
     <div id="rankList"></div>
 
-    <!-- 主持人操作 -->
+    <div id="summaryPanel" style="display:none;" class="card">
+      <h2>大家的选择</h2>
+      <div id="summaryList"></div>
+    </div>
+
     <div id="hostPanel" style="display:none;">
       <div class="divider"></div>
       <p style="font-size:13px; color:var(--muted); text-align:center; margin-bottom:12px;">选好了吗？记录今天的选择</p>
-      <button class="btn btn-primary" id="confirmBtn" onclick="confirmChoice()">我们去这里！✓</button>
-      <button class="btn btn-ghost" style="margin-top:10px;" onclick="window.location.href='/'">再来一次 🎲</button>
+      <button class="btn btn-primary" id="confirmBtn" onclick="confirmChoice()">我们去这里</button>
+      <button class="btn btn-ghost" style="margin-top:10px;" onclick="window.location.href='/'">再来一次</button>
     </div>
     <div id="guestPanel" style="display:none;">
       <div class="divider"></div>
@@ -62,6 +65,7 @@ async function loadResults() {
     renderHistory(data.recent_history);
     renderDrinksNotice(data.drinks_only_notices);
     renderRanking(data.results);
+    renderSummaries(data.participant_summaries);
 
     if (HOST_TOKEN) {
       document.getElementById('hostPanel').style.display = 'block';
@@ -78,12 +82,8 @@ function renderDrinksNotice(notices) {
   const banner = document.createElement('div');
   banner.className = 'card';
   banner.style.cssText = 'background:#FFF8E1; margin-bottom:12px; text-align:center;';
-  const names = notices.join('、');
-  banner.textContent = `${names} 今天胃口不好，只想喝点饮料～`;
-  document.getElementById('resultsView').insertBefore(
-    banner,
-    document.getElementById('historyPanel')
-  );
+  banner.textContent = `${notices.join('、')} 今天胃口不好，只想喝点饮料`;
+  document.getElementById('resultsView').insertBefore(banner, document.getElementById('historyPanel'));
 }
 
 function renderHistory(records) {
@@ -99,8 +99,6 @@ function renderHistory(records) {
   });
 }
 
-const RANK_ICONS = ['🥇', '🥈', '🥉'];
-
 function renderRanking(results) {
   const list = document.getElementById('rankList');
   list.innerHTML = '';
@@ -112,16 +110,15 @@ function renderRanking(results) {
     item.style.cursor = 'pointer';
     item.dataset.name = r.name;
 
-    const rankIcon = i < 3 ? RANK_ICONS[i] : `${i + 1}`;
-    const ratingStars = r.rating ? '⭐'.repeat(Math.round(r.rating)) : '';
+    const rating = r.rating ? r.rating.toFixed(1) + ' 分' : '';
     const spend = r.avg_spend ? `¥${r.avg_spend}/人` : '';
     const tags = (r.tags || []).slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('');
 
     item.innerHTML = `
-      <div class="result-rank">${rankIcon}</div>
+      <div class="result-rank">${i + 1}</div>
       <div class="result-info">
         <div class="result-name">${r.name}</div>
-        <div class="result-meta">${ratingStars} ${spend} · ${r.address ? r.address.substring(0, 20) : ''}</div>
+        <div class="result-meta">${rating} ${spend} · ${r.address ? r.address.substring(0, 20) : ''}</div>
         <div>${tags}</div>
         <div class="result-reason">${r.reason}</div>
       </div>
@@ -131,19 +128,31 @@ function renderRanking(results) {
     list.appendChild(item);
   });
 
-  // 预设第一名
   if (topRestaurant) selectRestaurant(topRestaurant, list.firstChild);
 }
 
 function selectRestaurant(name, el) {
-  // 清除所有高亮
   document.querySelectorAll('.result-item').forEach(i => i.style.border = '');
-  // 高亮选中项
   if (el) el.style.border = '2px solid var(--green)';
-  // 更新确认按钮
   const btn = document.getElementById('confirmBtn');
-  btn.dataset.name = name;
-  btn.textContent = `我们去：${name}！✓`;
+  if (btn) {
+    btn.dataset.name = name;
+    btn.textContent = `我们去：${name}`;
+  }
+}
+
+function renderSummaries(summaries) {
+  if (!summaries || summaries.length === 0) return;
+  const panel = document.getElementById('summaryPanel');
+  const list = document.getElementById('summaryList');
+  panel.style.display = 'block';
+  summaries.forEach(s => {
+    const row = document.createElement('div');
+    row.style.cssText = 'padding: 8px 0; border-bottom: 1px solid #F0F0F0; font-size: 14px;';
+    row.innerHTML = `<span style="font-weight:600; margin-right:10px;">${s.name}</span><span style="color:var(--muted);">${s.summary}</span>`;
+    list.appendChild(row);
+  });
+  list.lastChild.style.borderBottom = 'none';
 }
 
 async function confirmChoice() {
@@ -159,10 +168,10 @@ async function confirmChoice() {
     body: JSON.stringify({restaurant_name: name, room_id: ROOM_ID}),
   });
 
-  btn.textContent = '✅ 已记录，祝用餐愉快！';
-  document.getElementById('topEmoji').textContent = '🎊';
+  btn.textContent = '已记录，祝用餐愉快！';
 }
 
+lucide.createIcons();
 loadResults();
 </script>
 </body>

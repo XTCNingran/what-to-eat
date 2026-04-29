@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>加入投票 · 今天吃什么</title>
   <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 <div class="container">
   <div style="text-align:center; padding: 40px 0 24px;">
-    <div style="font-size:56px">🙋</div>
-    <h1>加入投票</h1>
+    <i data-lucide="user-plus" style="width:48px; height:48px; color:var(--orange);"></i>
+    <h1 style="margin-top:12px;">加入投票</h1>
     <p class="subtitle">告诉大家你是谁</p>
   </div>
 
@@ -28,7 +29,7 @@
 
     <p class="error-msg" id="errorMsg" style="display:none;"></p>
 
-    <button class="btn btn-primary" id="joinBtn" style="margin-top:16px;" onclick="joinRoom()">加入！</button>
+    <button class="btn btn-primary" id="joinBtn" style="margin-top:16px;" onclick="joinRoom()">加入</button>
   </div>
 </div>
 
@@ -67,7 +68,7 @@ async function joinRoom() {
     window.location.href = `/q/${roomId}`;
   } catch(e) {
     btn.disabled = false;
-    btn.textContent = '加入！';
+    btn.textContent = '加入';
     showError(e.message);
   }
 }
@@ -77,6 +78,8 @@ function showError(msg) {
   err.textContent = msg;
   err.style.display = 'block';
 }
+
+lucide.createIcons();
 </script>
 </body>
 </html>

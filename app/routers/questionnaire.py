@@ -42,7 +42,10 @@ async def get_questions(room_id: str):
     room = room_manager.get_room(room_id)
     if room is None:
         raise HTTPException(status_code=404, detail="房间不存在")
-    return {"questions": [q.model_dump() for q in room.questions]}
+    return {
+        "questions": [q.model_dump() for q in room.questions],
+        "drinks_questions": [q.model_dump() for q in room.drinks_questions],
+    }
 
 
 @router.post("/{room_id}/answers")

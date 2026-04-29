@@ -83,7 +83,9 @@ input[type="text"]:focus { border-color: var(--orange); background: #fff; }
 }
 .question-card.fun-type { background: linear-gradient(135deg, #F8F0FF, #EEF4FF); }
 
-.question-emoji { font-size: 40px; margin-bottom: 12px; }
+.question-icon { margin-bottom: 16px; }
+.question-icon svg { width: 40px; height: 40px; color: var(--orange); }
+.fun-type .question-icon svg { color: var(--purple); }
 .question-text { font-size: 20px; font-weight: 700; margin-bottom: 20px; flex: 1; }
 
 .choices { display: flex; flex-direction: column; gap: 10px; }
@@ -140,7 +142,19 @@ input[type="text"]:focus { border-color: var(--orange); background: #fff; }
   margin-bottom: 10px;
 }
 .result-item.top1 { border: 2px solid var(--orange); }
-.result-rank { font-size: 24px; font-weight: 900; min-width: 36px; color: var(--orange); }
+.result-rank {
+  font-size: 16px;
+  font-weight: 900;
+  min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--orange);
+  border: 2px solid #E8E8E8;
+}
+.result-item.top1 .result-rank { background: var(--orange); color: #fff; border-color: var(--orange); }
 .result-info { flex: 1; }
 .result-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
 .result-meta { font-size: 12px; color: var(--muted); }
@@ -179,13 +193,15 @@ input[type="text"]:focus { border-color: var(--orange); background: #fff; }
   text-align: center;
   padding: 40px 20px;
 }
-.waiting-emoji {
-  font-size: 56px;
-  animation: bounce 1s infinite alternate;
+.waiting-icon svg {
+  width: 52px;
+  height: 52px;
+  color: var(--orange);
+  animation: pulse 1.5s ease-in-out infinite;
 }
-@keyframes bounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-12px); }
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.92); }
 }
 
 /* ── 标签 ── */

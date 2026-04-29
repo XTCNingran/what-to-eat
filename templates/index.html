@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>今天吃什么？</title>
   <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 <div class="container">
   <div style="text-align:center; padding: 40px 0 20px;">
-    <div style="font-size:64px">🍜</div>
-    <h1>今天吃什么？</h1>
-    <p class="subtitle">让大家一起来决定！</p>
+    <i data-lucide="utensils" style="width:48px; height:48px; color:var(--orange);"></i>
+    <h1 style="margin-top:12px;">今天吃什么？</h1>
+    <p class="subtitle">让大家一起来决定</p>
   </div>
 
   {% if error %}
@@ -21,38 +22,36 @@
   {% endif %}
 
   <div class="card">
-    <h2>🎲 发起今日投票</h2>
+    <h2>发起今日投票</h2>
     <p class="subtitle">创建一个投票间，分享给同事扫码参与</p>
 
-    <!-- 步骤1：主按钮 -->
     <div id="step1">
-      <button class="btn btn-primary" id="createBtn" onclick="showBlacklistStep()">开始！</button>
+      <button class="btn btn-primary" id="createBtn" onclick="showBlacklistStep()">开始</button>
       <div style="margin-top: 10px;">
-        <button class="btn btn-ghost" id="soloBtn" onclick="startSolo()">🙋 一个人也能吃饭</button>
+        <button class="btn btn-ghost" id="soloBtn" onclick="startSolo()">一个人也能吃饭</button>
       </div>
     </div>
 
-    <!-- 步骤2：黑名单选择 -->
     <div id="step2" style="display:none;">
       <div style="margin-bottom:12px;">
         <label style="font-size:13px; color:var(--muted);">你的名字</label>
         <input type="text" id="hostName" placeholder="输入你的名字" maxlength="10" style="margin-top:4px;">
       </div>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:8px;">🚫 排除今天不想去的餐厅（可跳过）</p>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:8px;">排除今天不想去的餐厅（可跳过）</p>
       <input type="text" id="blSearch" placeholder="搜索餐厅…" oninput="filterBl(this.value)"
              style="margin-bottom:8px;">
       <div id="blOptions" style="max-height:160px; overflow-y:auto; border:1px solid #eee; border-radius:8px; padding:4px;"></div>
       <div id="blSelected" style="margin-top:8px; display:flex; flex-wrap:wrap; gap:4px;"></div>
       <div style="display:flex; gap:8px; margin-top:12px;">
         <button class="btn btn-ghost" style="width:auto; padding:12px 16px;" onclick="hideBlacklistStep()">← 返回</button>
-        <button class="btn btn-primary" id="confirmCreateBtn" onclick="createRoom()">创建房间 🚀</button>
+        <button class="btn btn-primary" id="confirmCreateBtn" onclick="createRoom()">创建房间</button>
       </div>
     </div>
   </div>
 
   {% if recent %}
   <div class="card">
-    <h2>📋 最近去过</h2>
+    <h2>最近去过</h2>
     {% for r in recent %}
     <div class="history-item">
       <strong>{{ r.date }}</strong> · {{ r.restaurant_name }}
@@ -72,7 +71,7 @@
   </div>
 
   <div style="text-align:center; margin-top:16px; margin-bottom:24px;">
-    <a href="/manage" style="font-size:13px; color:var(--muted); text-decoration:none;">⚙️ 管理餐厅</a>
+    <a href="/manage" style="font-size:13px; color:var(--muted); text-decoration:none;">管理餐厅</a>
     <div style="font-size:11px; color:#999; margin-top:8px;">更新于 2026-04-29 17:00</div>
   </div>
 </div>
@@ -140,7 +139,6 @@ async function createRoom() {
       body: JSON.stringify({blacklist: blList})
     });
     const data = await res.json();
-    // 主持人自动加入为参与者
     const joinRes = await fetch(`/api/rooms/${data.room_id}/participants`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -151,7 +149,7 @@ async function createRoom() {
     window.location.href = `/room/${data.room_id}?token=${data.host_token}`;
   } catch(e) {
     btn.disabled = false;
-    btn.textContent = '创建房间 🚀';
+    btn.textContent = '创建房间';
     alert('创建失败，请重试');
   }
 }
@@ -173,7 +171,7 @@ async function startSolo() {
     window.location.href = `/q/${data.room_id}`;
   } catch(e) {
     btn.disabled = false;
-    btn.textContent = '🙋 一个人也能吃饭';
+    btn.textContent = '一个人也能吃饭';
     alert('启动失败，请重试');
   }
 }
@@ -183,6 +181,8 @@ function joinByCode() {
   if (code.length < 4) return;
   window.location.href = `/join/${code}`;
 }
+
+lucide.createIcons();
 </script>
 </body>
 </html>

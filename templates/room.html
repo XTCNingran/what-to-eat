@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>投票间 · 今天吃什么</title>
   <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -14,7 +15,9 @@
   </div>
 
   <div class="card">
-    <h2>📢 房间码</h2>
+    <h2 style="display:flex; align-items:center; gap:8px;">
+      <i data-lucide="hash" style="width:20px; height:20px; color:var(--orange);"></i>房间码
+    </h2>
     <div class="room-code" id="roomCode">{{ room_id }}</div>
     <div class="qr-box">
       <img src="/api/rooms/{{ room_id }}/qr" alt="扫码加入" id="qrImg">
@@ -23,7 +26,9 @@
   </div>
 
   <div class="card">
-    <h2>👥 已加入 <span id="joinCount">0</span> 人</h2>
+    <h2 style="display:flex; align-items:center; gap:8px;">
+      <i data-lucide="users" style="width:20px; height:20px; color:var(--orange);"></i>已加入 <span id="joinCount">0</span> 人
+    </h2>
     <div class="participants" id="participantList"></div>
   </div>
 
@@ -34,10 +39,12 @@
   </div>
 
   <div id="progressPanel" style="display:none;" class="card">
-    <h2>✍️ 答题进度</h2>
+    <h2 style="display:flex; align-items:center; gap:8px;">
+      <i data-lucide="pencil" style="width:20px; height:20px; color:var(--orange);"></i>答题进度
+    </h2>
     <div class="progress-label"><span id="submittedCount">0</span> / <span id="totalCount">0</span> 人已提交</div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-    <button class="btn btn-secondary" id="closeBtn" onclick="closeRoom()">看结果！🎉</button>
+    <button class="btn btn-secondary" id="closeBtn" onclick="closeRoom()">看结果</button>
   </div>
 </div>
 
@@ -51,7 +58,6 @@ let state = 'waiting';
 let totalCount = 0;
 let submittedCount = 0;
 
-// SSE 监听
 const es = new EventSource(`/api/rooms/${ROOM_ID}/events`);
 es.onmessage = (e) => {
   const data = JSON.parse(e.data);
@@ -80,9 +86,6 @@ async function updateParticipants() {
   document.getElementById('joinCount').textContent = data.participant_count;
   totalCount = data.participant_count;
 
-  // 获取完整参与者信息
-  const qRes = await fetch(`/api/rooms/${ROOM_ID}/questions`);
-  // just update count for now
   if (data.participant_count >= 1) {
     const btn = document.getElementById('startBtn');
     btn.disabled = false;
@@ -90,7 +93,6 @@ async function updateParticipants() {
   }
 }
 
-// 轮询参与者详情
 async function pollParticipants() {
   try {
     const res = await fetch(`/api/rooms/${ROOM_ID}`);
@@ -100,7 +102,7 @@ async function pollParticipants() {
     if (data.participant_count >= 1) {
       const btn = document.getElementById('startBtn');
       btn.disabled = false;
-      btn.textContent = `开始答题 🚀`;
+      btn.textContent = `开始答题`;
     }
     if (data.state === 'questioning') showQuestioningPanel();
     if (data.has_results) {
@@ -128,12 +130,12 @@ async function startQuestioning() {
       const err = await res.json().catch(() => ({}));
       alert(`开始失败 (${res.status})：${err.detail || '未知错误'}`);
       btn.disabled = false;
-      btn.textContent = '开始答题 🚀';
+      btn.textContent = '开始答题';
     }
   } catch (e) {
     alert(`网络错误：${e.message}`);
     btn.disabled = false;
-    btn.textContent = '开始答题 🚀';
+    btn.textContent = '开始答题';
   }
 }
 
@@ -164,6 +166,8 @@ async function closeRoom() {
     window.location.href = `/results/${ROOM_ID}?token=${HOST_TOKEN}`;
   }
 }
+
+lucide.createIcons();
 </script>
 </body>
 </html>

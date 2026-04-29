@@ -25,6 +25,7 @@ class Room(BaseModel):
     state: RoomState = RoomState.WAITING
     participants: dict[str, Participant] = {}
     questions: list[Question] = []
+    drinks_questions: list[Question] = []
     answers: dict[str, list[Answer]] = {}  # participant_id -> answers
     results: Optional[list[ScoredRestaurant]] = None
     aggregated_weights: Optional[dict[str, float]] = None

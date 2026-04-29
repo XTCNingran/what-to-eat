@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>餐厅管理 · 今天吃什么</title>
   <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
     .mgmt-row { display:flex; justify-content:space-between; align-items:center;
                 padding:10px 12px; border-bottom:1px solid #F0F0F0; font-size:14px; }
@@ -24,7 +25,9 @@
   </div>
 
   <div class="card">
-    <h2>🏪 餐厅列表 <span id="countBadge" style="font-size:14px; color:var(--muted);"></span></h2>
+    <h2 style="display:flex; align-items:center; gap:8px;">
+      <i data-lucide="store" style="width:20px; height:20px; color:var(--orange);"></i>餐厅列表 <span id="countBadge" style="font-size:14px; color:var(--muted); font-weight:400;"></span>
+    </h2>
     <div class="filter-bar">
       <input type="text" id="searchInput" placeholder="搜索餐厅名…" oninput="applyFilters()"
              style="flex:1; min-width:120px;">
@@ -41,7 +44,9 @@
   </div>
 
   <div class="card">
-    <h2>➕ 新增餐厅</h2>
+    <h2 style="display:flex; align-items:center; gap:8px;">
+      <i data-lucide="plus-circle" style="width:20px; height:20px; color:var(--orange);"></i>新增餐厅
+    </h2>
     <div class="edit-form">
       <label>餐厅名称 *</label>
       <input type="text" id="newName" placeholder="必填">
@@ -63,7 +68,9 @@
   </div>
 
   <div class="card">
-    <h2>🔄 刷新餐厅数据</h2>
+    <h2 style="display:flex; align-items:center; gap:8px;">
+      <i data-lucide="refresh-cw" style="width:20px; height:20px; color:var(--orange);"></i>刷新餐厅数据
+    </h2>
     <p class="subtitle" style="font-size:13px;">重新爬取长泰广场餐厅信息，保留你的自定义标签和 vendor 设置</p>
     <button class="btn btn-secondary" id="refreshBtn" onclick="refreshData()">开始刷新</button>
     <p id="refreshResult" style="font-size:13px; margin-top:8px; color:var(--muted);"></p>
@@ -110,7 +117,7 @@ function renderList(restaurants) {
     row.innerHTML = `
       <div>
         <div><strong>${r.name}</strong> ${r.vendor ? '<span class="tag" style="background:#E8F4FD;">供应商</span>' : ''} ${r.deleted ? '<span class="tag" style="background:#FFE0E0;">已删除</span>' : ''}</div>
-        <div class="mgmt-meta">${r.address || ''} ${r.avg_spend ? '· ¥'+r.avg_spend : ''} ${r.rating ? '· ⭐'+r.rating : ''}</div>
+        <div class="mgmt-meta">${r.address || ''} ${r.avg_spend ? '· ¥'+r.avg_spend : ''} ${r.rating ? '· '+r.rating+' 分' : ''}</div>
         <div>${(r.tags||[]).slice(0,4).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
       </div>
       <button class="btn btn-ghost" style="width:auto; padding:8px 14px; font-size:13px;"
@@ -118,7 +125,6 @@ function renderList(restaurants) {
     `;
     list.appendChild(row);
 
-    // 编辑表单（隐藏）
     const form = document.createElement('div');
     form.id = `edit-${r.name}`;
     form.style.display = 'none';
@@ -248,6 +254,7 @@ async function refreshData() {
 }
 
 loadRestaurants();
+lucide.createIcons();
 </script>
 </body>
 </html>

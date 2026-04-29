@@ -15,7 +15,7 @@ _rooms: dict[str, Room] = {}
 _sse_queues: dict[str, list[Queue]] = {}
 
 
-def _load_question_bank() -> tuple[list[Question], list[Question]]:
+def _load_question_bank() -> tuple[list[Question], list[Question], list[Question]]:
     with open(config.QUESTION_BANK, encoding="utf-8") as f:
         bank = json.load(f)
 
@@ -35,13 +35,14 @@ def _load_question_bank() -> tuple[list[Question], list[Question]]:
     return (
         parse_questions(bank["real_questions"]),
         parse_questions(bank["fun_questions"]),
+        parse_questions(bank["drinks_questions"]),
     )
 
 
-def _select_questions() -> list[Question]:
-    real_qs, fun_qs = _load_question_bank()
+def _select_questions() -> tuple[list[Question], list[Question]]:
+    real_qs, fun_qs, drinks_qs = _load_question_bank()
     selected_fun = random.sample(fun_qs, min(config.FUN_QUESTIONS_COUNT, len(fun_qs)))
-    return real_qs + selected_fun
+    return real_qs + selected_fun, drinks_qs
 
 
 def _gen_room_id() -> str:
@@ -55,8 +56,8 @@ def _gen_room_id() -> str:
 def create_room(blacklist: list[str] | None = None) -> Room:
     room_id = _gen_room_id()
     host_token = str(uuid.uuid4())
-    questions = _select_questions()
-    room = Room(id=room_id, host_token=host_token, questions=questions, blacklist=blacklist or [])
+    questions, drinks_questions = _select_questions()
+    room = Room(id=room_id, host_token=host_token, questions=questions, drinks_questions=drinks_questions, blacklist=blacklist or [])
     _rooms[room_id] = room
     _sse_queues[room_id] = []
     return room

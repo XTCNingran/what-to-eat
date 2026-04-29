@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>答题中 · 今天吃什么</title>
   <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
     .slide-container { position: relative; overflow: hidden; }
     .slide { transition: transform 0.35s ease; }
@@ -15,12 +16,12 @@
 <body>
 <div class="container">
   <div id="loadingView" class="waiting">
-    <div class="waiting-emoji">🍽️</div>
+    <div class="waiting-icon"><i data-lucide="loader-circle"></i></div>
     <p style="margin-top:16px; color:var(--muted);">加载题目中…</p>
   </div>
 
   <div id="waitingView" style="display:none;" class="waiting">
-    <div class="waiting-emoji">⏳</div>
+    <div class="waiting-icon"><i data-lucide="clock"></i></div>
     <h2 style="margin-top:16px;">等待主持人开始答题</h2>
     <p style="color:var(--muted); margin-top:8px; font-size:14px;">主持人点击「开始答题」后自动跳转</p>
   </div>
@@ -34,7 +35,7 @@
     <div class="slide-container" id="slideContainer">
       <div class="slide" id="currentSlide">
         <div class="question-card" id="questionCard">
-          <div class="question-emoji" id="questionEmoji"></div>
+          <div class="question-icon" id="questionIcon"></div>
           <div class="question-text" id="questionText"></div>
           <div class="choices" id="choiceList"></div>
         </div>
@@ -48,7 +49,7 @@
   </div>
 
   <div id="submittedView" style="display:none;" class="waiting">
-    <div class="waiting-emoji" id="waitEmoji">🎉</div>
+    <div class="waiting-icon"><i data-lucide="check-circle-2"></i></div>
     <h2 style="margin-top:16px;">已提交！</h2>
     <p style="color:var(--muted); margin-top:8px; font-size:14px;">等待结果出炉…</p>
   </div>
@@ -57,17 +58,19 @@
 <script>
 const ROOM_ID = '{{ room_id }}';
 let questions = [];
+let drinksQuestions = [];
 let currentIndex = 0;
-let selectedAnswers = {};  // question_id -> choice_id
+let selectedAnswers = {};
 const participantId = sessionStorage.getItem('participant_id');
 
 async function init() {
+  lucide.createIcons();
+
   if (!participantId) {
     window.location.href = `/join/${ROOM_ID}`;
     return;
   }
 
-  // 先检查房间状态
   const statusRes = await fetch(`/api/rooms/${ROOM_ID}`);
   const status = await statusRes.json();
 
@@ -83,10 +86,10 @@ async function init() {
     return;
   }
 
-  // 获取题目
   const qRes = await fetch(`/api/rooms/${ROOM_ID}/questions`);
   const qData = await qRes.json();
   questions = qData.questions;
+  drinksQuestions = qData.drinks_questions || [];
 
   document.getElementById('loadingView').style.display = 'none';
   document.getElementById('questionView').style.display = 'block';
@@ -111,7 +114,10 @@ function renderQuestion(index) {
   const card = document.getElementById('questionCard');
   card.className = 'question-card' + (q.type === 'fun' ? ' fun-type' : '');
 
-  document.getElementById('questionEmoji').textContent = q.emoji;
+  const iconEl = document.getElementById('questionIcon');
+  iconEl.innerHTML = `<i data-lucide="${q.emoji}"></i>`;
+  lucide.createIcons({ nodes: [iconEl] });
+
   document.getElementById('questionText').textContent = q.text;
 
   const choiceList = document.getElementById('choiceList');
@@ -124,25 +130,25 @@ function renderQuestion(index) {
     choiceList.appendChild(btn);
   });
 
-  // 进度
   const total = questions.length;
   document.getElementById('progressLabel').textContent = `问题 ${index + 1} / ${total}`;
   document.getElementById('progressFill').style.width = `${(index / total) * 100}%`;
 
-  // 按钮
   document.getElementById('prevBtn').disabled = index === 0;
   const nextBtn = document.getElementById('nextBtn');
-  nextBtn.textContent = index === total - 1 ? '提交！🎉' : '下一题 →';
+  nextBtn.textContent = index === total - 1 ? '提交' : '下一题 →';
 }
 
 function selectChoice(questionId, choiceId) {
   selectedAnswers[questionId] = choiceId;
 
-  // 选了"来杯饮料就好了"后立即提交，跳过剩余题目
   const q = questions.find(q => q.id === questionId);
   const choice = q && q.choices.find(c => c.id === choiceId);
   if (choice && choice.weights && choice.weights.drinks_only) {
-    submitAnswers();
+    questions = drinksQuestions;
+    currentIndex = 0;
+    selectedAnswers = { [questionId]: choiceId };
+    renderQuestion(0);
     return;
   }
 
@@ -172,6 +178,13 @@ async function submitAnswers() {
     choice_id: selectedAnswers[q.id] || q.choices[0].id,
   }));
 
+  const drinksOnlyAnswer = Object.entries(selectedAnswers).find(
+    ([qid]) => !questions.find(q => q.id === qid)
+  );
+  if (drinksOnlyAnswer) {
+    answers.push({ question_id: drinksOnlyAnswer[0], choice_id: drinksOnlyAnswer[1] });
+  }
+
   const res = await fetch(`/api/rooms/${ROOM_ID}/answers`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -182,13 +195,6 @@ async function submitAnswers() {
     document.getElementById('questionView').style.display = 'none';
     document.getElementById('submittedView').style.display = 'block';
 
-    // 随机食物 emoji 等待动画
-    const emojis = ['🍜', '🍣', '🍔', '🌮', '🍲', '🥗', '🍱', '🥘', '🍝', '🍛'];
-    let i = 0;
-    const el = document.getElementById('waitEmoji');
-    setInterval(() => { el.textContent = emojis[i++ % emojis.length]; }, 800);
-
-    // 轮询结果
     const poll = setInterval(async () => {
       const r = await fetch(`/api/rooms/${ROOM_ID}`);
       const d = await r.json();
