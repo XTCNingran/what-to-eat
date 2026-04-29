@@ -19,6 +19,12 @@ FAST_TAGS     = {"fast_service"}
 NOODLE_TAGS   = {"noodles"}
 CUISINE_TAGS  = {"cuisine_chinese", "cuisine_japanese", "cuisine_western", "cuisine_korean"}
 
+_MONDAY_BUDGET_BOOST    = 0.10
+_WEEKEND_PREMIUM_BOOST  = 0.15
+_FATIGUE_2X_MULTIPLIER  = 0.7
+_FATIGUE_3X_MULTIPLIER  = 0.4
+_DIVERSITY_JITTER_RANGE = 0.10
+
 
 def aggregate_weights(all_participant_answers: list[list[Answer]]) -> dict[str, float]:
     """将所有参与者的答案权重聚合为一个权重字典。budget_max 取最小值，其余求和。"""
@@ -201,9 +207,9 @@ def rank_restaurants(
         tags = set(r.restaurant.tags)
         base = (r.restaurant.rating or 3.5) * 2.0
         if weekday == 0 and "budget_friendly" in tags:          # 周一
-            scored[i] = r.model_copy(update={"score": r.score + base * 0.10})
+            scored[i] = r.model_copy(update={"score": r.score + base * _MONDAY_BUDGET_BOOST})
         elif weekday in (4, 5, 6) and "premium" in tags:       # 周五/六/日
-            scored[i] = r.model_copy(update={"score": r.score + base * 0.15})
+            scored[i] = r.model_copy(update={"score": r.score + base * _WEEKEND_PREMIUM_BOOST})
 
     # 4. 菜系疲劳（乘以衰减系数）
     cuisine_counts = history_store.get_recent_cuisines(3)
@@ -215,9 +221,9 @@ def rank_restaurants(
                 default=0,
             )
             if max_count == 2:
-                scored[i] = r.model_copy(update={"score": r.score * 0.7})
+                scored[i] = r.model_copy(update={"score": r.score * _FATIGUE_2X_MULTIPLIER})
             elif max_count >= 3:
-                scored[i] = r.model_copy(update={"score": r.score * 0.4})
+                scored[i] = r.model_copy(update={"score": r.score * _FATIGUE_3X_MULTIPLIER})
 
     # 5. 排序
     scored.sort(key=lambda x: x.score, reverse=True)
@@ -225,7 +231,7 @@ def rank_restaurants(
     # 6. 多样性扰动（第 4–20 名）
     if len(scored) > 3:
         for i, r in enumerate(scored[3:], start=3):
-            jitter = 1.0 + random.uniform(-0.10, 0.10) * (r.restaurant.rating or 4.0) / 5.0
+            jitter = 1.0 + random.uniform(-_DIVERSITY_JITTER_RANGE, _DIVERSITY_JITTER_RANGE) * (r.restaurant.rating or 4.0) / 5.0  # scale by rating so lower-quality options get smaller variance
             scored[i] = r.model_copy(update={"score": r.score * jitter})
         scored[3:] = sorted(scored[3:], key=lambda x: x.score, reverse=True)
 
