@@ -36,18 +36,6 @@
       ]
     },
     {
-      "id": "q_spicy",
-      "type": "real",
-      "text": "今天能吃辣吗？",
-      "emoji": "🌶️",
-      "choices": [
-        {"id": "spicy_yes",  "text": "当然！越辣越好",   "weights": {"spicy": 2.0}},
-        {"id": "spicy_mid",  "text": "微辣可以",          "weights": {"spicy": 0.5}},
-        {"id": "spicy_no",   "text": "完全不行",          "weights": {"spicy": -2.0}},
-        {"id": "spicy_any",  "text": "随便，都行",        "weights": {}}
-      ]
-    },
-    {
       "id": "q_budget",
       "type": "real",
       "text": "今天午饭预算大概？",
@@ -94,18 +82,6 @@
         {"id": "health_mid", "text": "无所谓",             "weights": {}}
       ]
     },
-    {
-      "id": "q_soup",
-      "type": "real",
-      "text": "想喝汤 / 吃热食吗？",
-      "emoji": "🍲",
-      "choices": [
-        {"id": "soup_yes", "text": "想，要热汤热食",       "weights": {"warm_food": 1.5}},
-        {"id": "soup_no",  "text": "不需要",               "weights": {}},
-        {"id": "soup_any", "text": "随便",                 "weights": {}}
-      ]
-    }
-  ],
   "fun_questions": [
     {
       "id": "q_animal",
