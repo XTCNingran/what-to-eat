@@ -76,7 +76,10 @@ def _get_all_restaurants():
 
 
 def get_recent_cuisines(n: int) -> dict[str, int]:
-    """返回近 n 条历史记录中各菜系标签的出现次数。"""
+    """返回近 n 条历史记录中各菜系标签的出现次数。
+
+    只统计以 ``cuisine_`` 开头的标签；在餐厅库中找不到的餐厅会被静默跳过。
+    """
     records = get_recent(n)
     name_to_tags: dict[str, list[str]] = {r.name: r.tags for r in _get_all_restaurants()}
     counts: dict[str, int] = {}
