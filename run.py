@@ -1,5 +1,4 @@
 import sys
-import socket
 import argparse
 import uvicorn
 
@@ -10,16 +9,7 @@ if sys.platform == "win32":
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent))
 
-
-def get_lan_ip() -> str:
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        ip = s.getsockname()[0]
-        s.close()
-        return ip
-    except Exception:
-        return "127.0.0.1"
+from app.config import get_base_url, PORT
 
 
 if __name__ == "__main__":
@@ -27,8 +17,8 @@ if __name__ == "__main__":
     parser.add_argument("--tunnel", action="store_true", help="通过 ngrok 创建公网隧道")
     args = parser.parse_args()
 
-    port = 8000
-    display_url = f"http://{get_lan_ip()}:{port}"
+    port = PORT
+    display_url = get_base_url()
 
     if args.tunnel:
         try:
@@ -51,15 +41,6 @@ if __name__ == "__main__":
     print(f"  今天吃什么 🍜")
     print(f"  访问地址：{display_url}")
     print("=" * 50)
-
-    try:
-        import qrcode
-        qr = qrcode.QRCode(border=1)
-        qr.add_data(display_url)
-        qr.make(fit=True)
-        qr.print_ascii(invert=True)
-    except ImportError:
-        print("  (安装 qrcode 可显示二维码: pip install qrcode[pil])")
 
     mode = "公网（ngrok）" if args.tunnel else "局域网"
     print(f"\n  模式：{mode}\n")
