@@ -137,6 +137,15 @@ function renderQuestion(index) {
 
 function selectChoice(questionId, choiceId) {
   selectedAnswers[questionId] = choiceId;
+
+  // 选了"来杯饮料就好了"后立即提交，跳过剩余题目
+  const q = questions.find(q => q.id === questionId);
+  const choice = q && q.choices.find(c => c.id === choiceId);
+  if (choice && choice.weights && choice.weights.drinks_only) {
+    submitAnswers();
+    return;
+  }
+
   renderQuestion(currentIndex);
 }
 
