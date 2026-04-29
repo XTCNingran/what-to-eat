@@ -33,6 +33,7 @@ async def get_results(room_id: str):
             for i, r in enumerate(room.results)
         ],
         "recent_history": history_store.get_recent(5),
+        "drinks_only_notices": room.drinks_only_participants,
     }
 
 
