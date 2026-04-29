@@ -524,7 +524,7 @@
     "tags": [],
     "phone": "",
     "vendor": 0,
-    "deleted": false
+    "deleted": true
   },
   {
     "name": "上海浦东软件园第2餐厅",
@@ -1977,7 +1977,7 @@
     ],
     "phone": "",
     "vendor": 0,
-    "deleted": false
+    "deleted": true
   },
   {
     "name": "眉州东坡(汇智国际商业中心店)",
@@ -2111,7 +2111,7 @@
     "tags": [],
     "phone": "",
     "vendor": 0,
-    "deleted": false
+    "deleted": true
   },
   {
     "name": "绿茶餐厅(上海浦东汇智店)",
