@@ -11,7 +11,8 @@
     "poi_id": "B0FFFZYTCZ",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -61,7 +62,7 @@
     "poi_id": "B0HR7DP811",
     "tags": [],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -76,7 +77,8 @@
     "poi_id": "B0J6B5X2IY",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -94,25 +96,8 @@
     "poi_id": "B0J3TAG6QN",
     "tags": [
       "cold_food",
-      "light_meal"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "CHAGEE霸王茶姬(汇智国际商业中心店)",
-    "category_raw": "餐饮服务;冷饮店;冷饮店",
-    "address": "金科路3057号汇智国际商业中心F1层肯德基旁边西南门",
-    "rating": 4.4,
-    "avg_spend": 18.0,
-    "lng": 121.601173,
-    "lat": 31.202923,
-    "district": "浦东新区",
-    "poi_id": "B0KDHHIKRW",
-    "tags": [
-      "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -137,24 +122,6 @@
     "deleted": false
   },
   {
-    "name": "Costa Coffee(上海张江浦软2店)(暂停营业)",
-    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
-    "address": "郭守敬路498号上海浦东软件园郭守敬园14幢105-1室",
-    "rating": 4.4,
-    "avg_spend": 29.0,
-    "lng": 121.59869,
-    "lat": 31.208649,
-    "district": "浦东新区",
-    "poi_id": "B0FFFE51VD",
-    "tags": [
-      "light_meal",
-      "premium"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
     "name": "Costa Coffee(上海张江高科园)",
     "category_raw": "餐饮服务;咖啡厅;咖啡厅",
     "address": "博云路2号浦软大厦1楼(金科路地铁站1号口步行490米)",
@@ -166,25 +133,8 @@
     "poi_id": "B00156E59N",
     "tags": [
       "light_meal",
-      "premium"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "Costa Coffee(上海张江高科园)",
-    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
-    "address": "博云路2号浦软大厦1楼(金科路地铁站1号口步行490米)",
-    "rating": 4.5,
-    "avg_spend": 37.0,
-    "lng": 121.604233,
-    "lat": 31.202269,
-    "district": "浦东新区",
-    "poi_id": "B00156E59N",
-    "tags": [
-      "light_meal",
-      "premium"
+      "premium",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -220,7 +170,8 @@
     "poi_id": "B0FFG69LGH",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -238,7 +189,8 @@
     "poi_id": "B0FFIGRHED",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -256,7 +208,8 @@
     "poi_id": "B0IRBZX5J2",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -274,7 +227,8 @@
     "poi_id": "B0JU1CMX0R",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -305,7 +259,9 @@
     "lat": 31.205147,
     "district": "浦东新区",
     "poi_id": "B0H1L6E1H3",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -322,43 +278,8 @@
     "poi_id": "B0G2Z7IPET",
     "tags": [
       "light_meal",
-      "premium"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "Manner Coffee(汇智国际商业中心店)",
-    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
-    "address": "金科路3057号汇智国际商业中心F1层",
-    "rating": 4.2,
-    "avg_spend": 20.0,
-    "lng": 121.60143,
-    "lat": 31.203804,
-    "district": "浦东新区",
-    "poi_id": "B0JGR40U7H",
-    "tags": [
-      "light_meal",
-      "premium"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "Manner Coffee(金科路店)",
-    "category_raw": "餐饮服务;咖啡厅;咖啡厅",
-    "address": "金科路与祖冲之路交叉口西北120米",
-    "rating": 4.1,
-    "avg_spend": 20.0,
-    "lng": 121.599236,
-    "lat": 31.205097,
-    "district": "浦东新区",
-    "poi_id": "B0K2HBK604",
-    "tags": [
-      "light_meal",
-      "premium"
+      "premium",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -376,7 +297,8 @@
     "poi_id": "B0KGR5M2RP",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -396,7 +318,7 @@
       "cuisine_chinese"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -429,7 +351,8 @@
     "poi_id": "B0LRMHXRF5",
     "tags": [
       "light_meal",
-      "premium"
+      "premium",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -447,7 +370,7 @@
     "poi_id": "B0G3V4CHAC",
     "tags": [],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -460,7 +383,9 @@
     "lat": 31.205881,
     "district": "浦东新区",
     "poi_id": "B0JBAOI1QH",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -477,7 +402,8 @@
     "poi_id": "B0M647K7U0",
     "tags": [
       "light_meal",
-      "premium"
+      "premium",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -495,7 +421,8 @@
     "poi_id": "B0LGXH91C5",
     "tags": [
       "light_meal",
-      "premium"
+      "premium",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -577,7 +504,8 @@
     "district": "浦东新区",
     "poi_id": "B0KAC5V4UL",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -707,7 +635,7 @@
       "light_meal"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -753,7 +681,8 @@
     "district": "浦东新区",
     "poi_id": "B0JKVHMKG7",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -803,7 +732,8 @@
     "district": "浦东新区",
     "poi_id": "B0JKO9JX14",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -851,7 +781,9 @@
     "lat": 31.205439,
     "district": "浦东新区",
     "poi_id": "B0FFLNINWZ",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -867,28 +799,11 @@
     "district": "浦东新区",
     "poi_id": "B0FFLLW7U3",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "喜茶(汇智国际商业中心店)",
-    "category_raw": "餐饮服务;冷饮店;冷饮店",
-    "address": "金科路3057号汇智国际商业中心L1-27号铺位",
-    "rating": 4.2,
-    "avg_spend": 25.0,
-    "lng": 121.601625,
-    "lat": 31.203101,
-    "district": "浦东新区",
-    "poi_id": "B0KUD14G16",
-    "tags": [
-      "cold_food",
-      "light_meal"
-    ],
-    "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -903,7 +818,8 @@
     "poi_id": "B0J3CA3B6B",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -920,7 +836,8 @@
     "district": "浦东新区",
     "poi_id": "B0M6HZ8ZUI",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -937,7 +854,8 @@
     "district": "浦东新区",
     "poi_id": "B0L6CDJIH1",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -957,7 +875,7 @@
       "cuisine_chinese"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -970,7 +888,9 @@
     "lat": 31.203217,
     "district": "浦东新区",
     "poi_id": "B0HUCGVBBT",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -986,7 +906,8 @@
     "district": "浦东新区",
     "poi_id": "B0J0F7OK3I",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -1078,23 +999,6 @@
     "deleted": false
   },
   {
-    "name": "巡湘记·乡野湖南菜(汇智店)",
-    "category_raw": "餐饮服务;中餐厅;中餐厅",
-    "address": "金科路3057号汇智国际商业中心F4层",
-    "rating": 4.4,
-    "avg_spend": 83.0,
-    "lng": 121.601946,
-    "lat": 31.203262,
-    "district": "浦东新区",
-    "poi_id": "B0K16CVY2V",
-    "tags": [
-      "cuisine_chinese"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
     "name": "左庭右院鲜牛肉火锅(长泰广场店)",
     "category_raw": "餐饮服务;中餐厅;火锅店",
     "address": "祖冲之路1239弄7号地下一层58-33号",
@@ -1108,7 +1012,7 @@
       "cuisine_chinese"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -1121,9 +1025,11 @@
     "lat": 31.20295,
     "district": "浦东新区",
     "poi_id": "B0FFJLTKGF",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -1137,7 +1043,8 @@
     "district": "浦东新区",
     "poi_id": "B0KK7NO1MV",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -1157,7 +1064,7 @@
       "cuisine_chinese"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -1241,7 +1148,7 @@
       "cuisine_chinese"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -1325,24 +1232,6 @@
     "deleted": false
   },
   {
-    "name": "星巴克臻选(汇智广场店)",
-    "category_raw": "餐饮服务;咖啡厅;星巴克咖啡",
-    "address": "金科路3057号汇智国际商业中心1层L1-1A室",
-    "rating": 4.6,
-    "avg_spend": 42.0,
-    "lng": 121.601193,
-    "lat": 31.203687,
-    "district": "浦东新区",
-    "poi_id": "B0FFFH95JA",
-    "tags": [
-      "light_meal",
-      "premium"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
     "name": "星巴克臻选(长泰广场店)",
     "category_raw": "餐饮服务;咖啡厅;星巴克咖啡",
     "address": "祖冲之路1239弄5座1E13-1单元",
@@ -1354,7 +1243,8 @@
     "poi_id": "B0I1TA7B7D",
     "tags": [
       "light_meal",
-      "premium"
+      "premium",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -1454,10 +1344,11 @@
     "poi_id": "B0FFFHC7X8",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -1472,7 +1363,8 @@
     "poi_id": "B0LAOYF3LQ",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -1490,7 +1382,8 @@
     "poi_id": "B0JA9RGOOJ",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -1539,7 +1432,8 @@
     "district": "浦东新区",
     "poi_id": "B0L3FC5PPI",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -1555,7 +1449,9 @@
     "lat": 31.205441,
     "district": "浦东新区",
     "poi_id": "B0FFFWQ0LB",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -1571,10 +1467,11 @@
     "district": "浦东新区",
     "poi_id": "B0J3UL1L4K",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -1720,38 +1617,6 @@
     "deleted": false
   },
   {
-    "name": "淡马茶坊(张江汇智店)",
-    "category_raw": "餐饮服务;茶艺馆;茶艺馆",
-    "address": "金科路3057号、亮景路55号地下一层B1-18室",
-    "rating": 3.9,
-    "avg_spend": 20.0,
-    "lng": 121.601275,
-    "lat": 31.203625,
-    "district": "浦东新区",
-    "poi_id": "B0J0C7ELW1",
-    "tags": [],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "湊湊火锅·茶憩(上海金科路店)",
-    "category_raw": "餐饮服务;中餐厅;火锅店",
-    "address": "张江高科技园区金科路3057号汇智国际商业中心L3-7-8三楼",
-    "rating": 4.6,
-    "avg_spend": 140.0,
-    "lng": 121.60193,
-    "lat": 31.203267,
-    "district": "浦东新区",
-    "poi_id": "B0FFMABP7W",
-    "tags": [
-      "cuisine_chinese"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
     "name": "湊湊火锅·茶憩(上海金科路店)",
     "category_raw": "餐饮服务;中餐厅;火锅店",
     "address": "张江高科技园区金科路3057号汇智国际商业中心L3-7-8三楼",
@@ -1778,7 +1643,9 @@
     "lat": 31.205849,
     "district": "浦东新区",
     "poi_id": "B0FFISF5RQ",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -1813,7 +1680,8 @@
     "poi_id": "B0L3H7B5Y2",
     "tags": [
       "light_meal",
-      "premium"
+      "premium",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -1882,9 +1750,11 @@
     "lat": 31.205507,
     "district": "浦东新区",
     "poi_id": "B0HAKCIM3D",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -1898,10 +1768,11 @@
     "district": "浦东新区",
     "poi_id": "B0KRBCW6HU",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -1914,7 +1785,9 @@
     "lat": 31.205855,
     "district": "浦东新区",
     "poi_id": "B0K0PUWW7K",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -1929,7 +1802,9 @@
     "lat": 31.205898,
     "district": "浦东新区",
     "poi_id": "B0LKYO4LY5",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -1946,7 +1821,8 @@
     "poi_id": "B0K1SOBL5Y",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -1996,10 +1872,11 @@
     "district": "浦东新区",
     "poi_id": "B0KRP5R7Z5",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2046,7 +1923,8 @@
     "poi_id": "B0K06L45B5",
     "tags": [
       "light_meal",
-      "premium"
+      "premium",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -2147,10 +2025,11 @@
     "district": "浦东新区",
     "poi_id": "B0JK7RSR1P",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2212,7 +2091,9 @@
     "lat": 31.203673,
     "district": "浦东新区",
     "poi_id": "B0KKMO84FR",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -2248,7 +2129,7 @@
       "light_meal"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2294,10 +2175,11 @@
     "district": "浦东新区",
     "poi_id": "B0LAHRGMG4",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2325,24 +2207,11 @@
     "lat": 31.205585,
     "district": "浦东新区",
     "poi_id": "B0HAJR6DUV",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "肯德基(张江郭守敬园餐厅)",
-    "category_raw": "餐饮服务;快餐厅;肯德基",
-    "address": "郭守敬路498号6幢一层",
-    "rating": 4.3,
-    "avg_spend": 24.0,
-    "lng": 121.598675,
-    "lat": 31.208575,
-    "district": "浦东新区",
-    "poi_id": "B0KGFZ2F7V",
-    "tags": [],
-    "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2355,7 +2224,9 @@
     "lat": 31.202907,
     "district": "浦东新区",
     "poi_id": "B0FFFQ6KVT",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -2374,7 +2245,7 @@
       "cuisine_chinese"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2391,7 +2262,7 @@
       "cuisine_chinese"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2408,7 +2279,7 @@
       "cuisine_chinese"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2457,7 +2328,8 @@
     "poi_id": "B0GUN5IXD9",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -2490,7 +2362,8 @@
     "poi_id": "B0HD3RPF9H",
     "tags": [
       "cold_food",
-      "light_meal"
+      "light_meal",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -2539,7 +2412,8 @@
     "district": "浦东新区",
     "poi_id": "B0KKFOI29O",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -2651,7 +2525,9 @@
     "lat": 31.203662,
     "district": "浦东新区",
     "poi_id": "B0J0MSXA61",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -2684,10 +2560,11 @@
     "district": "浦东新区",
     "poi_id": "B0J3R72A5K",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2701,7 +2578,8 @@
     "district": "浦东新区",
     "poi_id": "B0LKUUY8T6",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
@@ -2733,10 +2611,11 @@
     "district": "浦东新区",
     "poi_id": "B0J3ULXL9R",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2801,10 +2680,11 @@
     "district": "浦东新区",
     "poi_id": "B0IG75P1EU",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2872,7 +2752,7 @@
       "cuisine_chinese"
     ],
     "phone": "",
-    "vendor": 0,
+    "vendor": 1,
     "deleted": false
   },
   {
@@ -2919,7 +2799,9 @@
     "lat": 31.205603,
     "district": "浦东新区",
     "poi_id": "B0FFG1HDAR",
-    "tags": [],
+    "tags": [
+      "fast_service"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -2952,10 +2834,99 @@
     "district": "浦东新区",
     "poi_id": "B0L0H7R6EW",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 0,
     "deleted": false
+  },
+  {
+    "name": "浦软第五餐厅",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "晨晖路1000号1号楼",
+    "rating": 4.1,
+    "avg_spend": 24.0,
+    "lng": 121.601278,
+    "lat": 31.199992,
+    "district": "浦东新区",
+    "poi_id": "B0FFFPUT89",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 1,
+    "deleted": false
+  },
+  {
+    "name": "上海浦东软件园第6餐厅(上海浦东软件园Y座店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "亮秀路112号",
+    "rating": 4.2,
+    "avg_spend": 27.0,
+    "lng": 121.602789,
+    "lat": 31.199141,
+    "district": "浦东新区",
+    "poi_id": "B00157364G",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 1,
+    "deleted": false
+  },
+  {
+    "name": "赛百味 SUBWAY(上海浦东软件园店)",
+    "category_raw": "餐饮服务;快餐厅;快餐厅",
+    "address": "晨晖路1000号1号楼117-B",
+    "rating": 4.2,
+    "avg_spend": 33.0,
+    "lng": 121.602031,
+    "lat": 31.200058,
+    "district": "浦东新区",
+    "poi_id": "B0JKTUAYAV",
+    "tags": [
+      "light_meal",
+      "cold_food",
+      "fast_service"
+    ],
+    "phone": "",
+    "vendor": 1,
+    "deleted": false
+  },
+  {
+    "name": "知鱼之味(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "长泰广场B1层东区",
+    "rating": 4.3,
+    "avg_spend": 30.0,
+    "lng": 121.602253,
+    "lat": 31.205217,
+    "district": "浦东新区",
+    "poi_id": "",
+    "tags": [
+      "cuisine_chinese",
+      "fast_service"
+    ],
+    "phone": "",
+    "vendor": 1,
+    "deleted": false
+  },
+  {
+    "name": "小满手工粉(长泰广场店)",
+    "category_raw": "餐饮服务;中餐厅;中餐厅",
+    "address": "长泰广场西区GF层美食广场内",
+    "rating": null,
+    "avg_spend": null,
+    "lng": 121.601066,
+    "lat": 31.205528,
+    "district": "浦东新区",
+    "poi_id": "",
+    "tags": [
+      "cuisine_chinese"
+    ],
+    "phone": "",
+    "vendor": 1,
+    "deleted": true
   }
 ]
