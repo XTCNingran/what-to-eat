@@ -1,21 +1,23 @@
 from __future__ import annotations
+import math
 import random
 from collections import defaultdict
-from datetime import date
+from datetime import datetime
 
+from app import config
 from app.models.restaurant import Restaurant, ScoredRestaurant
 from app.models.question import Answer
+from app.services import history_store
 
-# 标签集合，用于餐厅特征判断
-SPICY_TAGS = {"spicy"}
-WARM_TAGS = {"warm_food"}
-MEAT_TAGS = {"meat"}
-LIGHT_TAGS = {"light_meal"}
-FILLING_TAGS = {"filling"}
-HEALTHY_TAGS = {"healthy"}
-FAST_TAGS = {"fast_service"}
-NOODLE_TAGS = {"noodles"}
-CUISINE_TAGS = {"cuisine_chinese", "cuisine_japanese", "cuisine_western", "cuisine_korean"}
+SPICY_TAGS    = {"spicy"}
+WARM_TAGS     = {"warm_food"}
+MEAT_TAGS     = {"meat"}
+LIGHT_TAGS    = {"light_meal"}
+FILLING_TAGS  = {"filling"}
+HEALTHY_TAGS  = {"healthy"}
+FAST_TAGS     = {"fast_service"}
+NOODLE_TAGS   = {"noodles"}
+CUISINE_TAGS  = {"cuisine_chinese", "cuisine_japanese", "cuisine_western", "cuisine_korean"}
 
 
 def aggregate_weights(all_participant_answers: list[list[Answer]]) -> dict[str, float]:
@@ -37,6 +39,51 @@ def aggregate_weights(all_participant_answers: list[list[Answer]]) -> dict[str, 
     return dict(totals)
 
 
+def _haversine(lng1: float, lat1: float, lng2: float, lat2: float) -> float:
+    R = 6_371_000
+    phi1, phi2 = math.radians(lat1), math.radians(lat2)
+    dphi = math.radians(lat2 - lat1)
+    dlam = math.radians(lng2 - lng1)
+    a = math.sin(dphi / 2) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(dlam / 2) ** 2
+    return R * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+
+def _is_drinks(r: Restaurant) -> bool:
+    """纯饮品店：有 cold_food 标签且无任何 cuisine_* 标签。"""
+    tags = set(r.tags)
+    return "cold_food" in tags and not any(t.startswith("cuisine_") for t in tags)
+
+
+def _filter_pool(
+    restaurants: list[Restaurant],
+    weights: dict[str, float],
+) -> list[Restaurant]:
+    """根据控制信号过滤候选池，返回符合条件的餐厅列表。"""
+    pool = [r for r in restaurants if not r.deleted]
+
+    if weights.get("drinks_only", 0) > 0:
+        pool = [r for r in pool if _is_drinks(r)]
+    else:
+        pool = [r for r in pool if not _is_drinks(r)]
+
+    if weights.get("vendor_only", 0) > 0:
+        pool = [r for r in pool if r.vendor == 1]
+
+    if weights.get("meal_fast", 0) > 0:
+        pool = [r for r in pool if "fast_service" in r.tags]
+    elif weights.get("meal_proper", 0) > 0:
+        pool = [r for r in pool if "fast_service" not in r.tags]
+
+    if weights.get("nearby_only", 0) > 0:
+        pool = [
+            r for r in pool
+            if r.lng and r.lat
+            and _haversine(r.lng, r.lat, config.OFFICE_LNG, config.OFFICE_LAT) <= config.NEARBY_RADIUS_M
+        ]
+
+    return pool
+
+
 def score_restaurant(
     restaurant: Restaurant,
     weights: dict[str, float],
@@ -46,17 +93,14 @@ def score_restaurant(
     """对单个餐厅打分，返回 None 表示被过滤（预算超限）。"""
     reasons: list[str] = []
 
-    # 预算硬过滤
     budget_max = weights.get("budget_max", 999)
     if restaurant.avg_spend and restaurant.avg_spend > budget_max:
         return None
 
-    # 基础分：评分 × 2（0–10 分）
     score = (restaurant.rating or 3.5) * 2.0
 
     tags = set(restaurant.tags)
 
-    # 口味匹配
     if tags & SPICY_TAGS:
         delta = weights.get("spicy", 0)
         score += delta
@@ -98,13 +142,11 @@ def score_restaurant(
     if tags & NOODLE_TAGS:
         score -= weights.get("avoid_noodles", 0)
 
-    # 菜系匹配
     for cuisine_tag in CUISINE_TAGS:
         if cuisine_tag in tags:
             delta = weights.get(cuisine_tag, 0)
             score += delta
 
-    # 性价比
     if restaurant.avg_spend and restaurant.avg_spend < 25:
         delta = weights.get("budget_friendly", 0)
         score += delta
@@ -117,7 +159,6 @@ def score_restaurant(
         if delta > 0:
             reasons.append("高分好评")
 
-    # 历史惩罚
     name = restaurant.name
     if name in yesterday_names:
         score -= 3.0
@@ -126,11 +167,9 @@ def score_restaurant(
         score -= 1.5
         reasons.append("⚠️ 前天去过")
 
-    # 随机小加成，打破平局
     score += weights.get("random_bonus", 0) * random.uniform(0, 1)
 
     reason_str = "、".join(reasons) if reasons else "综合评分推荐"
-
     return ScoredRestaurant(restaurant=restaurant, score=round(score, 3), reason=reason_str)
 
 
@@ -142,14 +181,52 @@ def rank_restaurants(
     top_n: int = 20,
     blacklist: list[str] | None = None,
 ) -> list[ScoredRestaurant]:
-    """对全部餐厅打分，过滤黑名单后排序，返回前 top_n 名。"""
+    """过滤、打分、叠加动态信号、多样性扰动，返回前 top_n 名。"""
     blacklist_set = set(blacklist or [])
-    scored = []
-    for r in restaurants:
-        if r.name in blacklist_set:
-            continue
+
+    # 1. 控制信号过滤
+    pool = _filter_pool(restaurants, weights)
+    pool = [r for r in pool if r.name not in blacklist_set]
+
+    # 2. 打分
+    scored: list[ScoredRestaurant] = []
+    for r in pool:
         result = score_restaurant(r, weights, recent_names, yesterday_names)
         if result is not None:
             scored.append(result)
+
+    # 3. 星期几加成（作用于基础分增量）
+    weekday = datetime.now().weekday()
+    for i, r in enumerate(scored):
+        tags = set(r.restaurant.tags)
+        base = (r.restaurant.rating or 3.5) * 2.0
+        if weekday == 0 and "budget_friendly" in tags:          # 周一
+            scored[i] = r.model_copy(update={"score": r.score + base * 0.10})
+        elif weekday in (4, 5, 6) and "premium" in tags:       # 周五/六/日
+            scored[i] = r.model_copy(update={"score": r.score + base * 0.15})
+
+    # 4. 菜系疲劳（乘以衰减系数）
+    cuisine_counts = history_store.get_recent_cuisines(3)
+    if cuisine_counts:
+        for i, r in enumerate(scored):
+            tags = set(r.restaurant.tags)
+            max_count = max(
+                (cuisine_counts.get(t, 0) for t in tags if t.startswith("cuisine_")),
+                default=0,
+            )
+            if max_count == 2:
+                scored[i] = r.model_copy(update={"score": r.score * 0.7})
+            elif max_count >= 3:
+                scored[i] = r.model_copy(update={"score": r.score * 0.4})
+
+    # 5. 排序
     scored.sort(key=lambda x: x.score, reverse=True)
+
+    # 6. 多样性扰动（第 4–20 名）
+    if len(scored) > 3:
+        for i, r in enumerate(scored[3:], start=3):
+            jitter = 1.0 + random.uniform(-0.10, 0.10) * (r.restaurant.rating or 4.0) / 5.0
+            scored[i] = r.model_copy(update={"score": r.score * jitter})
+        scored[3:] = sorted(scored[3:], key=lambda x: x.score, reverse=True)
+
     return scored[:top_n]
