@@ -253,7 +253,9 @@
     "lat": 31.203496,
     "district": "浦东新区",
     "poi_id": "B0K6XCYF09",
-    "tags": [],
+    "tags": [
+      "drinks_shop"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -326,7 +328,8 @@
     "district": "浦东新区",
     "poi_id": "B0LKDXPJ4N",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 1,
@@ -454,7 +457,9 @@
     "lat": 31.204969,
     "district": "浦东新区",
     "poi_id": "B0JKG42MB1",
-    "tags": [],
+    "tags": [
+      "drinks_shop"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -541,23 +546,6 @@
     "phone": "",
     "vendor": 0,
     "deleted": true
-  },
-  {
-    "name": "上海浦东软件园第2餐厅",
-    "category_raw": "餐饮服务;中餐厅;中餐厅",
-    "address": "郭守敬路498号浦东软件园14号楼1层",
-    "rating": 4.0,
-    "avg_spend": 21.0,
-    "lng": 121.598186,
-    "lat": 31.208261,
-    "district": "浦东新区",
-    "poi_id": "B00155M7N7",
-    "tags": [
-      "cuisine_chinese"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
   },
   {
     "name": "丰和日丽(张江汇智店)",
@@ -768,7 +756,9 @@
     "lat": 31.205534,
     "district": "浦东新区",
     "poi_id": "B0FFFW4TXH",
-    "tags": [],
+    "tags": [
+      "drinks_shop"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -1117,7 +1107,9 @@
     "lat": 31.205402,
     "district": "浦东新区",
     "poi_id": "B0L3O7YI7J",
-    "tags": [],
+    "tags": [
+      "drinks_shop"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -1362,7 +1354,9 @@
     "lat": 31.205538,
     "district": "浦东新区",
     "poi_id": "B0FFJ8T55I",
-    "tags": [],
+    "tags": [
+      "drinks_shop"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -1466,7 +1460,9 @@
     "lat": 31.205467,
     "district": "浦东新区",
     "poi_id": "B0JUYSC01G",
-    "tags": [],
+    "tags": [
+      "drinks_shop"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -1515,21 +1511,6 @@
     "lat": 31.205158,
     "district": "浦东新区",
     "poi_id": "B0JR5SR3Z8",
-    "tags": [],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "泰兰尼斯TARANIS(上海长泰广场)",
-    "category_raw": "餐饮服务;餐饮相关场所;餐饮相关",
-    "address": "祖冲之路1239弄7号长泰广场B1层",
-    "rating": 3.6,
-    "avg_spend": 403.0,
-    "lng": 121.602125,
-    "lat": 31.205525,
-    "district": "浦东新区",
-    "poi_id": "B0LKAH8ZAX",
     "tags": [],
     "phone": "",
     "vendor": 0,
@@ -1684,24 +1665,6 @@
     "lat": 31.206277,
     "district": "浦东新区",
     "poi_id": "B0FFLFG7SE",
-    "tags": [
-      "cuisine_japanese",
-      "light_meal"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
-    "name": "炙染",
-    "category_raw": "餐饮服务;外国餐厅;日本料理",
-    "address": "祖冲之路1239弄7号长泰广场F1层",
-    "rating": 3.8,
-    "avg_spend": 50,
-    "lng": 121.601338,
-    "lat": 31.20616,
-    "district": "浦东新区",
-    "poi_id": "B0L3M1P08C",
     "tags": [
       "cuisine_japanese",
       "light_meal"
@@ -1878,7 +1841,9 @@
     "lat": 31.203325,
     "district": "浦东新区",
     "poi_id": "B0LKDGMPO5",
-    "tags": [],
+    "tags": [
+      "drinks_shop"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -2132,7 +2097,9 @@
     "lat": 31.203775,
     "district": "浦东新区",
     "poi_id": "B0L2D994U7",
-    "tags": [],
+    "tags": [
+      "drinks_shop"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -2165,7 +2132,9 @@
     "lat": 31.203773,
     "district": "浦东新区",
     "poi_id": "B0JKGCCNNN",
-    "tags": [],
+    "tags": [
+      "drinks_shop"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -2239,23 +2208,6 @@
     "deleted": false
   },
   {
-    "name": "胡子大厨·湖南小炒(汇智国际店)",
-    "category_raw": "餐饮服务;中餐厅;中餐厅",
-    "address": "金科路3057号B1层646-B007商铺",
-    "rating": 4.1,
-    "avg_spend": 61.0,
-    "lng": 121.601288,
-    "lat": 31.205917,
-    "district": "浦东新区",
-    "poi_id": "B0IKRUJWU5",
-    "tags": [
-      "cuisine_chinese"
-    ],
-    "phone": "",
-    "vendor": 1,
-    "deleted": false
-  },
-  {
     "name": "至街烧鸭",
     "category_raw": "餐饮服务;中餐厅;中餐厅",
     "address": "张江镇祖冲之路1239弄7号地下一层19-6室",
@@ -2319,7 +2271,9 @@
     "lat": 31.203341,
     "district": "浦东新区",
     "poi_id": "B0J30U47TT",
-    "tags": [],
+    "tags": [
+      "drinks_shop"
+    ],
     "phone": "",
     "vendor": 0,
     "deleted": false
@@ -2798,24 +2752,8 @@
     "district": "浦东新区",
     "poi_id": "B0FFFPUT89",
     "tags": [
-      "cuisine_chinese"
-    ],
-    "phone": "",
-    "vendor": 1,
-    "deleted": false
-  },
-  {
-    "name": "上海浦东软件园第6餐厅(上海浦东软件园Y座店)",
-    "category_raw": "餐饮服务;中餐厅;中餐厅",
-    "address": "亮秀路112号",
-    "rating": 4.2,
-    "avg_spend": 27.0,
-    "lng": 121.602789,
-    "lat": 31.199141,
-    "district": "浦东新区",
-    "poi_id": "B00157364G",
-    "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 1,
@@ -2863,16 +2801,17 @@
     "category_raw": "餐饮服务;中餐厅;中餐厅",
     "address": "长泰广场西区GF层美食广场内",
     "rating": null,
-    "avg_spend": null,
+    "avg_spend": 35,
     "lng": 121.601066,
     "lat": 31.205528,
     "district": "浦东新区",
     "poi_id": "",
     "tags": [
-      "cuisine_chinese"
+      "cuisine_chinese",
+      "fast_service"
     ],
     "phone": "",
     "vendor": 1,
-    "deleted": true
+    "deleted": false
   }
 ]
