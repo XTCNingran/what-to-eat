@@ -55,8 +55,10 @@ def _haversine(lng1: float, lat1: float, lng2: float, lat2: float) -> float:
 
 
 def _is_drinks(r: Restaurant) -> bool:
-    """纯饮品店：有 cold_food 标签且无任何 cuisine_* 标签。"""
+    """饮品/轻食店：有 drinks_shop 标签，或有 cold_food 且无 cuisine_* 标签。"""
     tags = set(r.tags)
+    if "drinks_shop" in tags:
+        return True
     return "cold_food" in tags and not any(t.startswith("cuisine_") for t in tags)
 
 
