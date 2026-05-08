@@ -141,6 +141,7 @@ window.closeRoom = async function() {
 
 loadRoom();
 loadParticipants();
+setInterval(loadParticipants, 3000);
 setInterval(() => {
   if (document.getElementById('progressPanel').style.display !== 'none') pollProgress();
 }, 5000);

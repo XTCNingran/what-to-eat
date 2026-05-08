@@ -118,6 +118,14 @@ function subscribeToRoomState() {
         if (payload.new.state === 'closed') window.location.href = `results.html?room_id=${ROOM_ID}`;
       })
     .subscribe();
+
+  // Polling fallback (3s) in case Realtime replication is not enabled for this table
+  const poll = setInterval(async () => {
+    const { data } = await sb.from('rooms').select('state').eq('id', ROOM_ID).single();
+    if (!data) return;
+    if (data.state === 'questioning') { clearInterval(poll); window.location.reload(); }
+    if (data.state === 'closed') { clearInterval(poll); window.location.href = `results.html?room_id=${ROOM_ID}`; }
+  }, 3000);
 }
 
 function renderQuestion(index) {
