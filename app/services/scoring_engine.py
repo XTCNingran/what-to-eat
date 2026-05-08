@@ -150,6 +150,10 @@ def score_restaurant(
     if tags & NOODLE_TAGS:
         score -= weights.get("avoid_noodles", 0)
 
+    if "fast_service" not in tags:
+        delta = weights.get("sitdown_bonus", 0)
+        score += delta
+
     for cuisine_tag in CUISINE_TAGS:
         if cuisine_tag in tags:
             delta = weights.get(cuisine_tag, 0)

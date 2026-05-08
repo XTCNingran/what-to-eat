@@ -153,44 +153,38 @@
       ]
     },
     {
-      "id": "q_cuisine",
+      "id": "q_vibe",
       "type": "real",
-      "multi_select": true,
-      "text": "今天想吃什么大类？",
-      "emoji": "utensils",
+      "text": "今天想吃个什么感觉？",
+      "emoji": "smile",
       "choices": [
         {
-          "id": "cuisine_chinese",
-          "text": "中餐",
+          "id": "vibe_treat",
+          "text": "犒劳一下自己",
           "weights": {
-            "cuisine_chinese": 2.0
+            "sitdown_bonus": 1.5
           }
         },
         {
-          "id": "cuisine_japanese",
-          "text": "日料",
+          "id": "vibe_budget",
+          "text": "省钱实惠就好",
           "weights": {
-            "cuisine_japanese": 2.0
+            "budget_friendly": 1.5
           }
         },
         {
-          "id": "cuisine_western",
-          "text": "西式",
+          "id": "vibe_fast",
+          "text": "快点吃完回去干活",
           "weights": {
-            "cuisine_western": 2.0
+            "meal_fast": 1
           }
         },
         {
-          "id": "cuisine_fast",
-          "text": "快餐",
+          "id": "vibe_random",
+          "text": "随缘，帮我选就行",
           "weights": {
-            "fast_service": 2.0
+            "random_bonus": 2.0
           }
-        },
-        {
-          "id": "cuisine_any",
-          "text": "随便都行",
-          "weights": {}
         }
       ]
     },
