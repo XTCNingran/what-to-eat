@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>加入投票 · 今天吃什么</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div style="text-align:center; padding: 40px 0 24px;">
+    <i data-lucide="user-plus" style="width:48px; height:48px; color:var(--orange);"></i>
+    <h1 style="margin-top:12px;">加入投票</h1>
+    <p class="subtitle">告诉大家你是谁</p>
+  </div>
+
+  <div class="card">
+    <label style="font-size:14px; font-weight:600; display:block; margin-bottom:8px;">房间码</label>
+    <input type="text" id="roomId"
+           style="text-transform:uppercase; letter-spacing:4px; font-weight:700; text-align:center;"
+           maxlength="6" placeholder="6位房间码">
+
+    <div style="margin-top:16px;">
+      <label style="font-size:14px; font-weight:600; display:block; margin-bottom:8px;">你的名字</label>
+      <input type="text" id="nameInput" placeholder="比如：小王、Alex…" maxlength="10"
+             onkeydown="if(event.key==='Enter') joinRoom()">
+    </div>
+
+    <p class="error-msg" id="errorMsg" style="display:none;"></p>
+    <button class="btn btn-primary" id="joinBtn" style="margin-top:16px;" onclick="joinRoom()">加入</button>
+  </div>
+</div>
+
+<script type="module">
+import { sb } from './js/sb.js';
+
+const params = new URLSearchParams(window.location.search);
+const roomIdParam = params.get('room_id') || '';
+if (roomIdParam) document.getElementById('roomId').value = roomIdParam.toUpperCase();
+
+window.joinRoom = async function() {
+  const roomId = document.getElementById('roomId').value.trim().toUpperCase();
+  const name = document.getElementById('nameInput').value.trim();
+  const btn = document.getElementById('joinBtn');
+  const err = document.getElementById('errorMsg');
+
+  if (!name) { showError('请输入你的名字'); return; }
+  if (roomId.length < 4) { showError('房间码不正确'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '加入中…';
+  err.style.display = 'none';
+
+  try {
+    const { data: room, error: roomErr } = await sb.from('rooms').select('state').eq('id', roomId).single();
+    if (roomErr || !room) throw new Error('房间不存在');
+    if (room.state === 'closed') throw new Error('投票已结束');
+
+    const { data: participant, error: partErr } = await sb.from('participants').insert({
+      id: crypto.randomUUID(),
+      room_id: roomId,
+      name,
+    }).select().single();
+    if (partErr) throw new Error('加入失败，请重试');
+
+    sessionStorage.setItem('participant_id', participant.id);
+    sessionStorage.setItem('participant_name', name);
+    sessionStorage.setItem('room_id', roomId);
+    window.location.href = `questionnaire.html?room_id=${roomId}`;
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = '加入';
+    showError(e.message);
+  }
+};
+
+function showError(msg) {
+  const err = document.getElementById('errorMsg');
+  err.textContent = msg;
+  err.style.display = 'block';
+}
+
+lucide.createIcons();
+</script>
+</body>
+</html>

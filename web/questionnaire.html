@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>答题中 · 今天吃什么</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    .slide-container { position: relative; overflow: hidden; }
+    .slide { transition: transform 0.35s ease; }
+    .slide.exit-left { transform: translateX(-110%); position: absolute; top: 0; width: 100%; }
+    .slide.enter-right { transform: translateX(110%); }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="loadingView" class="waiting">
+    <div class="waiting-icon"><i data-lucide="loader-circle"></i></div>
+    <p style="margin-top:16px; color:var(--muted);">加载题目中…</p>
+  </div>
+
+  <div id="waitingView" style="display:none;" class="waiting">
+    <div class="waiting-icon"><i data-lucide="clock"></i></div>
+    <h2 style="margin-top:16px;">等待主持人开始答题</h2>
+    <p style="color:var(--muted); margin-top:8px; font-size:14px;">主持人点击「开始答题」后自动跳转</p>
+  </div>
+
+  <div id="questionView" style="display:none;">
+    <p class="progress-label" id="progressLabel">问题 1 / 8</p>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+
+    <div class="slide-container" id="slideContainer">
+      <div class="slide" id="currentSlide">
+        <div class="question-card" id="questionCard">
+          <div class="question-icon" id="questionIcon"></div>
+          <div class="question-text" id="questionText"></div>
+          <div class="choices" id="choiceList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; display:flex; gap:10px;">
+      <button class="btn btn-ghost" id="prevBtn" style="width:auto; padding:14px 20px;" onclick="prevQuestion()">← 上一题</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextOrSubmit()">下一题 →</button>
+    </div>
+  </div>
+
+  <div id="confirmView" style="display:none;" class="waiting">
+    <div class="waiting-icon"><i data-lucide="circle-help"></i></div>
+    <h2 style="margin-top:16px;">确定不改了吗？</h2>
+    <p style="color:var(--muted); margin-top:8px; font-size:14px;">提交后无法修改哦</p>
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:24px; width:100%;">
+      <button class="btn btn-primary" onclick="submitAnswers()">确定</button>
+      <button class="btn btn-ghost" onclick="submitAnswers()">别想了，提交吧</button>
+      <button class="btn btn-ghost" style="border-color:#ccc; color:var(--muted); margin-top:4px; font-size:14px;" onclick="backToQuestion()">再看看</button>
+    </div>
+  </div>
+
+  <div id="submittedView" style="display:none;" class="waiting">
+    <div class="waiting-icon"><i data-lucide="check-circle-2"></i></div>
+    <h2 style="margin-top:16px;">已提交！</h2>
+    <p style="color:var(--muted); margin-top:8px; font-size:14px;">等待结果出炉…</p>
+  </div>
+</div>
+
+<script type="module">
+import { sb } from './js/sb.js';
+
+const params = new URLSearchParams(window.location.search);
+const ROOM_ID = params.get('room_id') || '';
+const participantId = sessionStorage.getItem('participant_id');
+
+let questions = [];
+let drinksQuestions = [];
+let currentIndex = 0;
+let selectedAnswers = {};
+
+async function init() {
+  lucide.createIcons();
+
+  if (!participantId) {
+    window.location.href = `join.html?room_id=${ROOM_ID}`;
+    return;
+  }
+
+  const { data: room } = await sb.from('rooms').select('state').eq('id', ROOM_ID).single();
+  if (!room) { window.location.href = 'index.html'; return; }
+
+  if (room.state === 'closed') {
+    window.location.href = `results.html?room_id=${ROOM_ID}`;
+    return;
+  }
+
+  const bank = await (await fetch('bank.json')).json();
+  questions = bank.real_questions;
+  drinksQuestions = bank.drinks_questions || [];
+
+  if (room.state === 'waiting') {
+    document.getElementById('loadingView').style.display = 'none';
+    document.getElementById('waitingView').style.display = 'block';
+    subscribeToRoomState();
+    return;
+  }
+
+  document.getElementById('loadingView').style.display = 'none';
+  document.getElementById('questionView').style.display = 'block';
+  renderQuestion(0);
+}
+
+function subscribeToRoomState() {
+  sb.channel(`questionnaire-room-${ROOM_ID}`)
+    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'rooms', filter: `id=eq.${ROOM_ID}` },
+      payload => {
+        if (payload.new.state === 'questioning') window.location.reload();
+        if (payload.new.state === 'closed') window.location.href = `results.html?room_id=${ROOM_ID}`;
+      })
+    .subscribe();
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  currentIndex = index;
+
+  const card = document.getElementById('questionCard');
+  card.className = 'question-card' + (q.type === 'fun' ? ' fun-type' : '');
+
+  const iconEl = document.getElementById('questionIcon');
+  iconEl.innerHTML = `<i data-lucide="${q.emoji}"></i>`;
+  lucide.createIcons({ nodes: [iconEl] });
+
+  document.getElementById('questionText').textContent = q.text;
+
+  const choiceList = document.getElementById('choiceList');
+  choiceList.innerHTML = '';
+  q.choices.forEach(c => {
+    const btn = document.createElement('button');
+    const isSelected = q.multi_select
+      ? (selectedAnswers[q.id] || []).includes(c.id)
+      : selectedAnswers[q.id] === c.id;
+    btn.className = 'choice-btn' + (isSelected ? ' selected' : '');
+    btn.textContent = c.text;
+    btn.onclick = () => selectChoice(q.id, c.id, q.multi_select);
+    choiceList.appendChild(btn);
+  });
+
+  const total = questions.length;
+  document.getElementById('progressLabel').textContent = `问题 ${index + 1} / ${total}`;
+  document.getElementById('progressFill').style.width = `${(index / total) * 100}%`;
+
+  document.getElementById('prevBtn').disabled = index === 0;
+  document.getElementById('nextBtn').textContent = index === total - 1 ? '提交' : '下一题 →';
+}
+
+function selectChoice(questionId, choiceId, multiSelect) {
+  if (multiSelect) {
+    const current = selectedAnswers[questionId] || [];
+    selectedAnswers[questionId] = current.includes(choiceId)
+      ? current.filter(id => id !== choiceId)
+      : [...current, choiceId];
+    renderQuestion(currentIndex);
+    return;
+  }
+
+  selectedAnswers[questionId] = choiceId;
+
+  const q = questions.find(q => q.id === questionId);
+  const choice = q && q.choices.find(c => c.id === choiceId);
+  if (choice && choice.weights && choice.weights.drinks_only) {
+    questions = drinksQuestions;
+    currentIndex = 0;
+    selectedAnswers = { [questionId]: choiceId };
+    renderQuestion(0);
+    return;
+  }
+
+  renderQuestion(currentIndex);
+}
+
+window.prevQuestion = function() {
+  if (currentIndex > 0) renderQuestion(currentIndex - 1);
+};
+
+window.nextOrSubmit = function() {
+  const q = questions[currentIndex];
+  const ans = selectedAnswers[q.id];
+  const hasAnswer = q.multi_select ? (ans && ans.length > 0) : !!ans;
+  if (!hasAnswer) {
+    if (q.multi_select) {
+      selectedAnswers[q.id] = [q.choices[0].id];
+    } else {
+      selectChoice(q.id, q.choices[0].id, false);
+    }
+    return;
+  }
+  if (currentIndex < questions.length - 1) {
+    renderQuestion(currentIndex + 1);
+  } else {
+    document.getElementById('questionView').style.display = 'none';
+    document.getElementById('confirmView').style.display = 'block';
+    lucide.createIcons();
+  }
+};
+
+window.backToQuestion = function() {
+  document.getElementById('confirmView').style.display = 'none';
+  document.getElementById('questionView').style.display = 'block';
+};
+
+window.submitAnswers = async function() {
+  const rows = [];
+  questions.forEach(q => {
+    const ans = selectedAnswers[q.id];
+    if (q.multi_select) {
+      const selected = (ans && ans.length > 0) ? ans : [q.choices[0].id];
+      selected.forEach(cid => rows.push({ participant_id: participantId, room_id: ROOM_ID, question_id: q.id, choice_id: cid }));
+    } else {
+      rows.push({ participant_id: participantId, room_id: ROOM_ID, question_id: q.id, choice_id: ans || q.choices[0].id });
+    }
+  });
+
+  // Include the drinks_only answer if it was from a question not in current set
+  const drinksOnlyEntry = Object.entries(selectedAnswers).find(
+    ([qid]) => !questions.find(q => q.id === qid)
+  );
+  if (drinksOnlyEntry) {
+    rows.push({ participant_id: participantId, room_id: ROOM_ID, question_id: drinksOnlyEntry[0], choice_id: drinksOnlyEntry[1] });
+  }
+
+  const { error } = await sb.from('answers').insert(rows);
+  if (error) { alert('提交失败，请重试'); return; }
+
+  document.getElementById('questionView').style.display = 'none';
+  document.getElementById('confirmView').style.display = 'none';
+  document.getElementById('submittedView').style.display = 'block';
+
+  // Check if everyone has submitted — auto-close room if last person
+  const { data: participants } = await sb.from('participants').select('id').eq('room_id', ROOM_ID);
+  const { data: allAnswers } = await sb.from('answers').select('participant_id').eq('room_id', ROOM_ID);
+  const uniqueSubmitted = new Set((allAnswers || []).map(a => a.participant_id));
+  if (uniqueSubmitted.size >= (participants || []).length) {
+    await sb.from('rooms').update({ state: 'closed', has_results: true }).eq('id', ROOM_ID);
+    window.location.href = `results.html?room_id=${ROOM_ID}`;
+    return;
+  }
+
+  // Wait for host to close the room
+  sb.channel(`submitted-${ROOM_ID}`)
+    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'rooms', filter: `id=eq.${ROOM_ID}` },
+      payload => {
+        if (payload.new.state === 'closed') window.location.href = `results.html?room_id=${ROOM_ID}`;
+      })
+    .subscribe();
+};
+
+init();
+</script>
+</body>
+</html>

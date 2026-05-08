@@ -855,24 +855,6 @@
     "deleted": false
   },
   {
-    "name": "复兴面王·咖啡铺(长泰广场店)",
-    "category_raw": "餐饮服务;中餐厅;中餐厅",
-    "address": "祖冲之路1239号长泰广场东区B1-402",
-    "rating": 4.4,
-    "avg_spend": 40.0,
-    "lng": 121.602525,
-    "lat": 31.205475,
-    "district": "浦东新区",
-    "poi_id": "B0L6CDJIH1",
-    "tags": [
-      "cuisine_chinese",
-      "fast_service"
-    ],
-    "phone": "",
-    "vendor": 0,
-    "deleted": false
-  },
-  {
     "name": "太二酸菜鱼(上海长泰广场店)",
     "category_raw": "餐饮服务;中餐厅;中餐厅",
     "address": "上海浦东新区张江镇金科路2889号长泰广场7座2楼04号",

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今天吃什么？</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div style="text-align:center; padding: 40px 0 20px;">
+    <i data-lucide="utensils" style="width:48px; height:48px; color:var(--orange);"></i>
+    <h1 style="margin-top:12px;">今天吃什么？</h1>
+    <p class="subtitle">让大家一起来决定</p>
+  </div>
+
+  <div class="card">
+    <h2>发起今日投票</h2>
+    <p class="subtitle">创建一个投票间，分享给同事扫码参与</p>
+
+    <div id="step1">
+      <button class="btn btn-primary" onclick="showBlacklistStep()">开始</button>
+      <div style="margin-top: 10px;">
+        <button class="btn btn-ghost" id="soloBtn" onclick="startSolo()">一个人也能吃饭</button>
+      </div>
+    </div>
+
+    <div id="step2" style="display:none;">
+      <div style="margin-bottom:12px;">
+        <label style="font-size:13px; color:var(--muted);">你的名字</label>
+        <input type="text" id="hostName" placeholder="输入你的名字" maxlength="10" style="margin-top:4px;">
+      </div>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:8px;">排除今天不想去的餐厅（可跳过）</p>
+      <input type="text" id="blSearch" placeholder="搜索餐厅…" oninput="filterBl(this.value)" style="margin-bottom:8px;">
+      <div id="blOptions" style="max-height:160px; overflow-y:auto; border:1px solid #eee; border-radius:8px; padding:4px;"></div>
+      <div id="blSelected" style="margin-top:8px; display:flex; flex-wrap:wrap; gap:4px;"></div>
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button class="btn btn-ghost" style="width:auto; padding:12px 16px;" onclick="hideBlacklistStep()">← 返回</button>
+        <button class="btn btn-primary" id="confirmCreateBtn" onclick="createRoom()">创建房间</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="historyCard" class="card" style="display:none;">
+    <h2>最近去过</h2>
+    <div id="historyList"></div>
+  </div>
+
+  <div class="card" style="background:#FFF3EE;">
+    <p style="font-size:13px; color:#888; text-align:center;">已有投票间？输入房间码直接加入</p>
+    <div style="display:flex; gap:8px; margin-top:12px;">
+      <input type="text" id="codeInput" placeholder="输入6位房间码" maxlength="6"
+             style="text-transform:uppercase; letter-spacing:4px; font-weight:700;"
+             onkeydown="if(event.key==='Enter') joinByCode()">
+      <button class="btn btn-ghost" style="width:auto; padding:14px 20px;" onclick="joinByCode()">加入</button>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:16px; margin-bottom:24px;">
+    <a href="manage.html" style="font-size:13px; color:var(--muted); text-decoration:none;">管理餐厅</a>
+  </div>
+</div>
+
+<script type="module">
+import { sb } from './js/sb.js';
+
+let blList = [];
+let allRests = [];
+
+window.showBlacklistStep = async function() {
+  document.getElementById('step1').style.display = 'none';
+  document.getElementById('step2').style.display = 'block';
+  if (allRests.length === 0) {
+    const { data } = await sb.from('restaurants').select('name').eq('deleted', false).order('name');
+    allRests = (data || []).map(r => r.name);
+  }
+  renderBlOptions(allRests);
+};
+
+window.hideBlacklistStep = function() {
+  document.getElementById('step2').style.display = 'none';
+  document.getElementById('step1').style.display = 'block';
+};
+
+function renderBlOptions(names) {
+  const c = document.getElementById('blOptions');
+  c.innerHTML = '';
+  names.slice(0, 60).forEach(name => {
+    const div = document.createElement('div');
+    div.style.cssText = 'padding:5px 8px; cursor:pointer; border-radius:4px; font-size:13px;';
+    div.textContent = name;
+    if (blList.includes(name)) div.style.background = '#FFE0E0';
+    div.onclick = () => { toggleBl(name); renderBlOptions(names); };
+    c.appendChild(div);
+  });
+}
+
+window.filterBl = function(q) { renderBlOptions(allRests.filter(n => n.includes(q))); };
+
+function toggleBl(name) {
+  blList = blList.includes(name) ? blList.filter(n => n !== name) : [...blList, name];
+  const c = document.getElementById('blSelected');
+  c.innerHTML = '';
+  blList.forEach(n => {
+    const tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.style.cssText = 'background:#FFE0E0; cursor:pointer;';
+    tag.textContent = n + ' ×';
+    tag.onclick = () => { toggleBl(n); window.filterBl(document.getElementById('blSearch').value); };
+    c.appendChild(tag);
+  });
+}
+
+function genRoomId() {
+  return Math.random().toString(36).slice(2, 8).toUpperCase();
+}
+
+window.createRoom = async function() {
+  const btn = document.getElementById('confirmCreateBtn');
+  const hostName = document.getElementById('hostName').value.trim() || '主持人';
+  btn.disabled = true;
+  btn.textContent = '创建中…';
+  try {
+    const roomId = genRoomId();
+    const hostToken = crypto.randomUUID();
+    const { error: roomErr } = await sb.from('rooms').insert({
+      id: roomId,
+      host_token: hostToken,
+      state: 'waiting',
+      blacklist: blList,
+      has_results: false,
+    });
+    if (roomErr) throw roomErr;
+
+    const { data: participant, error: partErr } = await sb.from('participants').insert({
+      id: crypto.randomUUID(),
+      room_id: roomId,
+      name: hostName,
+    }).select().single();
+    if (partErr) throw partErr;
+
+    sessionStorage.setItem('participant_id', participant.id);
+    sessionStorage.setItem('participant_name', hostName);
+    window.location.href = `room.html?room_id=${roomId}&token=${hostToken}`;
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = '创建房间';
+    alert('创建失败，请重试');
+  }
+};
+
+window.startSolo = async function() {
+  const btn = document.getElementById('soloBtn');
+  btn.disabled = true;
+  btn.textContent = '准备中…';
+  try {
+    const roomId = genRoomId();
+    const hostToken = crypto.randomUUID();
+    await sb.from('rooms').insert({
+      id: roomId,
+      host_token: hostToken,
+      state: 'questioning',
+      blacklist: [],
+      has_results: false,
+    });
+    const { data: participant } = await sb.from('participants').insert({
+      id: crypto.randomUUID(),
+      room_id: roomId,
+      name: '我',
+    }).select().single();
+    sessionStorage.setItem('participant_id', participant.id);
+    sessionStorage.setItem('participant_name', '我');
+    window.location.href = `questionnaire.html?room_id=${roomId}`;
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = '一个人也能吃饭';
+    alert('启动失败，请重试');
+  }
+};
+
+window.joinByCode = function() {
+  const code = document.getElementById('codeInput').value.trim().toUpperCase();
+  if (code.length < 4) return;
+  window.location.href = `join.html?room_id=${code}`;
+};
+
+async function loadHistory() {
+  const { data } = await sb.from('history')
+    .select('restaurant_name, date')
+    .order('created_at', { ascending: false })
+    .limit(5);
+  if (data && data.length > 0) {
+    document.getElementById('historyCard').style.display = 'block';
+    const list = document.getElementById('historyList');
+    data.forEach(r => {
+      const item = document.createElement('div');
+      item.className = 'history-item';
+      item.innerHTML = `<strong>${r.date}</strong> · ${r.restaurant_name}`;
+      list.appendChild(item);
+    });
+  }
+}
+
+loadHistory();
+lucide.createIcons();
+</script>
+</body>
+</html>

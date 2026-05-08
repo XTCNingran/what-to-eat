@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>投票间 · 今天吃什么</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <a href="index.html" style="color:var(--muted); text-decoration:none; font-size:14px;">← 返回</a>
+    <span style="font-size:13px; color:var(--muted)">主持人视图</span>
+  </div>
+
+  <div class="card">
+    <h2 style="display:flex; align-items:center; gap:8px;">
+      <i data-lucide="hash" style="width:20px; height:20px; color:var(--orange);"></i>房间码
+    </h2>
+    <div class="room-code" id="roomCode"></div>
+    <div class="qr-box">
+      <img id="qrImg" src="" alt="扫码加入" style="width:200px; height:200px; border-radius:12px;">
+      <p style="font-size:13px; color:var(--muted); margin-top:8px;">同事扫码或输入房间码加入</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 style="display:flex; align-items:center; gap:8px;">
+      <i data-lucide="users" style="width:20px; height:20px; color:var(--orange);"></i>已加入 <span id="joinCount">0</span> 人
+    </h2>
+    <div class="participants" id="participantList"></div>
+  </div>
+
+  <div id="controlPanel">
+    <button class="btn btn-primary" id="startBtn" disabled onclick="startQuestioning()">
+      等待大家加入…
+    </button>
+  </div>
+
+  <div id="progressPanel" style="display:none;" class="card">
+    <h2 style="display:flex; align-items:center; gap:8px;">
+      <i data-lucide="pencil" style="width:20px; height:20px; color:var(--orange);"></i>答题进度
+    </h2>
+    <div class="progress-label"><span id="submittedCount">0</span> / <span id="totalCount">0</span> 人已提交</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <button class="btn btn-secondary" id="closeBtn" onclick="closeRoom()">看结果</button>
+  </div>
+</div>
+
+<script type="module">
+import { sb } from './js/sb.js';
+
+const params = new URLSearchParams(window.location.search);
+const ROOM_ID = params.get('room_id') || '';
+const HOST_TOKEN = params.get('token') || '';
+
+document.getElementById('roomCode').textContent = ROOM_ID;
+const joinUrl = new URL(`join.html?room_id=${ROOM_ID}`, window.location.href).href;
+document.getElementById('qrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(joinUrl)}`;
+
+let totalCount = 0;
+let submittedCount = 0;
+
+async function loadRoom() {
+  const { data: room } = await sb.from('rooms').select('state, has_results').eq('id', ROOM_ID).single();
+  if (!room) return;
+  if (room.has_results || room.state === 'closed') {
+    window.location.href = `results.html?room_id=${ROOM_ID}&token=${HOST_TOKEN}`;
+    return;
+  }
+  if (room.state === 'questioning') showQuestioningPanel();
+}
+
+async function loadParticipants() {
+  const { data } = await sb.from('participants').select('id, name').eq('room_id', ROOM_ID);
+  const list = data || [];
+  totalCount = list.length;
+  document.getElementById('joinCount').textContent = list.length;
+  document.getElementById('totalCount').textContent = list.length;
+
+  const pl = document.getElementById('participantList');
+  pl.innerHTML = '';
+  list.forEach(p => {
+    const tag = document.createElement('span');
+    tag.className = 'participant-tag';
+    tag.textContent = p.name;
+    pl.appendChild(tag);
+  });
+
+  const btn = document.getElementById('startBtn');
+  if (list.length >= 1) {
+    btn.disabled = false;
+    btn.textContent = `开始答题 (${list.length}人)`;
+  }
+}
+
+async function pollProgress() {
+  const { data: answers } = await sb.from('answers').select('participant_id').eq('room_id', ROOM_ID);
+  const unique = new Set((answers || []).map(a => a.participant_id));
+  submittedCount = unique.size;
+  document.getElementById('submittedCount').textContent = submittedCount;
+  const pct = totalCount > 0 ? Math.round(submittedCount / totalCount * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  if (submittedCount >= totalCount && totalCount > 0) {
+    document.getElementById('closeBtn').style.background = 'var(--green)';
+  }
+}
+
+function showQuestioningPanel() {
+  document.getElementById('controlPanel').style.display = 'none';
+  document.getElementById('progressPanel').style.display = 'block';
+  pollProgress();
+}
+
+sb.channel(`room-${ROOM_ID}`)
+  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'participants', filter: `room_id=eq.${ROOM_ID}` },
+    () => loadParticipants())
+  .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'rooms', filter: `id=eq.${ROOM_ID}` },
+    payload => {
+      if (payload.new.has_results || payload.new.state === 'closed') {
+        window.location.href = `results.html?room_id=${ROOM_ID}&token=${HOST_TOKEN}`;
+      }
+    })
+  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'answers', filter: `room_id=eq.${ROOM_ID}` },
+    () => pollProgress())
+  .subscribe();
+
+window.startQuestioning = async function() {
+  const btn = document.getElementById('startBtn');
+  btn.disabled = true;
+  btn.textContent = '跳转中…';
+  await sb.from('rooms').update({ state: 'questioning' }).eq('id', ROOM_ID);
+  window.location.href = `questionnaire.html?room_id=${ROOM_ID}`;
+};
+
+window.closeRoom = async function() {
+  await sb.from('rooms').update({ state: 'closed', has_results: true }).eq('id', ROOM_ID);
+  window.location.href = `results.html?room_id=${ROOM_ID}&token=${HOST_TOKEN}`;
+};
+
+loadRoom();
+loadParticipants();
+setInterval(() => {
+  if (document.getElementById('progressPanel').style.display !== 'none') pollProgress();
+}, 5000);
+
+lucide.createIcons();
+</script>
+</body>
+</html>

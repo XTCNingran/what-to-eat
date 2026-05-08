@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>结果出炉 · 今天吃什么</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div style="text-align:center; padding: 24px 0 16px;">
+    <i data-lucide="trophy" style="width:40px; height:40px; color:var(--orange);"></i>
+    <h1 style="margin-top:8px;">结果出炉</h1>
+  </div>
+
+  <div id="loadingView" class="waiting">
+    <div class="waiting-icon"><i data-lucide="loader-circle"></i></div>
+    <p style="margin-top:16px; color:var(--muted);">计算中…</p>
+  </div>
+
+  <div id="resultsView" style="display:none;">
+    <div id="summaryPanel" style="display:none;" class="card">
+      <h2>大家的选择</h2>
+      <div id="summaryList"></div>
+    </div>
+
+    <div id="historyPanel" style="display:none;" class="card">
+      <h2>最近避雷</h2>
+      <div id="historyPills"></div>
+    </div>
+
+    <div id="rankList"></div>
+
+    <div id="hostPanel" style="display:none;">
+      <div class="divider"></div>
+      <p style="font-size:13px; color:var(--muted); text-align:center; margin-bottom:12px;">选好了吗？记录今天的选择</p>
+      <button class="btn btn-primary" id="confirmBtn" onclick="confirmChoice()">我们去这里</button>
+      <button class="btn btn-ghost" style="margin-top:10px;" onclick="window.location.href='index.html'">再来一次</button>
+    </div>
+    <div id="guestPanel" style="display:none;">
+      <div class="divider"></div>
+      <button class="btn btn-ghost" onclick="window.location.href='index.html'">回到首页</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { sb } from './js/sb.js';
+import { aggregateWeights, rankRestaurants } from './js/scoring.js';
+
+const params = new URLSearchParams(window.location.search);
+const ROOM_ID = params.get('room_id') || '';
+const HOST_TOKEN = params.get('token') || '';
+let topRestaurant = '';
+
+async function loadResults() {
+  try {
+    const [
+      { data: room },
+      { data: answerRows },
+      { data: participants },
+      { data: restaurants },
+      { data: historyRows },
+    ] = await Promise.all([
+      sb.from('rooms').select('state, blacklist, has_results').eq('id', ROOM_ID).single(),
+      sb.from('answers').select('*').eq('room_id', ROOM_ID),
+      sb.from('participants').select('id, name').eq('room_id', ROOM_ID),
+      sb.from('restaurants').select('*'),
+      sb.from('history').select('restaurant_name, date').order('created_at', { ascending: false }).limit(7),
+    ]);
+
+    if (!room || !room.has_results) {
+      setTimeout(loadResults, 2000);
+      return;
+    }
+
+    const bank = await (await fetch('bank.json')).json();
+
+    // Build choice weight lookup
+    const allQ = [...bank.real_questions, ...bank.drinks_questions, ...bank.fun_questions];
+    const choiceWeightMap = {};
+    const choiceTextMap = {};
+    allQ.forEach(q => q.choices.forEach(c => {
+      choiceWeightMap[c.id] = c.weights || {};
+      choiceTextMap[c.id] = c.text;
+    }));
+
+    // Group answers by participant
+    const byParticipant = {};
+    (answerRows || []).forEach(a => {
+      if (!byParticipant[a.participant_id]) byParticipant[a.participant_id] = [];
+      byParticipant[a.participant_id].push({ weights: choiceWeightMap[a.choice_id] || {} });
+    });
+
+    // Aggregate weights
+    const allParticipantAnswers = Object.values(byParticipant);
+    const weights = aggregateWeights(allParticipantAnswers);
+
+    // Cuisine fatigue from recent history
+    const threeDaysAgo = new Date();
+    threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+    const recentNames = new Set((historyRows || []).map(h => h.restaurant_name));
+    const yesterdayDate = new Date();
+    yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+    const yesterdayStr = yesterdayDate.toISOString().split('T')[0];
+    const { data: yesterdayRows } = await sb.from('history')
+      .select('restaurant_name')
+      .eq('date', yesterdayStr);
+    const yesterdayNames = new Set((yesterdayRows || []).map(h => h.restaurant_name));
+
+    const cuisineCounts = {};
+    const recentRestaurants = (restaurants || []).filter(r => recentNames.has(r.name));
+    recentRestaurants.forEach(r => {
+      (r.tags || []).filter(t => t.startsWith('cuisine_')).forEach(t => {
+        cuisineCounts[t] = (cuisineCounts[t] || 0) + 1;
+      });
+    });
+    weights._cuisineCounts = cuisineCounts;
+
+    // Run scoring
+    const blacklist = room.blacklist || [];
+    const ranked = rankRestaurants(restaurants || [], weights, recentNames, yesterdayNames, 20, blacklist);
+
+    // Build results array with tags included
+    const results = ranked.map(r => ({
+      name: r.restaurant.name,
+      tags: r.restaurant.tags || [],
+      rating: r.restaurant.rating,
+      avg_spend: r.restaurant.avg_spend,
+      address: r.restaurant.address,
+      reason: r.reason,
+      score: r.score,
+    }));
+
+    document.getElementById('loadingView').style.display = 'none';
+    document.getElementById('resultsView').style.display = 'block';
+
+    renderSummaries(participants || [], answerRows || [], choiceTextMap);
+    renderHistory(historyRows || []);
+    renderRanking(results);
+
+    if (HOST_TOKEN) {
+      document.getElementById('hostPanel').style.display = 'block';
+    } else {
+      document.getElementById('guestPanel').style.display = 'block';
+    }
+  } catch(e) {
+    console.error(e);
+    setTimeout(loadResults, 2000);
+  }
+}
+
+function renderHistory(records) {
+  if (!records.length) return;
+  const panel = document.getElementById('historyPanel');
+  const pills = document.getElementById('historyPills');
+  panel.style.display = 'block';
+  records.forEach(r => {
+    const pill = document.createElement('span');
+    pill.className = 'history-pill';
+    pill.textContent = `${r.restaurant_name} (${r.date})`;
+    pills.appendChild(pill);
+  });
+}
+
+function renderRanking(results) {
+  const list = document.getElementById('rankList');
+  list.innerHTML = '';
+
+  const cuisineOrder = [
+    { key: 'cuisine_chinese', label: '中餐' },
+    { key: 'cuisine_japanese', label: '日料' },
+    { key: 'cuisine_korean', label: '韩餐' },
+    { key: 'cuisine_western', label: '西式' },
+    { key: null, label: '其他' },
+  ];
+
+  const grouped = {};
+  cuisineOrder.forEach(c => grouped[c.label] = []);
+
+  results.forEach(r => {
+    let placed = false;
+    for (const c of cuisineOrder.slice(0, -1)) {
+      if (r.tags.includes(c.key)) {
+        grouped[c.label].push(r);
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) grouped['其他'].push(r);
+  });
+
+  if (results.length > 0) topRestaurant = results[0].name;
+
+  cuisineOrder.forEach(c => {
+    const group = grouped[c.label].slice(0, 2);
+    if (!group.length) return;
+
+    const header = document.createElement('div');
+    header.style.cssText = 'font-size:12px; font-weight:700; color:var(--muted); margin:16px 0 8px; letter-spacing:1px;';
+    header.textContent = c.label;
+    list.appendChild(header);
+
+    group.forEach((r, i) => {
+      const item = document.createElement('div');
+      item.className = 'result-item' + (r.name === topRestaurant ? ' top1' : '');
+      item.style.cursor = 'pointer';
+      item.dataset.name = r.name;
+
+      const rating = r.rating ? r.rating.toFixed(1) + ' 分' : '';
+      const spend = r.avg_spend ? `¥${r.avg_spend}/人` : '';
+
+      item.innerHTML = `
+        <div class="result-rank">${i + 1}</div>
+        <div class="result-info">
+          <div class="result-name">${r.name}</div>
+          <div class="result-meta">${[rating, spend, r.address ? r.address.substring(0, 20) : ''].filter(Boolean).join(' · ')}</div>
+          <div class="result-reason">${r.reason}</div>
+        </div>
+      `;
+      item.onclick = () => selectRestaurant(r.name, item);
+      list.appendChild(item);
+    });
+  });
+
+  const topItem = list.querySelector(`[data-name="${CSS.escape(topRestaurant)}"]`);
+  if (topItem) selectRestaurant(topRestaurant, topItem);
+}
+
+function selectRestaurant(name, el) {
+  document.querySelectorAll('.result-item').forEach(i => i.style.border = '');
+  if (el) el.style.border = '2px solid var(--green)';
+  const btn = document.getElementById('confirmBtn');
+  if (btn) {
+    btn.dataset.name = name;
+    btn.textContent = `我们去：${name}`;
+  }
+}
+
+function renderSummaries(participants, answerRows, choiceTextMap) {
+  if (!participants.length) return;
+
+  const byParticipant = {};
+  answerRows.forEach(a => {
+    if (!byParticipant[a.participant_id]) byParticipant[a.participant_id] = [];
+    byParticipant[a.participant_id].push(a);
+  });
+
+  const panel = document.getElementById('summaryPanel');
+  const list = document.getElementById('summaryList');
+  panel.style.display = 'block';
+
+  participants.forEach(p => {
+    const answers = byParticipant[p.id] || [];
+    const labels = answers.map(a => choiceTextMap[a.choice_id]).filter(Boolean).slice(0, 3);
+    const row = document.createElement('div');
+    row.style.cssText = 'padding:8px 0; border-bottom:1px solid #F0F0F0; font-size:14px;';
+    row.innerHTML = `<span style="font-weight:600; margin-right:10px;">${p.name}</span><span style="color:var(--muted);">${labels.join(' · ') || '—'}</span>`;
+    list.appendChild(row);
+  });
+  if (list.lastChild) list.lastChild.style.borderBottom = 'none';
+}
+
+window.confirmChoice = async function() {
+  const btn = document.getElementById('confirmBtn');
+  const name = btn.dataset.name;
+  if (!name) return;
+  btn.disabled = true;
+  btn.textContent = '记录中…';
+  await sb.from('history').insert({ restaurant_name: name, room_id: ROOM_ID });
+  btn.textContent = '已记录，祝用餐愉快！';
+};
+
+lucide.createIcons();
+loadResults();
+</script>
+</body>
+</html>

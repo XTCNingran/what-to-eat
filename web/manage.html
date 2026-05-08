@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>餐厅管理 · 今天吃什么</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    .mgmt-row { display:flex; justify-content:space-between; align-items:center;
+                padding:10px 12px; border-bottom:1px solid #F0F0F0; font-size:14px; }
+    .mgmt-row:last-child { border-bottom:none; }
+    .mgmt-row.deleted { opacity:0.4; }
+    .mgmt-meta { font-size:12px; color:var(--muted); }
+    .edit-form { background:#F9F9F9; border-radius:10px; padding:16px; margin-top:8px; }
+    .edit-form label { display:block; font-size:12px; color:var(--muted); margin-top:10px; margin-bottom:4px; }
+    .filter-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+    select { width:auto; padding:10px; border-radius:8px; border:2px solid #E8E8E8; background:#FAFAFA; font-size:14px; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <a href="index.html" style="color:var(--muted); text-decoration:none; font-size:14px;">← 返回首页</a>
+    <span style="font-size:13px; color:var(--muted)">餐厅管理</span>
+  </div>
+
+  <div class="card">
+    <h2 style="display:flex; align-items:center; gap:8px;">
+      <i data-lucide="store" style="width:20px; height:20px; color:var(--orange);"></i>餐厅列表
+      <span id="countBadge" style="font-size:14px; color:var(--muted); font-weight:400;"></span>
+    </h2>
+    <div class="filter-bar">
+      <input type="text" id="searchInput" placeholder="搜索餐厅名…" oninput="applyFilters()"
+             style="flex:1; min-width:120px;">
+      <select id="vendorFilter" onchange="applyFilters()">
+        <option value="">全部</option>
+        <option value="0">普通餐厅</option>
+        <option value="1">合作供应商</option>
+      </select>
+      <label style="display:flex; align-items:center; gap:4px; font-size:13px; cursor:pointer;">
+        <input type="checkbox" id="showDeleted" onchange="applyFilters()"> 显示已删除
+      </label>
+    </div>
+    <div id="restaurantList"></div>
+  </div>
+
+  <div class="card">
+    <h2 style="display:flex; align-items:center; gap:8px;">
+      <i data-lucide="plus-circle" style="width:20px; height:20px; color:var(--orange);"></i>新增餐厅
+    </h2>
+    <div class="edit-form">
+      <label>餐厅名称 *</label>
+      <input type="text" id="newName" placeholder="必填">
+      <label>地址</label>
+      <input type="text" id="newAddress" placeholder="">
+      <label>标签（逗号分隔）</label>
+      <input type="text" id="newTags" placeholder="如：cuisine_chinese,fast_service">
+      <label>人均消费（元）</label>
+      <input type="number" id="newSpend" placeholder="">
+      <label>评分</label>
+      <input type="number" id="newRating" step="0.1" min="0" max="5" placeholder="0-5">
+      <label>类型</label>
+      <select id="newVendor" style="width:100%;">
+        <option value="0">普通餐厅</option>
+        <option value="1">合作供应商</option>
+      </select>
+      <button class="btn btn-primary" style="margin-top:16px;" onclick="addRestaurant()">添加</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { sb } from './js/sb.js';
+
+let allRestaurants = [];
+
+async function loadRestaurants() {
+  const showDeleted = document.getElementById('showDeleted').checked;
+  let query = sb.from('restaurants').select('*').order('name');
+  if (!showDeleted) query = query.eq('deleted', false);
+  const { data } = await query;
+  allRestaurants = data || [];
+  applyFilters();
+}
+
+window.applyFilters = function() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const vendor = document.getElementById('vendorFilter').value;
+  const showDeleted = document.getElementById('showDeleted').checked;
+
+  const filtered = allRestaurants.filter(r => {
+    if (!showDeleted && r.deleted) return false;
+    if (q && !r.name.toLowerCase().includes(q)) return false;
+    if (vendor !== '' && String(r.vendor) !== vendor) return false;
+    return true;
+  });
+
+  document.getElementById('countBadge').textContent = `(${filtered.length})`;
+  renderList(filtered);
+};
+
+function renderList(restaurants) {
+  const list = document.getElementById('restaurantList');
+  list.innerHTML = '';
+  if (!restaurants.length) {
+    list.innerHTML = '<p style="text-align:center; color:var(--muted); padding:20px;">没有找到餐厅</p>';
+    return;
+  }
+  restaurants.forEach(r => {
+    const safeId = r.id;
+    const row = document.createElement('div');
+    row.className = 'mgmt-row' + (r.deleted ? ' deleted' : '');
+    row.innerHTML = `
+      <div>
+        <div><strong>${r.name}</strong>
+          ${r.vendor ? '<span class="tag" style="background:#E8F4FD;">供应商</span>' : ''}
+          ${r.deleted ? '<span class="tag" style="background:#FFE0E0;">已删除</span>' : ''}
+        </div>
+        <div class="mgmt-meta">${r.address || ''} ${r.avg_spend ? '· ¥' + r.avg_spend : ''} ${r.rating ? '· ' + r.rating + ' 分' : ''}</div>
+        <div>${(r.tags || []).slice(0, 4).map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+      <button class="btn btn-ghost" style="width:auto; padding:8px 14px; font-size:13px;"
+              onclick="openEdit(${safeId})">编辑</button>
+    `;
+    list.appendChild(row);
+
+    const form = document.createElement('div');
+    form.id = `edit-${safeId}`;
+    form.style.display = 'none';
+    form.className = 'edit-form';
+    form.innerHTML = `
+      <label>标签（逗号分隔）</label>
+      <input type="text" id="et-${safeId}" value="${(r.tags || []).join(',')}">
+      <label>地址</label>
+      <input type="text" id="ea-${safeId}" value="${r.address || ''}">
+      <label>人均消费（元）</label>
+      <input type="number" id="es-${safeId}" value="${r.avg_spend || ''}">
+      <label>评分</label>
+      <input type="number" id="er-${safeId}" step="0.1" min="0" max="5" value="${r.rating || ''}">
+      <label>类型</label>
+      <select id="ev-${safeId}" style="width:100%;">
+        <option value="0" ${r.vendor === 0 ? 'selected' : ''}>普通餐厅</option>
+        <option value="1" ${r.vendor === 1 ? 'selected' : ''}>合作供应商</option>
+      </select>
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button class="btn btn-primary" style="font-size:13px;" onclick="saveEdit(${safeId})">保存</button>
+        ${!r.deleted
+          ? `<button class="btn btn-ghost" style="font-size:13px; color:#CC3333;" onclick="deleteRestaurant(${safeId})">删除</button>`
+          : `<button class="btn btn-ghost" style="font-size:13px;" onclick="restoreRestaurant(${safeId})">恢复</button>`
+        }
+        <button class="btn btn-ghost" style="font-size:13px; width:auto; padding:10px 14px;" onclick="closeEdit(${safeId})">取消</button>
+      </div>
+    `;
+    list.appendChild(form);
+  });
+}
+
+window.openEdit = function(id) {
+  document.querySelectorAll('.edit-form').forEach(f => f.style.display = 'none');
+  const form = document.getElementById(`edit-${id}`);
+  if (form) form.style.display = 'block';
+};
+
+window.closeEdit = function(id) {
+  const form = document.getElementById(`edit-${id}`);
+  if (form) form.style.display = 'none';
+};
+
+window.saveEdit = async function(id) {
+  const tags = document.getElementById(`et-${id}`).value.split(',').map(t => t.trim()).filter(Boolean);
+  const address = document.getElementById(`ea-${id}`).value;
+  const avg_spend = parseFloat(document.getElementById(`es-${id}`).value) || null;
+  const rating = parseFloat(document.getElementById(`er-${id}`).value) || null;
+  const vendor = parseInt(document.getElementById(`ev-${id}`).value);
+
+  const { error } = await sb.from('restaurants').update({ tags, address, avg_spend, rating, vendor }).eq('id', id);
+  if (error) { alert('保存失败'); return; }
+  await loadRestaurants();
+};
+
+window.deleteRestaurant = async function(id) {
+  if (!confirm('确定删除？（可在"显示已删除"中恢复）')) return;
+  await sb.from('restaurants').update({ deleted: true }).eq('id', id);
+  await loadRestaurants();
+};
+
+window.restoreRestaurant = async function(id) {
+  await sb.from('restaurants').update({ deleted: false }).eq('id', id);
+  await loadRestaurants();
+};
+
+window.addRestaurant = async function() {
+  const name = document.getElementById('newName').value.trim();
+  if (!name) { alert('餐厅名称不能为空'); return; }
+  const tags = document.getElementById('newTags').value.split(',').map(t => t.trim()).filter(Boolean);
+  const { error } = await sb.from('restaurants').insert({
+    name,
+    address: document.getElementById('newAddress').value,
+    rating: parseFloat(document.getElementById('newRating').value) || null,
+    avg_spend: parseFloat(document.getElementById('newSpend').value) || null,
+    tags,
+    vendor: parseInt(document.getElementById('newVendor').value),
+    deleted: false,
+    category_raw: '',
+    district: '',
+    poi_id: '',
+    phone: '',
+    lng: null,
+    lat: null,
+  });
+  if (error) { alert(error.message || '添加失败'); return; }
+  ['newName', 'newAddress', 'newTags', 'newSpend', 'newRating'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  await loadRestaurants();
+};
+
+loadRestaurants();
+lucide.createIcons();
+</script>
+</body>
+</html>
