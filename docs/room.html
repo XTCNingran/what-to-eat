@@ -142,6 +142,12 @@ window.closeRoom = async function() {
 loadRoom();
 loadParticipants();
 setInterval(loadParticipants, 3000);
+setInterval(async () => {
+  const { data: room } = await sb.from('rooms').select('state, has_results').eq('id', ROOM_ID).single();
+  if (room && (room.has_results || room.state === 'closed')) {
+    window.location.href = `results.html?room_id=${ROOM_ID}&token=${HOST_TOKEN}`;
+  }
+}, 3000);
 setInterval(() => {
   if (document.getElementById('progressPanel').style.display !== 'none') pollProgress();
 }, 5000);
