@@ -261,6 +261,15 @@ window.submitAnswers = async function() {
         if (payload.new.state === 'closed') window.location.href = `results.html?room_id=${ROOM_ID}`;
       })
     .subscribe();
+
+  // Polling fallback every 3s
+  const waitPoll = setInterval(async () => {
+    const { data } = await sb.from('rooms').select('state').eq('id', ROOM_ID).single();
+    if (data && data.state === 'closed') {
+      clearInterval(waitPoll);
+      window.location.href = `results.html?room_id=${ROOM_ID}`;
+    }
+  }, 3000);
 };
 
 init();
