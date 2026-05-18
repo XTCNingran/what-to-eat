@@ -147,6 +147,7 @@ window.createRoom = async function() {
     localStorage.setItem('user_name', hostName);
 
     if (soloMode) {
+      sessionStorage.setItem('host_token', hostToken);
       window.location.href = `questionnaire.html?room_id=${roomId}`;
     } else {
       window.location.href = `room.html?room_id=${roomId}&token=${hostToken}`;

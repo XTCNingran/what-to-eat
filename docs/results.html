@@ -66,7 +66,8 @@ function roomSeed(id) {
 
 const params = new URLSearchParams(window.location.search);
 const ROOM_ID = params.get('room_id') || '';
-const HOST_TOKEN = params.get('token') || '';
+const HOST_TOKEN = params.get('token') || sessionStorage.getItem('host_token') || '';
+sessionStorage.removeItem('host_token');
 let topRestaurant = '';
 
 async function loadResults() {
