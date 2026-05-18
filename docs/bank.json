@@ -327,11 +327,6 @@
             "meat": 1.5,
             "filling": 0.5
           }
-        },
-        {
-          "id": "animal_any",
-          "text": "随便，都行",
-          "weights": {}
         }
       ]
     },
@@ -361,11 +356,6 @@
           "weights": {
             "budget_friendly": 0.3
           }
-        },
-        {
-          "id": "coffee_any",
-          "text": "随便，都行",
-          "weights": {}
         }
       ]
     },
@@ -396,11 +386,6 @@
           "weights": {
             "random_bonus": 0.8
           }
-        },
-        {
-          "id": "weather_mood_any",
-          "text": "随便，都行",
-          "weights": {}
         }
       ]
     },
@@ -430,54 +415,6 @@
             "fast_service": 1.5,
             "budget_friendly": 0.5
           }
-        },
-        {
-          "id": "meeting_any",
-          "text": "随便，都行",
-          "weights": {}
-        }
-      ]
-    },
-    {
-      "id": "q_last_eaten",
-      "type": "fun",
-      "text": "昨天吃了什么类型的食物？",
-      "emoji": "utensils",
-      "choices": [
-        {
-          "id": "last_rice",
-          "text": "米饭类",
-          "weights": {
-            "noodles": 0.5
-          }
-        },
-        {
-          "id": "last_noodles",
-          "text": "面食类",
-          "weights": {
-            "avoid_noodles": 0.8
-          }
-        },
-        {
-          "id": "last_fast",
-          "text": "快餐外卖",
-          "weights": {
-            "healthy": 0.5,
-            "premium": 0.3
-          }
-        },
-        {
-          "id": "last_nice",
-          "text": "正餐（坐下来吃的）",
-          "weights": {
-            "budget_friendly": 0.5,
-            "fast_service": 0.3
-          }
-        },
-        {
-          "id": "last_any",
-          "text": "随便，都行",
-          "weights": {}
         }
       ]
     },
@@ -569,6 +506,46 @@
           "weights": {
             "spicy": 0.5,
             "filling": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q_dish_type",
+      "type": "fun",
+      "text": "如果你是一道菜，你会是？",
+      "emoji": "chef-hat",
+      "choices": [
+        {
+          "id": "dish_spicy",
+          "text": "🌶️ 麻辣香锅（热辣刺激）",
+          "weights": {
+            "spicy": 1.0,
+            "filling": 0.5
+          }
+        },
+        {
+          "id": "dish_light",
+          "text": "🐟 清蒸鱼（清淡精致）",
+          "weights": {
+            "light_meal": 1.0,
+            "healthy": 0.5
+          }
+        },
+        {
+          "id": "dish_meat",
+          "text": "🍖 红烧肉（实在满足）",
+          "weights": {
+            "meat": 1.2,
+            "filling": 0.8
+          }
+        },
+        {
+          "id": "dish_salad",
+          "text": "🥗 沙拉（健康自律）",
+          "weights": {
+            "healthy": 1.2,
+            "light_meal": 0.5
           }
         }
       ]
