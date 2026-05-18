@@ -20,9 +20,9 @@
     <p class="subtitle">创建一个投票间，分享给同事扫码参与</p>
 
     <div id="step1">
-      <button class="btn btn-primary" onclick="showBlacklistStep()">开始</button>
+      <button class="btn btn-primary" onclick="showBlacklistStep(false)">开始</button>
       <div style="margin-top: 10px;">
-        <button class="btn btn-ghost" id="soloBtn" onclick="startSolo()">一个人也能吃饭</button>
+        <button class="btn btn-ghost" onclick="showBlacklistStep(true)">一个人也能吃饭</button>
       </div>
     </div>
 
@@ -67,10 +67,14 @@ import { sb } from './js/sb.js';
 
 let blList = [];
 let allRests = [];
+let soloMode = false;
 
-window.showBlacklistStep = async function() {
+window.showBlacklistStep = async function(solo) {
+  soloMode = !!solo;
   document.getElementById('step1').style.display = 'none';
   document.getElementById('step2').style.display = 'block';
+  document.getElementById('hostName').placeholder = solo ? '输入你的名字' : '输入你的名字';
+  document.getElementById('confirmCreateBtn').textContent = solo ? '开始选择' : '创建房间';
   if (allRests.length === 0) {
     const { data } = await sb.from('restaurants').select('name').eq('deleted', false).order('name');
     allRests = (data || []).map(r => r.name);
@@ -118,21 +122,19 @@ function genRoomId() {
 
 window.createRoom = async function() {
   const btn = document.getElementById('confirmCreateBtn');
-  const hostName = document.getElementById('hostName').value.trim() || '主持人';
+  const hostName = document.getElementById('hostName').value.trim() || (soloMode ? '我' : '主持人');
   btn.disabled = true;
-  btn.textContent = '创建中…';
+  btn.textContent = soloMode ? '准备中…' : '创建中…';
   try {
     const roomId = genRoomId();
     const hostToken = crypto.randomUUID();
-    const { error: roomErr } = await sb.from('rooms').insert({
+    await sb.from('rooms').insert({
       id: roomId,
       host_token: hostToken,
-      state: 'waiting',
+      state: soloMode ? 'questioning' : 'waiting',
       blacklist: blList,
       has_results: false,
     });
-    if (roomErr) throw roomErr;
-
     const { data: participant, error: partErr } = await sb.from('participants').insert({
       id: crypto.randomUUID(),
       room_id: roomId,
@@ -143,41 +145,16 @@ window.createRoom = async function() {
     sessionStorage.setItem('participant_id', participant.id);
     sessionStorage.setItem('participant_name', hostName);
     localStorage.setItem('user_name', hostName);
-    window.location.href = `room.html?room_id=${roomId}&token=${hostToken}`;
-  } catch(e) {
-    btn.disabled = false;
-    btn.textContent = '创建房间';
-    alert('创建失败，请重试');
-  }
-};
 
-window.startSolo = async function() {
-  const btn = document.getElementById('soloBtn');
-  btn.disabled = true;
-  btn.textContent = '准备中…';
-  try {
-    const roomId = genRoomId();
-    const hostToken = crypto.randomUUID();
-    await sb.from('rooms').insert({
-      id: roomId,
-      host_token: hostToken,
-      state: 'questioning',
-      blacklist: [],
-      has_results: false,
-    });
-    const { data: participant } = await sb.from('participants').insert({
-      id: crypto.randomUUID(),
-      room_id: roomId,
-      name: '我',
-    }).select().single();
-    sessionStorage.setItem('participant_id', participant.id);
-    sessionStorage.setItem('participant_name', '我');
-    localStorage.setItem('user_name', '我');
-    window.location.href = `questionnaire.html?room_id=${roomId}`;
+    if (soloMode) {
+      window.location.href = `questionnaire.html?room_id=${roomId}`;
+    } else {
+      window.location.href = `room.html?room_id=${roomId}&token=${hostToken}`;
+    }
   } catch(e) {
     btn.disabled = false;
-    btn.textContent = '一个人也能吃饭';
-    alert('启动失败，请重试');
+    btn.textContent = soloMode ? '开始选择' : '创建房间';
+    alert('创建失败，请重试');
   }
 };
 
