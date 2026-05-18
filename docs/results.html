@@ -87,7 +87,7 @@ async function loadResults() {
       sb.from('answers').select('*').eq('room_id', ROOM_ID),
       sb.from('participants').select('id, name').eq('room_id', ROOM_ID),
       sb.from('restaurants').select('*'),
-      sb.from('history').select('restaurant_name, date').gte('date', cutoffStr).order('created_at', { ascending: false }),
+      sb.from('history').select('restaurant_name, date, user_name').gte('date', cutoffStr).order('created_at', { ascending: false }),
     ]);
 
     if (!room || !room.has_results) {
@@ -117,14 +117,17 @@ async function loadResults() {
     const allParticipantAnswers = Object.values(byParticipant);
     const weights = aggregateWeights(allParticipantAnswers);
 
-    const recentNames = new Set((historyRows || []).map(h => h.restaurant_name));
+    const participantNames = new Set((participants || []).map(p => p.name));
+    const filteredHistory = (historyRows || []).filter(h => participantNames.has(h.user_name));
+
+    const recentNames = new Set(filteredHistory.map(h => h.restaurant_name));
     const yesterdayDate = new Date();
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
     const yesterdayStr = yesterdayDate.toISOString().split('T')[0];
     const { data: yesterdayRows } = await sb.from('history')
-      .select('restaurant_name')
+      .select('restaurant_name, user_name')
       .eq('date', yesterdayStr);
-    const yesterdayNames = new Set((yesterdayRows || []).map(h => h.restaurant_name));
+    const yesterdayNames = new Set((yesterdayRows || []).filter(h => participantNames.has(h.user_name)).map(h => h.restaurant_name));
 
     // Run scoring with seeded random so all clients get identical results
     const origRandom = Math.random;
@@ -149,7 +152,7 @@ async function loadResults() {
 
     const isSolo = (participants || []).length <= 1;
     renderSummaries(participants || [], answerRows || [], choiceTextMap, isSolo);
-    renderHistory(historyRows || []);
+    renderHistory(filteredHistory);
     renderRanking(results, isSolo);
 
     if (HOST_TOKEN) {
