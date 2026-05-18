@@ -139,7 +139,7 @@
         },
         {
           "id": "budget_high",
-          "text": "60元以上",
+          "text": "100元以上",
           "weights": {
             "budget_max": 999,
             "premium": 1.0
