@@ -156,6 +156,7 @@ async function loadResults() {
       if (results.length > 0) await upsertHistory(results[0].name);
     } else {
       document.getElementById('guestPanel').style.display = 'block';
+      startConfirmedPoll();
     }
   } catch(e) {
     console.error(e);
@@ -277,28 +278,72 @@ function renderSummaries(participants, answerRows, choiceTextMap) {
 async function upsertHistory(name) {
   const date = new Date().toISOString().split('T')[0];
 
-  const { data: existing } = await sb.from('history')
-    .select('id').eq('room_id', ROOM_ID).limit(1);
+  const { data: participantsList } = await sb.from('participants')
+    .select('name').eq('room_id', ROOM_ID);
 
-  if (existing && existing.length > 0) {
+  if (participantsList && participantsList.length > 0) {
+    for (const p of participantsList) {
+      const { data: existing } = await sb.from('history')
+        .select('id').eq('user_name', p.name).eq('date', date).limit(1);
+      if (existing && existing.length > 0) {
+        await sb.from('history')
+          .update({ restaurant_name: name, room_id: ROOM_ID })
+          .eq('user_name', p.name).eq('date', date);
+      } else {
+        await sb.from('history').insert({
+          restaurant_name: name, room_id: ROOM_ID, date, user_name: p.name,
+        });
+      }
+    }
+  } else {
     await sb.from('history')
       .update({ restaurant_name: name, date })
       .eq('room_id', ROOM_ID);
-  } else {
-    const { data: participantsList } = await sb.from('participants')
-      .select('name').eq('room_id', ROOM_ID);
-    const rows = (participantsList || []).map(p => ({
-      restaurant_name: name,
-      room_id: ROOM_ID,
-      date,
-      user_name: p.name,
-    }));
-    if (rows.length > 0) await sb.from('history').insert(rows);
   }
 
   await sb.from('answers').delete().eq('room_id', ROOM_ID);
   await sb.from('participants').delete().eq('room_id', ROOM_ID);
   await sb.from('rooms').delete().eq('id', ROOM_ID);
+}
+
+function startConfirmedPoll() {
+  const guestName = sessionStorage.getItem('participant_name');
+  if (!guestName) return;
+  const today = new Date().toISOString().split('T')[0];
+  let lastConfirmed = null;
+
+  async function check() {
+    const { data } = await sb.from('history')
+      .select('restaurant_name')
+      .eq('user_name', guestName)
+      .eq('date', today)
+      .limit(1);
+    if (data && data.length > 0 && data[0].restaurant_name !== lastConfirmed) {
+      lastConfirmed = data[0].restaurant_name;
+      showConfirmed(data[0].restaurant_name);
+    }
+  }
+
+  check();
+  const poll = setInterval(check, 3000);
+  setTimeout(() => clearInterval(poll), 180000);
+}
+
+function showConfirmed(name) {
+  let banner = document.getElementById('confirmedBanner');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'confirmedBanner';
+    banner.style.cssText = 'background:var(--green); color:white; text-align:center; padding:12px; border-radius:12px; font-weight:600; margin-bottom:16px; font-size:15px;';
+    document.getElementById('resultsView').insertBefore(banner, document.getElementById('resultsView').firstChild);
+  }
+  banner.textContent = `今天吃：${name} ✓`;
+  document.querySelectorAll('.result-item').forEach(i => i.style.border = '');
+  const el = document.querySelector(`[data-name="${CSS.escape(name)}"]`);
+  if (el) {
+    el.style.border = '2px solid var(--green)';
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 
 window.confirmChoice = async function() {
