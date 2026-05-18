@@ -56,6 +56,7 @@
              onkeydown="if(event.key==='Enter') joinByCode()">
       <button class="btn btn-ghost" style="width:auto; padding:14px 20px;" onclick="joinByCode()">加入</button>
     </div>
+    <p id="codeError" style="display:none; color:#E55; font-size:13px; margin-top:8px;"></p>
   </div>
 
   <div style="text-align:center; margin-top:16px; margin-bottom:24px;">
@@ -164,7 +165,13 @@ window.createRoom = async function() {
 
 window.joinByCode = function() {
   const code = document.getElementById('codeInput').value.trim().toUpperCase();
-  if (code.length !== 6) return;
+  const errEl = document.getElementById('codeError');
+  if (code.length !== 6) {
+    errEl.textContent = '房间码需要6位';
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
   window.location.href = `join.html?room_id=${code}`;
 };
 
