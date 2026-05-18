@@ -30,7 +30,7 @@ function haversine(lng1, lat1, lng2, lat2) {
 
 export function isDrinks(r) {
   const tags = new Set(r.tags || []);
-  if (tags.has("drinks_shop")) return true;
+  if (tags.has("drink_n_snack")) return true;
   return tags.has("cold_food") && ![...tags].some(t => t.startsWith("cuisine_"));
 }
 
@@ -59,12 +59,6 @@ export function aggregateWeights(allParticipantAnswers) {
 
 function filterPool(restaurants, weights) {
   let pool = restaurants.filter(r => !r.deleted);
-
-  if ((weights.drinks_only || 0) > 0) {
-    pool = pool.filter(r => isDrinks(r));
-  } else {
-    pool = pool.filter(r => !isDrinks(r));
-  }
 
   if ((weights.vendor_only || 0) > 0) {
     pool = pool.filter(r => r.vendor === 1);

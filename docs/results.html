@@ -52,7 +52,7 @@
 
 <script type="module">
 import { sb } from './js/sb.js';
-import { aggregateWeights, rankRestaurants } from './js/scoring.js';
+import { aggregateWeights, rankRestaurants, isDrinks } from './js/scoring.js';
 
 // Seeded PRNG so all clients get identical results for the same room
 function mulberry32(seed) {
@@ -194,41 +194,22 @@ function renderRanking(results, isSolo = false) {
   const list = document.getElementById('rankList');
   list.innerHTML = '';
 
-  const cuisineOrder = [
-    { key: 'cuisine_chinese', label: '中餐' },
-    { key: 'cuisine_japanese', label: '日料' },
-    { key: 'cuisine_korean', label: '韩餐' },
-    { key: 'cuisine_western', label: '西式' },
-    { key: null, label: '其他' },
+  const groups = [
+    { label: '餐厅', items: results.filter(r => !isDrinks({ tags: r.tags })).slice(0, 5) },
+    { label: '其他',  items: results.filter(r =>  isDrinks({ tags: r.tags })).slice(0, 2) },
   ];
-
-  const grouped = {};
-  cuisineOrder.forEach(c => grouped[c.label] = []);
-
-  results.forEach(r => {
-    let placed = false;
-    for (const c of cuisineOrder.slice(0, -1)) {
-      if (r.tags.includes(c.key)) {
-        grouped[c.label].push(r);
-        placed = true;
-        break;
-      }
-    }
-    if (!placed) grouped['其他'].push(r);
-  });
 
   if (results.length > 0) topRestaurant = results[0].name;
 
-  cuisineOrder.forEach(c => {
-    const group = grouped[c.label].slice(0, 2);
-    if (!group.length) return;
+  groups.forEach(g => {
+    if (!g.items.length) return;
 
     const header = document.createElement('div');
     header.style.cssText = 'font-size:12px; font-weight:700; color:var(--muted); margin:16px 0 8px; letter-spacing:1px;';
-    header.textContent = c.label;
+    header.textContent = g.label;
     list.appendChild(header);
 
-    group.forEach((r, i) => {
+    g.items.forEach((r, i) => {
       const item = document.createElement('div');
       item.className = 'result-item' + (r.name === topRestaurant ? ' top1' : '');
       item.style.cursor = 'pointer';
