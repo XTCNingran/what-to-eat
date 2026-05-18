@@ -35,6 +35,9 @@
     <div id="hostPanel" style="display:none;">
       <div class="divider"></div>
       <p style="font-size:13px; color:var(--muted); text-align:center; margin-bottom:12px;">选好了吗？记录今天的选择</p>
+      <input type="text" id="customRestaurant" placeholder="或者输入其他餐厅名…" maxlength="30"
+             style="margin-bottom:10px;"
+             oninput="onCustomInput(this.value)">
       <button class="btn btn-primary" id="confirmBtn" onclick="confirmChoice()">选好了，就去这里</button>
       <button class="btn btn-ghost" style="margin-top:10px;" onclick="window.location.href='index.html'">再来一次</button>
     </div>
@@ -69,6 +72,7 @@ const ROOM_ID = params.get('room_id') || '';
 const HOST_TOKEN = params.get('token') || sessionStorage.getItem('host_token') || '';
 sessionStorage.removeItem('host_token');
 let topRestaurant = '';
+let isSoloMode = false;
 
 async function loadResults() {
   try {
@@ -151,6 +155,7 @@ async function loadResults() {
     document.getElementById('resultsView').style.display = 'block';
 
     const isSolo = (participants || []).length <= 1;
+    isSoloMode = isSolo;
     renderSummaries(participants || [], answerRows || [], choiceTextMap, isSolo);
     renderHistory(filteredHistory);
     renderRanking(results, isSolo);
@@ -354,9 +359,23 @@ function showConfirmed(name) {
   }
 }
 
+window.onCustomInput = function(value) {
+  const btn = document.getElementById('confirmBtn');
+  if (!btn) return;
+  const prefix = isSoloMode ? '就去：' : '我们去：';
+  if (value.trim()) {
+    document.querySelectorAll('.result-item').forEach(i => i.style.border = '');
+    btn.textContent = prefix + value.trim();
+  } else {
+    const selected = btn.dataset.name;
+    btn.textContent = selected ? prefix + selected : '选好了，就去这里';
+  }
+};
+
 window.confirmChoice = async function() {
   const btn = document.getElementById('confirmBtn');
-  const name = btn.dataset.name;
+  const custom = document.getElementById('customRestaurant').value.trim();
+  const name = custom || btn.dataset.name;
   if (!name) return;
   btn.disabled = true;
   btn.textContent = '记录中…';
