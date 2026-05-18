@@ -29,7 +29,8 @@
     <div id="step2" style="display:none;">
       <div style="margin-bottom:12px;">
         <label style="font-size:13px; color:var(--muted);">你的名字</label>
-        <input type="text" id="hostName" placeholder="输入你的名字" maxlength="10" style="margin-top:4px;">
+        <input type="text" id="hostName" placeholder="输入你的名字" maxlength="10" style="margin-top:4px;"
+               oninput="onNameInput(this.value)">
       </div>
       <p style="font-size:13px; color:var(--muted); margin-bottom:8px;">排除今天不想去的餐厅（可跳过）</p>
       <input type="text" id="blSearch" placeholder="搜索餐厅…" oninput="filterBl(this.value)" style="margin-bottom:8px;">
@@ -85,6 +86,8 @@ window.showBlacklistStep = async function(solo) {
 window.hideBlacklistStep = function() {
   document.getElementById('step2').style.display = 'none';
   document.getElementById('step1').style.display = 'block';
+  document.getElementById('historyCard').style.display = 'none';
+  document.getElementById('historyList').innerHTML = '';
 };
 
 function renderBlOptions(names) {
@@ -165,13 +168,19 @@ window.joinByCode = function() {
   window.location.href = `join.html?room_id=${code}`;
 };
 
-async function loadHistory() {
-  const userName = localStorage.getItem('user_name');
-  if (!userName) return;
+let currentName = '';
 
+window.onNameInput = function(value) {
+  currentName = value.trim();
+  document.getElementById('historyCard').style.display = 'none';
+  document.getElementById('historyList').innerHTML = '';
+  if (currentName) loadHistory(currentName);
+};
+
+async function loadHistory(name) {
   const { data } = await sb.from('history')
     .select('id, restaurant_name, date')
-    .eq('user_name', userName)
+    .eq('user_name', name)
     .order('created_at', { ascending: false })
     .limit(5);
 
@@ -196,7 +205,7 @@ async function deleteHistory(id) {
   await sb.from('history').delete().eq('id', id);
   document.getElementById('historyList').innerHTML = '';
   document.getElementById('historyCard').style.display = 'none';
-  await loadHistory();
+  if (currentName) await loadHistory(currentName);
 }
 
 async function cleanupAbandonedRooms() {
@@ -211,7 +220,6 @@ async function cleanupAbandonedRooms() {
   await sb.from('rooms').delete().in('id', ids);
 }
 
-loadHistory();
 cleanupAbandonedRooms();
 lucide.createIcons();
 </script>
