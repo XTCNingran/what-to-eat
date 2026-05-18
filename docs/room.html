@@ -131,6 +131,7 @@ window.startQuestioning = async function() {
   btn.disabled = true;
   btn.textContent = '跳转中…';
   await sb.from('rooms').update({ state: 'questioning' }).eq('id', ROOM_ID);
+  sessionStorage.setItem('host_token', HOST_TOKEN);
   window.location.href = `questionnaire.html?room_id=${ROOM_ID}`;
 };
 
