@@ -35,7 +35,7 @@
     <div id="hostPanel" style="display:none;">
       <div class="divider"></div>
       <p style="font-size:13px; color:var(--muted); text-align:center; margin-bottom:12px;">选好了吗？记录今天的选择</p>
-      <button class="btn btn-primary" id="confirmBtn" onclick="confirmChoice()">我们去这里</button>
+      <button class="btn btn-primary" id="confirmBtn" onclick="confirmChoice()">选好了，就去这里</button>
       <button class="btn btn-ghost" style="margin-top:10px;" onclick="window.location.href='index.html'">再来一次</button>
     </div>
     <div id="guestPanel" style="display:none;">
@@ -147,9 +147,10 @@ async function loadResults() {
     document.getElementById('loadingView').style.display = 'none';
     document.getElementById('resultsView').style.display = 'block';
 
-    renderSummaries(participants || [], answerRows || [], choiceTextMap);
+    const isSolo = (participants || []).length <= 1;
+    renderSummaries(participants || [], answerRows || [], choiceTextMap, isSolo);
     renderHistory(historyRows || []);
-    renderRanking(results);
+    renderRanking(results, isSolo);
 
     if (HOST_TOKEN) {
       document.getElementById('hostPanel').style.display = 'block';
@@ -177,7 +178,7 @@ function renderHistory(records) {
   });
 }
 
-function renderRanking(results) {
+function renderRanking(results, isSolo = false) {
   const list = document.getElementById('rankList');
   list.innerHTML = '';
 
@@ -238,20 +239,20 @@ function renderRanking(results) {
   });
 
   const topItem = list.querySelector(`[data-name="${CSS.escape(topRestaurant)}"]`);
-  if (topItem) selectRestaurant(topRestaurant, topItem);
+  if (topItem) selectRestaurant(topRestaurant, topItem, isSolo);
 }
 
-function selectRestaurant(name, el) {
+function selectRestaurant(name, el, isSolo = false) {
   document.querySelectorAll('.result-item').forEach(i => i.style.border = '');
   if (el) el.style.border = '2px solid var(--green)';
   const btn = document.getElementById('confirmBtn');
   if (btn) {
     btn.dataset.name = name;
-    btn.textContent = `我们去：${name}`;
+    btn.textContent = isSolo ? `就去：${name}` : `我们去：${name}`;
   }
 }
 
-function renderSummaries(participants, answerRows, choiceTextMap) {
+function renderSummaries(participants, answerRows, choiceTextMap, isSolo = false) {
   if (!participants.length) return;
 
   const byParticipant = {};
@@ -262,6 +263,10 @@ function renderSummaries(participants, answerRows, choiceTextMap) {
 
   const panel = document.getElementById('summaryPanel');
   const list = document.getElementById('summaryList');
+  if (isSolo) {
+    panel.style.display = 'none';
+    return;
+  }
   panel.style.display = 'block';
 
   participants.forEach(p => {
