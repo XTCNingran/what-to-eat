@@ -233,7 +233,7 @@ function renderRanking(results, isSolo = false) {
           <div class="result-reason">${r.reason}</div>
         </div>
       `;
-      item.onclick = () => selectRestaurant(r.name, item);
+      item.onclick = () => selectRestaurant(r.name, item, isSolo);
       list.appendChild(item);
     });
   });
