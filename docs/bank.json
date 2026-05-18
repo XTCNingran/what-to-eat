@@ -13,7 +13,7 @@
         },
         {
           "id": "drinks_only",
-          "text": "没有，只想喝点饮料",
+          "text": "没有，只想来点零食饮料",
           "weights": {
             "drinks_only": 1
           }
