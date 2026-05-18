@@ -71,6 +71,10 @@ let topRestaurant = '';
 
 async function loadResults() {
   try {
+    const recentCutoff = new Date();
+    recentCutoff.setDate(recentCutoff.getDate() - 3);
+    const cutoffStr = recentCutoff.toISOString().split('T')[0];
+
     const [
       { data: room },
       { data: answerRows },
@@ -82,7 +86,7 @@ async function loadResults() {
       sb.from('answers').select('*').eq('room_id', ROOM_ID),
       sb.from('participants').select('id, name').eq('room_id', ROOM_ID),
       sb.from('restaurants').select('*'),
-      sb.from('history').select('restaurant_name, date').order('created_at', { ascending: false }).limit(7),
+      sb.from('history').select('restaurant_name, date').gte('date', cutoffStr).order('created_at', { ascending: false }),
     ]);
 
     if (!room || !room.has_results) {
@@ -112,9 +116,6 @@ async function loadResults() {
     const allParticipantAnswers = Object.values(byParticipant);
     const weights = aggregateWeights(allParticipantAnswers);
 
-    // Cuisine fatigue from recent history
-    const threeDaysAgo = new Date();
-    threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
     const recentNames = new Set((historyRows || []).map(h => h.restaurant_name));
     const yesterdayDate = new Date();
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
@@ -123,15 +124,6 @@ async function loadResults() {
       .select('restaurant_name')
       .eq('date', yesterdayStr);
     const yesterdayNames = new Set((yesterdayRows || []).map(h => h.restaurant_name));
-
-    const cuisineCounts = {};
-    const recentRestaurants = (restaurants || []).filter(r => recentNames.has(r.name));
-    recentRestaurants.forEach(r => {
-      (r.tags || []).filter(t => t.startsWith('cuisine_')).forEach(t => {
-        cuisineCounts[t] = (cuisineCounts[t] || 0) + 1;
-      });
-    });
-    weights._cuisineCounts = cuisineCounts;
 
     // Run scoring with seeded random so all clients get identical results
     const origRandom = Math.random;
@@ -160,6 +152,7 @@ async function loadResults() {
 
     if (HOST_TOKEN) {
       document.getElementById('hostPanel').style.display = 'block';
+      if (results.length > 0) await upsertHistory(results[0].name);
     } else {
       document.getElementById('guestPanel').style.display = 'block';
     }
@@ -280,13 +273,40 @@ function renderSummaries(participants, answerRows, choiceTextMap) {
   if (list.lastChild) list.lastChild.style.borderBottom = 'none';
 }
 
+async function upsertHistory(name) {
+  const date = new Date().toISOString().split('T')[0];
+
+  const { data: existing } = await sb.from('history')
+    .select('id').eq('room_id', ROOM_ID).limit(1);
+
+  if (existing && existing.length > 0) {
+    await sb.from('history')
+      .update({ restaurant_name: name, date })
+      .eq('room_id', ROOM_ID);
+  } else {
+    const { data: participantsList } = await sb.from('participants')
+      .select('name').eq('room_id', ROOM_ID);
+    const rows = (participantsList || []).map(p => ({
+      restaurant_name: name,
+      room_id: ROOM_ID,
+      date,
+      user_name: p.name,
+    }));
+    if (rows.length > 0) await sb.from('history').insert(rows);
+  }
+
+  await sb.from('answers').delete().eq('room_id', ROOM_ID);
+  await sb.from('participants').delete().eq('room_id', ROOM_ID);
+  await sb.from('rooms').delete().eq('id', ROOM_ID);
+}
+
 window.confirmChoice = async function() {
   const btn = document.getElementById('confirmBtn');
   const name = btn.dataset.name;
   if (!name) return;
   btn.disabled = true;
   btn.textContent = '记录中…';
-  await sb.from('history').insert({ restaurant_name: name, room_id: ROOM_ID });
+  await upsertHistory(name);
   btn.textContent = '已记录，祝用餐愉快！';
 };
 

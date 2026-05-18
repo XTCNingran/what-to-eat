@@ -1,5 +1,23 @@
 # 今天吃什么 — 版本记录
 
+## v0.3.0（2026-05-18）
+
+### 部署
+- 迁移至 GitHub Pages + Supabase，告别 Railway 自建后端
+- 前端静态化（`docs/`），数据库由 Supabase（PostgreSQL）托管
+- Python FastAPI 后端归档至 `_archive/python-backend/`
+
+### 评分引擎
+- 移除 base score（原 `rating × 2.0`），餐厅得分完全由答题偏好决定，高评分不再自动占优
+- 移除菜系疲劳衰减逻辑（`FATIGUE_2X_MULTIPLIER` / `FATIGUE_3X_MULTIPLIER`）
+- 保留历史疲劳惩罚：昨天去过 -3.0，前天去过 -1.5
+- 结果排名使用房间 ID 作为随机种子，保证同一房间所有客户端看到相同排序
+
+### 其他
+- 清理过期文件：`.pytest_cache`、`__pycache__`、旧规划文档、`start.bat`
+
+---
+
 ## v0.2.0（2026-04-21）
 
 ### 部署

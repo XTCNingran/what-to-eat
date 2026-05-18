@@ -2,7 +2,7 @@ from __future__ import annotations
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-from app.services import room_manager
+from app.services import room_manager, user_store
 from app.models.room import RoomState
 
 router = APIRouter(prefix="/api/rooms", tags=["questionnaire"])
@@ -15,6 +15,7 @@ class JoinRequest(BaseModel):
 class JoinResponse(BaseModel):
     participant_id: str
     name: str
+    is_new_user: bool = False
 
 
 class AnswerItem(BaseModel):
@@ -31,10 +32,12 @@ class SubmitRequest(BaseModel):
 async def join_room(room_id: str, body: JoinRequest):
     if not body.name.strip():
         raise HTTPException(status_code=400, detail="名字不能为空")
-    p = room_manager.add_participant(room_id, body.name.strip())
+    name = body.name.strip()
+    is_new = user_store.register(name)  # 已存在则 False，新用户则 True
+    p = room_manager.add_participant(room_id, name)
     if p is None:
         raise HTTPException(status_code=404, detail="房间不存在或已关闭")
-    return JoinResponse(participant_id=p.id, name=p.name)
+    return JoinResponse(participant_id=p.id, name=p.name, is_new_user=is_new)
 
 
 @router.get("/{room_id}/questions")

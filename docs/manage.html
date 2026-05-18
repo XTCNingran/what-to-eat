@@ -73,6 +73,10 @@
 <script type="module">
 import { sb } from './js/sb.js';
 
+function esc(s) {
+  return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 let allRestaurants = [];
 
 async function loadRestaurants() {
@@ -113,12 +117,12 @@ function renderList(restaurants) {
     row.className = 'mgmt-row' + (r.deleted ? ' deleted' : '');
     row.innerHTML = `
       <div>
-        <div><strong>${r.name}</strong>
+        <div><strong>${esc(r.name)}</strong>
           ${r.vendor ? '<span class="tag" style="background:#E8F4FD;">供应商</span>' : ''}
           ${r.deleted ? '<span class="tag" style="background:#FFE0E0;">已删除</span>' : ''}
         </div>
-        <div class="mgmt-meta">${r.address || ''} ${r.avg_spend ? '· ¥' + r.avg_spend : ''} ${r.rating ? '· ' + r.rating + ' 分' : ''}</div>
-        <div>${(r.tags || []).slice(0, 4).map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        <div class="mgmt-meta">${esc(r.address || '')} ${r.avg_spend ? '· ¥' + r.avg_spend : ''} ${r.rating ? '· ' + r.rating + ' 分' : ''}</div>
+        <div>${(r.tags || []).slice(0, 4).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
       </div>
       <button class="btn btn-ghost" style="width:auto; padding:8px 14px; font-size:13px;"
               onclick="openEdit(${safeId})">编辑</button>
@@ -131,9 +135,9 @@ function renderList(restaurants) {
     form.className = 'edit-form';
     form.innerHTML = `
       <label>标签（逗号分隔）</label>
-      <input type="text" id="et-${safeId}" value="${(r.tags || []).join(',')}">
+      <input type="text" id="et-${safeId}" value="${esc((r.tags || []).join(','))}">
       <label>地址</label>
-      <input type="text" id="ea-${safeId}" value="${r.address || ''}">
+      <input type="text" id="ea-${safeId}" value="${esc(r.address || '')}">
       <label>人均消费（元）</label>
       <input type="number" id="es-${safeId}" value="${r.avg_spend || ''}">
       <label>评分</label>

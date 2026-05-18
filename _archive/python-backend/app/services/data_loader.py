@@ -57,7 +57,7 @@ def _parse_tags(category_raw: str) -> list[str]:
         part = part.strip()
         if part in CATEGORY_TAG_MAP:
             tags.extend(CATEGORY_TAG_MAP[part])
-    return list(dict.fromkeys(tags))
+    return list(dict.fromkeys(tags))  # 去重并保留插入顺序
 
 
 def get_restaurants(force_reload: bool = False) -> list[Restaurant]:

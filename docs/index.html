@@ -142,6 +142,7 @@ window.createRoom = async function() {
 
     sessionStorage.setItem('participant_id', participant.id);
     sessionStorage.setItem('participant_name', hostName);
+    localStorage.setItem('user_name', hostName);
     window.location.href = `room.html?room_id=${roomId}&token=${hostToken}`;
   } catch(e) {
     btn.disabled = false;
@@ -171,6 +172,7 @@ window.startSolo = async function() {
     }).select().single();
     sessionStorage.setItem('participant_id', participant.id);
     sessionStorage.setItem('participant_name', '我');
+    localStorage.setItem('user_name', '我');
     window.location.href = `questionnaire.html?room_id=${roomId}`;
   } catch(e) {
     btn.disabled = false;
@@ -181,28 +183,58 @@ window.startSolo = async function() {
 
 window.joinByCode = function() {
   const code = document.getElementById('codeInput').value.trim().toUpperCase();
-  if (code.length < 4) return;
+  if (code.length !== 6) return;
   window.location.href = `join.html?room_id=${code}`;
 };
 
 async function loadHistory() {
+  const userName = localStorage.getItem('user_name');
+  if (!userName) return;
+
   const { data } = await sb.from('history')
-    .select('restaurant_name, date')
+    .select('id, restaurant_name, date')
+    .eq('user_name', userName)
     .order('created_at', { ascending: false })
     .limit(5);
+
   if (data && data.length > 0) {
     document.getElementById('historyCard').style.display = 'block';
     const list = document.getElementById('historyList');
     data.forEach(r => {
       const item = document.createElement('div');
       item.className = 'history-item';
-      item.innerHTML = `<strong>${r.date}</strong> · ${r.restaurant_name}`;
+      item.style.cssText = 'display:flex; justify-content:space-between; align-items:center;';
+      item.innerHTML = `
+        <span><strong>${r.date}</strong> · ${r.restaurant_name}</span>
+        <button data-id="${r.id}" style="background:none;border:none;color:#aaa;cursor:pointer;font-size:16px;">×</button>
+      `;
+      item.querySelector('button').onclick = () => deleteHistory(r.id);
       list.appendChild(item);
     });
   }
 }
 
+async function deleteHistory(id) {
+  await sb.from('history').delete().eq('id', id);
+  document.getElementById('historyList').innerHTML = '';
+  document.getElementById('historyCard').style.display = 'none';
+  await loadHistory();
+}
+
+async function cleanupAbandonedRooms() {
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 3);
+  const { data: oldRooms } = await sb.from('rooms')
+    .select('id').lt('created_at', cutoff.toISOString());
+  if (!oldRooms || oldRooms.length === 0) return;
+  const ids = oldRooms.map(r => r.id);
+  await sb.from('answers').delete().in('room_id', ids);
+  await sb.from('participants').delete().in('room_id', ids);
+  await sb.from('rooms').delete().in('id', ids);
+}
+
 loadHistory();
+cleanupAbandonedRooms();
 lucide.createIcons();
 </script>
 </body>

@@ -7,7 +7,6 @@ from datetime import datetime
 from app import config
 from app.models.restaurant import Restaurant, ScoredRestaurant
 from app.models.question import Answer
-from app.services import history_store
 
 SPICY_TAGS    = {"spicy"}
 WARM_TAGS     = {"warm_food"}
@@ -21,8 +20,6 @@ CUISINE_TAGS  = {"cuisine_chinese", "cuisine_japanese", "cuisine_western", "cuis
 
 _MONDAY_BUDGET_BOOST    = 0.10
 _WEEKEND_PREMIUM_BOOST  = 0.15
-_FATIGUE_2X_MULTIPLIER  = 0.7
-_FATIGUE_3X_MULTIPLIER  = 0.4
 _DIVERSITY_JITTER_RANGE = 0.10
 
 
@@ -105,6 +102,7 @@ def score_restaurant(
     if restaurant.avg_spend and restaurant.avg_spend > budget_max:
         return None
 
+    # 基础分 = 评分 × 2，将 1-5 星映射到 2-10 分段，与权重增量保持同量级
     score = (restaurant.rating or 3.5) * 2.0
 
     tags = set(restaurant.tags)
@@ -192,6 +190,7 @@ def rank_restaurants(
     yesterday_names: set[str],
     top_n: int = 20,
     blacklist: list[str] | None = None,
+    usernames: list[str] | None = None,
 ) -> list[ScoredRestaurant]:
     """过滤、打分、叠加动态信号、多样性扰动，返回前 top_n 名。"""
     blacklist_set = set(blacklist or [])
@@ -217,21 +216,7 @@ def rank_restaurants(
         elif weekday in (4, 5, 6) and "premium" in tags:       # 周五/六/日
             scored[i] = r.model_copy(update={"score": r.score + base * _WEEKEND_PREMIUM_BOOST})
 
-    # 4. 菜系疲劳（乘以衰减系数）
-    cuisine_counts = history_store.get_recent_cuisines(3)
-    if cuisine_counts:
-        for i, r in enumerate(scored):
-            tags = set(r.restaurant.tags)
-            max_count = max(
-                (cuisine_counts.get(t, 0) for t in tags if t.startswith("cuisine_")),
-                default=0,
-            )
-            if max_count == 2:
-                scored[i] = r.model_copy(update={"score": r.score * _FATIGUE_2X_MULTIPLIER})
-            elif max_count >= 3:
-                scored[i] = r.model_copy(update={"score": r.score * _FATIGUE_3X_MULTIPLIER})
-
-    # 5. 排序
+    # 4. 排序
     scored.sort(key=lambda x: x.score, reverse=True)
 
     # 6. 多样性扰动（第 4–20 名）

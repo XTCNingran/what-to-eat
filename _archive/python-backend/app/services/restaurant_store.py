@@ -8,6 +8,8 @@ _cache: list[Restaurant] | None = None
 
 def _load() -> list[Restaurant]:
     global _cache
+    if _cache is not None:
+        return _cache
     if not config.RESTAURANT_JSON.exists():
         raise FileNotFoundError(
             f"找不到 {config.RESTAURANT_JSON}，请先运行 scripts/migrate_excel_to_json.py"

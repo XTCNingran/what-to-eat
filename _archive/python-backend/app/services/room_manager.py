@@ -46,6 +46,7 @@ def _select_questions() -> tuple[list[Question], list[Question]]:
 
 
 def _gen_room_id() -> str:
+    # 排除 I/O/0/1，防止字母与数字视觉混淆
     chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
     while True:
         rid = "".join(random.choices(chars, k=6))
@@ -53,11 +54,11 @@ def _gen_room_id() -> str:
             return rid
 
 
-def create_room(blacklist: list[str] | None = None) -> Room:
+def create_room(blacklist: list[str] | None = None, host_username: str = "") -> Room:
     room_id = _gen_room_id()
     host_token = str(uuid.uuid4())
     questions, drinks_questions = _select_questions()
-    room = Room(id=room_id, host_token=host_token, questions=questions, drinks_questions=drinks_questions, blacklist=blacklist or [])
+    room = Room(id=room_id, host_token=host_token, host_username=host_username, questions=questions, drinks_questions=drinks_questions, blacklist=blacklist or [])
     _rooms[room_id] = room
     _sse_queues[room_id] = []
     return room
@@ -134,10 +135,11 @@ def submit_answers(room_id: str, participant_id: str, raw_answers: list[dict]) -
             weights.pop("drinks_only", None)
         room.aggregated_weights = weights
         restaurants = data_loader.get_restaurants()
-        yesterday, two_days = history_store.get_recent_names(days=2)
+        participant_names = list(room.participants[pid].name for pid in room.participants)
+        yesterday, two_days = history_store.get_recent_names(participant_names)
         results = scoring_engine.rank_restaurants(
             restaurants, weights, two_days, yesterday,
-            blacklist=room.blacklist
+            blacklist=room.blacklist, usernames=participant_names
         )
         room.results = results
         room.state = RoomState.CLOSED
@@ -163,10 +165,11 @@ def close_room(room_id: str, host_token: str) -> bool:
     room.aggregated_weights = weights
 
     restaurants = data_loader.get_restaurants()
-    yesterday, two_days = history_store.get_recent_names(days=2)
+    participant_names = list(room.participants[pid].name for pid in room.participants)
+    yesterday, two_days = history_store.get_recent_names(participant_names)
     results = scoring_engine.rank_restaurants(
         restaurants, weights, two_days, yesterday,
-        blacklist=room.blacklist
+        blacklist=room.blacklist, usernames=participant_names
     )
 
     room.results = results

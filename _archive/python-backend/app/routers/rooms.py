@@ -15,6 +15,7 @@ router = APIRouter(prefix="/api/rooms", tags=["rooms"])
 
 class CreateRoomRequest(BaseModel):
     blacklist: list[str] = []
+    host_username: str = ""
 
 
 class CreateRoomResponse(BaseModel):
@@ -38,7 +39,7 @@ class StartRequest(BaseModel):
 
 @router.post("", response_model=CreateRoomResponse)
 async def create_room(body: CreateRoomRequest = CreateRoomRequest()):
-    room = room_manager.create_room(blacklist=body.blacklist)
+    room = room_manager.create_room(blacklist=body.blacklist, host_username=body.host_username)
     base = config.get_base_url()
     join_url = f"{base}/join/{room.id}"
     qr_url = f"/api/rooms/{room.id}/qr"
@@ -89,11 +90,9 @@ async def get_qr(room_id: str):
         raise HTTPException(status_code=500, detail="qrcode 未安装")
     join_url = f"{config.get_base_url()}/join/{room_id}"
     qr = qrcode.make(join_url)
-    from io import BytesIO
     buf = BytesIO()
     qr.save(buf, format="PNG")
     buf.seek(0)
-    from fastapi import Response
     return Response(content=buf.read(), media_type="image/png")
 
 

@@ -77,7 +77,8 @@ async def get_results(room_id: str):
     if room.results is None:
         raise HTTPException(status_code=425, detail="结果还未生成")
 
-    yesterday_names, two_days_names = history_store.get_recent_names()
+    participant_names = [room.participants[pid].name for pid in room.participants]
+    yesterday_names, two_days_names = history_store.get_recent_names(participant_names)
 
     summaries = [
         {
@@ -103,7 +104,7 @@ async def get_results(room_id: str):
             }
             for i, r in enumerate(room.results)
         ],
-        "recent_history": history_store.get_recent(5),
+        "recent_history": history_store.get_recent_all(5),
         "drinks_only_notices": room.drinks_only_participants,
         "participant_summaries": summaries,
     }
@@ -117,10 +118,15 @@ class RecordRequest(BaseModel):
 
 @router.get("/api/history")
 async def get_history():
-    return {"records": history_store.get_recent(10)}
+    return {"records": history_store.get_recent_all(10)}
 
 
 @router.post("/api/history")
 async def add_history(body: RecordRequest):
-    history_store.add_record(body.restaurant_name, body.room_id, body.notes)
+    room = room_manager.get_room(body.room_id) if body.room_id else None
+    if room is not None:
+        usernames = [p.name for p in room.participants.values()]
+        history_store.add_record_for_users(body.restaurant_name, usernames, body.room_id)
+    else:
+        history_store.add_record(body.restaurant_name, username="", room_id=body.room_id)
     return {"ok": True}

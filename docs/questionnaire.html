@@ -95,8 +95,18 @@ async function init() {
   }
 
   const bank = await (await fetch('bank.json')).json();
-  questions = bank.real_questions;
   drinksQuestions = bank.drinks_questions || [];
+
+  const funPool = [...(bank.fun_questions || [])].sort(() => Math.random() - 0.5);
+  const pickCount = 2 + Math.floor(Math.random() * 2);
+  const pickedFun = funPool.slice(0, pickCount);
+  const real = bank.real_questions;
+  const rest = [...real.slice(1)];
+  pickedFun.forEach(q => {
+    const pos = 1 + Math.floor(Math.random() * rest.length);
+    rest.splice(pos, 0, q);
+  });
+  questions = [real[0], ...rest];
 
   if (room.state === 'waiting') {
     document.getElementById('loadingView').style.display = 'none';
@@ -218,6 +228,14 @@ window.backToQuestion = function() {
 };
 
 window.submitAnswers = async function() {
+  const { data: existingAnswers } = await sb.from('answers')
+    .select('id').eq('participant_id', participantId).eq('room_id', ROOM_ID).limit(1);
+  if (existingAnswers && existingAnswers.length > 0) {
+    document.getElementById('questionView').style.display = 'none';
+    document.getElementById('confirmView').style.display = 'none';
+    document.getElementById('submittedView').style.display = 'block';
+    return;
+  }
   const rows = [];
   questions.forEach(q => {
     const ans = selectedAnswers[q.id];

@@ -16,8 +16,6 @@ const CUISINE_TAGS = new Set(["cuisine_chinese", "cuisine_japanese", "cuisine_we
 
 const MONDAY_BUDGET_BOOST   = 0.10;
 const WEEKEND_PREMIUM_BOOST = 0.15;
-const FATIGUE_2X_MULTIPLIER = 0.7;
-const FATIGUE_3X_MULTIPLIER = 0.4;
 const DIVERSITY_JITTER_RANGE = 0.10;
 
 function haversine(lng1, lat1, lng2, lat2) {
@@ -196,20 +194,6 @@ export function rankRestaurants(restaurants, weights, recentNames, yesterdayName
     }
     return r;
   });
-
-  const cuisineCounts = weights._cuisineCounts || {};
-  if (Object.keys(cuisineCounts).length > 0) {
-    scored = scored.map(r => {
-      const tags = new Set(r.restaurant.tags || []);
-      const maxCount = Math.max(
-        0,
-        ...[...tags].filter(t => t.startsWith("cuisine_")).map(t => cuisineCounts[t] || 0)
-      );
-      if (maxCount === 2) return { ...r, score: r.score * FATIGUE_2X_MULTIPLIER };
-      if (maxCount >= 3) return { ...r, score: r.score * FATIGUE_3X_MULTIPLIER };
-      return r;
-    });
-  }
 
   scored.sort((a, b) => b.score - a.score);
 

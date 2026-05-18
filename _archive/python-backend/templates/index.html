@@ -136,7 +136,7 @@ async function createRoom() {
     const res = await fetch('/api/rooms', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({blacklist: blList})
+      body: JSON.stringify({blacklist: blList, host_username: hostName})
     });
     const data = await res.json();
     const joinRes = await fetch(`/api/rooms/${data.room_id}/participants`, {

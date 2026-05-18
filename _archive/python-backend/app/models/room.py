@@ -22,6 +22,7 @@ class Participant(BaseModel):
 class Room(BaseModel):
     id: str
     host_token: str
+    host_username: str = ""
     state: RoomState = RoomState.WAITING
     participants: dict[str, Participant] = {}
     questions: list[Question] = []

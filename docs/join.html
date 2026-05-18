@@ -46,7 +46,7 @@ window.joinRoom = async function() {
   const err = document.getElementById('errorMsg');
 
   if (!name) { showError('请输入你的名字'); return; }
-  if (roomId.length < 4) { showError('房间码不正确'); return; }
+  if (roomId.length !== 6) { showError('房间码不正确'); return; }
 
   btn.disabled = true;
   btn.textContent = '加入中…';
@@ -67,6 +67,7 @@ window.joinRoom = async function() {
     sessionStorage.setItem('participant_id', participant.id);
     sessionStorage.setItem('participant_name', name);
     sessionStorage.setItem('room_id', roomId);
+    localStorage.setItem('user_name', name);
     window.location.href = `questionnaire.html?room_id=${roomId}`;
   } catch(e) {
     btn.disabled = false;

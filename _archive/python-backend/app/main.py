@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 
 from app import config
-from app.routers import rooms, questionnaire, results, restaurants
+from app.routers import rooms, questionnaire, results, restaurants, users
 
 app = FastAPI(title="今天吃什么", docs_url="/docs")
 
@@ -17,13 +17,14 @@ app.include_router(rooms.router)
 app.include_router(questionnaire.router)
 app.include_router(results.router)
 app.include_router(restaurants.router)
+app.include_router(users.router)
 
 
 # 页面路由
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     from app.services import history_store
-    recent = history_store.get_recent(3)
+    recent = history_store.get_recent_all(3)
     return templates.TemplateResponse(request, "index.html", {"recent": recent})
 
 

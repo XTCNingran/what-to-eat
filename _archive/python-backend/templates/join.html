@@ -62,10 +62,19 @@ async function joinRoom() {
       throw new Error(data.detail || '加入失败');
     }
     const data = await res.json();
-    sessionStorage.setItem('participant_id', data.participant_id);
-    sessionStorage.setItem('participant_name', data.name);
-    sessionStorage.setItem('room_id', roomId);
-    window.location.href = `/q/${roomId}`;
+    if (data.is_new_user) {
+      sessionStorage.setItem('participant_id', data.participant_id);
+      sessionStorage.setItem('participant_name', data.name);
+      sessionStorage.setItem('room_id', roomId);
+      window.location.href = `/q/${roomId}`;
+    } else {
+      // 返回用户，显示欢迎提示后跳转
+      btn.textContent = `欢迎回来，${data.name}！`;
+      setTimeout(() => { window.location.href = `/q/${roomId}`; }, 800);
+      sessionStorage.setItem('participant_id', data.participant_id);
+      sessionStorage.setItem('participant_name', data.name);
+      sessionStorage.setItem('room_id', roomId);
+    }
   } catch(e) {
     btn.disabled = false;
     btn.textContent = '加入';
