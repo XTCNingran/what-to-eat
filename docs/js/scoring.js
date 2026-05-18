@@ -92,7 +92,7 @@ function scoreRestaurant(restaurant, weights, recentNames, yesterdayNames) {
   const budgetMax = weights.budget_max ?? 999;
   if (restaurant.avg_spend && restaurant.avg_spend > budgetMax) return null;
 
-  let score = (restaurant.rating || 3.5) * 2.0;
+  let score = 0;
   const tags = new Set(restaurant.tags || []);
   const reasons = [];
 
