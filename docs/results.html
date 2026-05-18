@@ -35,9 +35,11 @@
     <div id="hostPanel" style="display:none;">
       <div class="divider"></div>
       <p style="font-size:13px; color:var(--muted); text-align:center; margin-bottom:12px;">选好了吗？记录今天的选择</p>
-      <input type="text" id="customRestaurant" placeholder="或者输入其他餐厅名…" maxlength="30"
-             style="margin-bottom:10px;"
-             oninput="onCustomInput(this.value)">
+      <div style="position:relative; margin-bottom:10px;">
+        <input type="text" id="customRestaurant" placeholder="或者搜索其他餐厅…" maxlength="30"
+               autocomplete="off" oninput="onCustomInput(this.value)" onfocus="onCustomInput(this.value)">
+        <div id="customDropdown" style="display:none; position:absolute; left:0; right:0; background:#fff; border:1px solid #eee; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); z-index:100; max-height:180px; overflow-y:auto;"></div>
+      </div>
       <button class="btn btn-primary" id="confirmBtn" onclick="confirmChoice()">选好了，就去这里</button>
       <button class="btn btn-ghost" style="margin-top:10px;" onclick="window.location.href='index.html'">再来一次</button>
     </div>
@@ -73,6 +75,7 @@ const HOST_TOKEN = params.get('token') || sessionStorage.getItem('host_token') |
 sessionStorage.removeItem('host_token');
 let topRestaurant = '';
 let isSoloMode = false;
+let allRestaurants = [];
 
 async function loadResults() {
   try {
@@ -156,6 +159,7 @@ async function loadResults() {
 
     const isSolo = (participants || []).length <= 1;
     isSoloMode = isSolo;
+    allRestaurants = restaurants || [];
     renderSummaries(participants || [], answerRows || [], choiceTextMap, isSolo);
     renderHistory(filteredHistory);
     renderRanking(results, isSolo);
@@ -360,16 +364,37 @@ function showConfirmed(name) {
 }
 
 window.onCustomInput = function(value) {
+  const dropdown = document.getElementById('customDropdown');
+  const keyword = value.trim();
+  if (!keyword) { dropdown.style.display = 'none'; return; }
+
+  const matches = allRestaurants
+    .filter(r => !r.deleted && r.name.includes(keyword))
+    .slice(0, 8);
+
+  if (!matches.length) { dropdown.style.display = 'none'; return; }
+
+  dropdown.innerHTML = '';
+  matches.forEach(r => {
+    const item = document.createElement('div');
+    item.style.cssText = 'padding:10px 14px; cursor:pointer; font-size:14px; border-bottom:1px solid #f5f5f5;';
+    item.textContent = r.name;
+    item.onmousedown = () => selectCustomRestaurant(r.name);
+    item.onmouseover = () => item.style.background = '#FFF3EE';
+    item.onmouseout = () => item.style.background = '';
+    dropdown.appendChild(item);
+  });
+  dropdown.style.display = 'block';
+};
+
+window.selectCustomRestaurant = function(name) {
+  document.getElementById('customRestaurant').value = name;
+  document.getElementById('customDropdown').style.display = 'none';
   const btn = document.getElementById('confirmBtn');
-  if (!btn) return;
   const prefix = isSoloMode ? '就去：' : '我们去：';
-  if (value.trim()) {
-    document.querySelectorAll('.result-item').forEach(i => i.style.border = '');
-    btn.textContent = prefix + value.trim();
-  } else {
-    const selected = btn.dataset.name;
-    btn.textContent = selected ? prefix + selected : '选好了，就去这里';
-  }
+  document.querySelectorAll('.result-item').forEach(i => i.style.border = '');
+  btn.dataset.name = name;
+  btn.textContent = prefix + name;
 };
 
 window.confirmChoice = async function() {
@@ -382,6 +407,13 @@ window.confirmChoice = async function() {
   await upsertHistory(name);
   btn.textContent = '已记录，祝用餐愉快！';
 };
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('#customRestaurant') && !e.target.closest('#customDropdown')) {
+    const dd = document.getElementById('customDropdown');
+    if (dd) dd.style.display = 'none';
+  }
+});
 
 lucide.createIcons();
 loadResults();
