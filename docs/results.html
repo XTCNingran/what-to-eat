@@ -34,6 +34,10 @@
 
     <div id="rankList"></div>
 
+    <div style="text-align:center; margin:8px 0 4px;">
+      <button class="btn btn-ghost" id="switchBatchBtn" onclick="switchBatch()" style="font-size:13px; padding:10px 20px;">换一批</button>
+    </div>
+
     <div id="hostPanel" style="display:none;">
       <div class="divider"></div>
       <p style="font-size:13px; color:var(--muted); text-align:center; margin-bottom:12px;">选好了吗？记录今天的选择</p>
@@ -78,6 +82,8 @@ sessionStorage.removeItem('host_token');
 let topRestaurant = '';
 let isSoloMode = false;
 let allRestaurants = [];
+let allBatches = [];
+let currentBatch = 0;
 
 async function loadResults() {
   try {
@@ -147,15 +153,10 @@ async function loadResults() {
       .eq('date', yesterdayStr);
     const yesterdayNames = new Set((yesterdayRows || []).filter(h => participantNames.has(h.user_name)).map(h => h.restaurant_name));
 
-    // Run scoring with seeded random so all clients get identical results
+    // Pre-generate 3 batches with deterministic seeds so all clients see identical results
     const origRandom = Math.random;
-    Math.random = mulberry32(roomSeed(ROOM_ID));
     const blacklist = room.blacklist || [];
-    const ranked = rankRestaurants(restaurants || [], weights, recentNames, yesterdayNames, 20, blacklist);
-    Math.random = origRandom;
-
-    // Build results array with tags included
-    const results = ranked.map(r => ({
+    const toResults = ranked => ranked.map(r => ({
       name: r.restaurant.name,
       tags: r.restaurant.tags || [],
       rating: r.restaurant.rating,
@@ -164,6 +165,14 @@ async function loadResults() {
       reason: r.reason,
       score: r.score,
     }));
+    allBatches = [0, 1, 2].map(i => {
+      Math.random = mulberry32(roomSeed(ROOM_ID) + i);
+      return toResults(rankRestaurants(restaurants || [], weights, recentNames, yesterdayNames, 20, blacklist));
+    });
+    Math.random = origRandom;
+    currentBatch = 0;
+
+    const results = allBatches[0];
 
     document.getElementById('loadingView').style.display = 'none';
     document.getElementById('resultsView').style.display = 'block';
@@ -398,6 +407,17 @@ window.confirmChoice = async function() {
   btn.textContent = '记录中…';
   await upsertHistory(name);
   btn.textContent = '已记录，祝用餐愉快！';
+};
+
+window.switchBatch = function() {
+  if (currentBatch >= allBatches.length - 1) {
+    alert('别点了，不要吃了');
+    return;
+  }
+  currentBatch++;
+  const btn = document.getElementById('switchBatchBtn');
+  if (btn) btn.textContent = currentBatch === allBatches.length - 1 ? '已是最后一批' : '换一批';
+  renderRanking(allBatches[currentBatch], isSoloMode);
 };
 
 document.addEventListener('click', e => {
