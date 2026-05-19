@@ -20,6 +20,8 @@
   </div>
 
   <div id="resultsView" style="display:none;">
+    <div id="drinksNotice" style="display:none; background:#FFF3EE; border:1px solid #FFCBA4; border-radius:12px; padding:12px 16px; margin-bottom:16px; font-size:13px; color:#C05A00;"></div>
+
     <div id="summaryPanel" style="display:none;" class="card">
       <h2>大家的选择</h2>
       <div id="summaryList"></div>
@@ -123,6 +125,15 @@ async function loadResults() {
     // Aggregate weights
     const allParticipantAnswers = Object.values(byParticipant);
     const weights = aggregateWeights(allParticipantAnswers);
+
+    const drinksVoters = (participants || [])
+      .filter(p => (byParticipant[p.id] || []).some(a => (a.weights.drinks_only || 0) > 0))
+      .map(p => p.name);
+    if (drinksVoters.length > 0) {
+      const notice = document.getElementById('drinksNotice');
+      notice.textContent = `🧃 ${drinksVoters.join('、')} 只想喝点饮料，建议在单人模式下重选`;
+      notice.style.display = 'block';
+    }
 
     const participantNames = new Set((participants || []).map(p => p.name));
     const filteredHistory = (historyRows || []).filter(h => participantNames.has(h.user_name));
