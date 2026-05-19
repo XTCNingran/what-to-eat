@@ -303,29 +303,29 @@
           "id": "animal_cat",
           "text": "🐱 猫（慵懒优雅）",
           "weights": {
-            "light_meal": 0.8
+            "light_meal": 1.2
           }
         },
         {
           "id": "animal_bear",
           "text": "🐻 熊（要吃饱！）",
           "weights": {
-            "filling": 1.2
+            "filling": 1.8
           }
         },
         {
           "id": "animal_bird",
           "text": "🐦 鸟（啄几口就够）",
           "weights": {
-            "light_meal": 1.2
+            "light_meal": 1.8
           }
         },
         {
           "id": "animal_wolf",
           "text": "🐺 狼（肉肉肉！）",
           "weights": {
-            "meat": 1.5,
-            "filling": 0.5
+            "meat": 2.0,
+            "filling": 0.8
           }
         }
       ]
@@ -340,21 +340,21 @@
           "id": "coffee_today",
           "text": "今天！我最好了",
           "weights": {
-            "premium": 0.5
+            "premium": 0.8
           }
         },
         {
           "id": "coffee_week",
           "text": "这周买过",
           "weights": {
-            "premium": 0.2
+            "premium": 0.3
           }
         },
         {
           "id": "coffee_never",
           "text": "…我不记得了",
           "weights": {
-            "budget_friendly": 0.3
+            "budget_friendly": 0.5
           }
         }
       ]
@@ -369,22 +369,22 @@
           "id": "weather_cold",
           "text": "🧊 冷饮冰淇淋",
           "weights": {
-            "cold_food": 1.0
+            "cold_food": 1.5
           }
         },
         {
           "id": "weather_warm",
           "text": "🍜 热汤面条",
           "weights": {
-            "warm_food": 1.0,
-            "noodles": 0.8
+            "warm_food": 1.5,
+            "noodles": 1.2
           }
         },
         {
           "id": "weather_any",
           "text": "🎲 随机一个吧",
           "weights": {
-            "random_bonus": 0.8
+            "random_bonus": 2.0
           }
         }
       ]
@@ -399,8 +399,8 @@
           "id": "meeting_none",
           "text": "零个！开心",
           "weights": {
-            "premium": 0.5,
-            "filling": 0.5
+            "premium": 0.8,
+            "filling": 0.8
           }
         },
         {
@@ -412,8 +412,8 @@
           "id": "meeting_many",
           "text": "3个以上，救命",
           "weights": {
-            "fast_service": 1.5,
-            "budget_friendly": 0.5
+            "fast_service": 2.0,
+            "budget_friendly": 0.8
           }
         }
       ]
@@ -428,7 +428,7 @@
           "id": "energy_high",
           "text": "精力充沛！",
           "weights": {
-            "premium": 0.3
+            "premium": 0.5
           }
         },
         {
@@ -440,8 +440,8 @@
           "id": "energy_low",
           "text": "困死了需要补血",
           "weights": {
-            "filling": 1.0,
-            "meat": 0.5
+            "filling": 1.5,
+            "meat": 0.8
           }
         }
       ]
@@ -456,7 +456,7 @@
           "id": "pay_soon",
           "text": "快了！3天内",
           "weights": {
-            "premium": 1.0
+            "premium": 1.5
           }
         },
         {
@@ -468,7 +468,7 @@
           "id": "pay_far",
           "text": "遥遥无期…",
           "weights": {
-            "budget_friendly": 1.5
+            "budget_friendly": 2.0
           }
         }
       ]
@@ -483,16 +483,16 @@
           "id": "mood_happy",
           "text": "😊 开心！",
           "weights": {
-            "spicy": 0.3,
-            "premium": 0.3
+            "spicy": 0.5,
+            "premium": 0.5
           }
         },
         {
           "id": "mood_tired",
           "text": "😴 困",
           "weights": {
-            "warm_food": 0.5,
-            "filling": 0.5
+            "warm_food": 0.8,
+            "filling": 0.8
           }
         },
         {
@@ -504,8 +504,8 @@
           "id": "mood_stress",
           "text": "😤 有点烦",
           "weights": {
-            "spicy": 0.5,
-            "filling": 0.3
+            "spicy": 0.8,
+            "filling": 0.5
           }
         }
       ]
@@ -520,32 +520,32 @@
           "id": "dish_spicy",
           "text": "🌶️ 麻辣香锅（热辣刺激）",
           "weights": {
-            "spicy": 1.0,
-            "filling": 0.5
+            "spicy": 1.5,
+            "filling": 0.8
           }
         },
         {
           "id": "dish_light",
           "text": "🐟 清蒸鱼（清淡精致）",
           "weights": {
-            "light_meal": 1.0,
-            "healthy": 0.5
+            "light_meal": 1.5,
+            "healthy": 0.8
           }
         },
         {
           "id": "dish_meat",
           "text": "🍖 红烧肉（实在满足）",
           "weights": {
-            "meat": 1.2,
-            "filling": 0.8
+            "meat": 1.8,
+            "filling": 1.2
           }
         },
         {
           "id": "dish_salad",
           "text": "🥗 沙拉（健康自律）",
           "weights": {
-            "healthy": 1.2,
-            "light_meal": 0.5
+            "healthy": 1.8,
+            "light_meal": 0.8
           }
         }
       ]
@@ -560,7 +560,7 @@
           "id": "weather_rain",
           "text": "下雨了，湿冷湿冷的",
           "weights": {
-            "warm_food": 1.5
+            "warm_food": 2.0
           }
         },
         {
@@ -572,15 +572,15 @@
           "id": "weather_hot",
           "text": "好热好闷，快入夏啦",
           "weights": {
-            "cold_food": 1.2,
-            "spicy": -0.5
+            "cold_food": 1.8,
+            "spicy": -0.8
           }
         },
         {
           "id": "weather_windy",
           "text": "风有点大，有点凉",
           "weights": {
-            "warm_food": 1.0
+            "warm_food": 1.5
           }
         },
         {

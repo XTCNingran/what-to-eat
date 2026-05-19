@@ -16,7 +16,6 @@ const CUISINE_TAGS = new Set(["cuisine_chinese", "cuisine_japanese", "cuisine_we
 
 const MONDAY_BUDGET_BOOST   = 0.10;
 const WEEKEND_PREMIUM_BOOST = 0.15;
-const DIVERSITY_JITTER_RANGE = 0.10;
 
 function haversine(lng1, lat1, lng2, lat2) {
   const R = 6_371_000;
@@ -191,14 +190,24 @@ export function rankRestaurants(restaurants, weights, recentNames, yesterdayName
 
   scored.sort((a, b) => b.score - a.score);
 
-  if (scored.length > 3) {
-    const tail = scored.slice(3).map(r => {
-      const jitter = 1.0 + (Math.random() * 2 - 1) * DIVERSITY_JITTER_RANGE * (r.restaurant.rating || 4.0) / 5.0;
-      return { ...r, score: r.score * jitter };
-    });
-    tail.sort((a, b) => b.score - a.score);
-    scored = [...scored.slice(0, 3), ...tail];
+  if (scored.length <= topN) return scored;
+
+  // Weighted sampling: high-score restaurants are more likely but not guaranteed
+  const minScore = Math.min(...scored.map(r => r.score));
+  let remaining = scored.map(r => ({ ...r, w: Math.max(0.1, r.score - minScore + 1) }));
+  const result = [];
+  while (result.length < topN && remaining.length > 0) {
+    const total = remaining.reduce((s, r) => s + r.w, 0);
+    let rand = Math.random() * total;
+    let idx = 0;
+    while (idx < remaining.length - 1 && rand > remaining[idx].w) {
+      rand -= remaining[idx].w;
+      idx++;
+    }
+    const { w, ...item } = remaining[idx];
+    result.push(item);
+    remaining.splice(idx, 1);
   }
 
-  return scored.slice(0, topN);
+  return result;
 }
