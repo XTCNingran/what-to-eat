@@ -66,7 +66,7 @@ function filterPool(restaurants, weights) {
   if ((weights.meal_fast || 0) > 0) {
     pool = pool.filter(r => (r.tags || []).includes("fast_service"));
   } else if ((weights.meal_proper || 0) > 0) {
-    pool = pool.filter(r => !(r.tags || []).includes("fast_service"));
+    pool = pool.filter(r => !(r.tags || []).includes("no_seat"));
   }
 
   if ((weights.nearby_only || 0) > 0) {
